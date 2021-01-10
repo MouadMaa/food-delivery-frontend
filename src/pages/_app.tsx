@@ -2,11 +2,15 @@ import { Fragment } from 'react'
 import { AppProps } from 'next/app'
 import { GlobalStyles } from 'twin.macro'
 
-function MyApp({ Component, pageProps }: AppProps) {
+import Layout from '@/layout/index'
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (
 		<Fragment>
 			<GlobalStyles />
-			<Component {...pageProps} />
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
 		</Fragment>
 	)
 }

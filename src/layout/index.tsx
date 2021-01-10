@@ -2,7 +2,7 @@ import { FC, Fragment } from 'react'
 import Head from 'next/head'
 
 import GlobalStyles from '@/styles/globalStyles'
-import Header from './header/header.component'
+import Header from './header'
 
 const Layout: FC = ({ children }) => {
 	return (

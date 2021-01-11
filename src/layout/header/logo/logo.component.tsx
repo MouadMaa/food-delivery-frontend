@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import { StyledLogo } from './logo.styles'
 
 const Logo: FC = () => {

@@ -6,11 +6,11 @@ export const StyledDropdown = styled.div(() => [
   `,
 	css`
 		button {
-			${tw`flex w-full px-4 py-2 space-x-2 text-sm text-gray-500 hover:(bg-gray-100 text-gray-700) focus:outline-none dark:text-gray-100 dark:hover:bg-gray-700`};
+			${tw`flex w-full px-4 py-2 space-x-2 text-sm text-gray-500 hover:(bg-gray-100 text-gray-700) focus:outline-none dark:(text-gray-100 hover:bg-gray-700)`};
 		}
 	`,
 ])
 
 export const BackDrop = tw.div`
-  fixed inset-0 h-full w-full
+  fixed inset-0 h-full w-full bg-gray-900 bg-opacity-10
 `

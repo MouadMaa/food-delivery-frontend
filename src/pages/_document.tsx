@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
 
 	render() {
 		return (
-			<Html lang='en' className=''>
+			<Html lang='en' className='dark'>
 				<Head />
 				<body>
 					<Main />

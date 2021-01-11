@@ -6,13 +6,13 @@ export const StyledBurger = styled.div(() => [
   `,
 	css`
 		div {
-			${tw`h-0.5 bg-gray-500 dark:bg-gray-300`};
+			${tw`h-0.5 bg-gray-500 transition-all duration-300 dark:bg-gray-300`};
 		}
 		div:first-child {
-			${tw`self-end h-0.5 w-2/3 bg-gray-500 transition-all duration-300 group-hover:w-full dark:bg-gray-300`};
+			${tw`self-end w-2/3 group-hover:w-full`};
 		}
 		div:last-child {
-			${tw`h-0.5 w-2/3 bg-gray-500 transition-all duration-300 group-hover:w-full dark:bg-gray-300`};
+			${tw`w-2/3 group-hover:w-full`};
 		}
 	`,
 ])

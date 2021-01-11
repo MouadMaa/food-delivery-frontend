@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import IconButton from '@/components/ui/icon-button/icon-button.component'
+import { IconButton } from '@/components/ui'
 import { StyledBurger } from './burger.styles'
 
 const Burger: FC = () => {

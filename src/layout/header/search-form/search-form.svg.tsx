@@ -15,16 +15,16 @@ export const SearchSvg = () => (
 	<svg fill='none' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
 		<path
 			d='M9.667 16.667a7.5 7.5 0 100-15 7.5 7.5 0 000 15zM18.833 18.333L15.5 15'
-			stroke-width='2'
-			stroke-linecap='round'
-			stroke-linejoin='round'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
 		/>
 	</svg>
 )
 
 export const FilterSvg = () => (
 	<svg fill='none' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
-		<path d='M8.931 14.989H2.903' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' />
+		<path d='M8.931 14.989H2.903' strokeWidth='1.6' strokeLinecap='round' strokeLinejoin='round' />
 		<path
 			clipRule='evenodd'
 			d='M18.098 14.989a2.4 2.4 0 11-4.8 0 2.4 2.4 0 014.8 0z'
@@ -32,7 +32,7 @@ export const FilterSvg = () => (
 			strokeLinecap='round'
 			strokeLinejoin='round'
 		/>
-		<path d='M12.069 5.218h6.03' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' />
+		<path d='M12.069 5.218h6.03' strokeWidth='1.6' strokeLinecap='round' strokeLinejoin='round' />
 		<path
 			clipRule='evenodd'
 			d='M2.902 5.218a2.4 2.4 0 104.799.002 2.4 2.4 0 00-4.799-.002z'

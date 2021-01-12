@@ -6,6 +6,7 @@ import Logo from './logo/logo.component'
 import MobileSignInOut from './mobile-sign-in-out/mobile-sign-in-out.component'
 import SearchForm from './search-form/search-form.component'
 import DesktopSignInOut from './desktop-sign-in-out/desktop-sign-in-out.component'
+// import Avatar from './avatar/avatar.component'
 
 const Header: FC = () => {
 	return (
@@ -17,6 +18,7 @@ const Header: FC = () => {
 			</div>
 			<SearchForm />
 			<DesktopSignInOut />
+			{/* <Avatar /> */}
 		</StyledHeader>
 	)
 }

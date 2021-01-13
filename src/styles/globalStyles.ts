@@ -2,6 +2,16 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 
+  header {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+
+  main {
+    max-width: 1536px;
+    margin: 0 auto;
+  }
+
   /* Modal */
   .modal {
     background: rgba(0, 0, 0, 0.1);

@@ -1,0 +1,17 @@
+export const categories = [
+	{ id: 0, name: 'All' },
+	{ id: 1, name: 'Pizza' },
+	{ id: 3, name: 'Burger' },
+	{ id: 4, name: 'Taco' },
+	{ id: 5, name: 'Drink' },
+	{ id: 6, name: 'Asian' },
+	{ id: 7, name: 'Pizza' },
+	{ id: 8, name: 'Burger' },
+	{ id: 9, name: 'Taco' },
+	{ id: 10, name: 'Drink' },
+	{ id: 11, name: 'Asian' },
+	{ id: 12, name: 'Pizza' },
+	{ id: 13, name: 'Burger' },
+	{ id: 14, name: 'Taco' },
+	{ id: 15, name: 'Drink' },
+]

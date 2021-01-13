@@ -1,5 +1,6 @@
 import { FC, Fragment } from 'react'
 import Head from 'next/head'
+import tw from 'twin.macro'
 
 import GlobalStyles from '@/styles/globalStyles'
 import Header from './header'
@@ -10,7 +11,7 @@ const Layout: FC = ({ children }) => {
 			{HtmlHead}
 			<GlobalStyles />
 			<Header />
-			{children}
+			<Main>{children}</Main>
 		</Fragment>
 	)
 }
@@ -28,3 +29,7 @@ const HtmlHead = (
 		<title>Food Delivery</title>
 	</Head>
 )
+
+const Main = tw.main`
+	font-body text-md text-gray-700 bg-white px-2 md:px-6
+`

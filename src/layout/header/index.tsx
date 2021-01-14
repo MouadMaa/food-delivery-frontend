@@ -27,9 +27,7 @@ export default Header
 
 const StyledHeader = styled.header(() => [
 	tw`font-body text-md text-gray-700 bg-white`,
-	tw`border-b-2 border-gray-200`,
-	tw`flex items-center justify-between h-16 px-4`,
-	tw`md:px-8`,
+	tw`flex items-center justify-between h-16 md:h-20 px-4 md:px-8 shadow`,
 	tw`dark:(text-gray-50 bg-gray-900 border-gray-600)`,
 	css`
 		> div:first-child {

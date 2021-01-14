@@ -15,11 +15,9 @@ const Category: FC<CategoryProps> = (props) => {
 
 	return (
 		<StyledCategory>
-			{id !== 0 && (
-				<div>
-					<Image src={`/svg/${name.toLowerCase()}.svg`} alt={name} layout='fill' />
-				</div>
-			)}
+			<picture>
+				<Image src={`/svg/${name.toLowerCase()}.svg`} alt={name} layout='fill' />
+			</picture>
 			<span>{name}</span>
 		</StyledCategory>
 	)

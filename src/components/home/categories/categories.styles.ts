@@ -1,10 +1,10 @@
 import tw, { css, styled } from 'twin.macro'
 
 export const StyledCategories = styled.section(() => [
-	tw`relative mt-4 sm:mt-6`,
+	tw`relative mt-8`,
 	css`
-		nav {
-			${tw`flex justify-between space-x-2 p-1 overflow-x-hidden sm:space-x-4`};
+		h1 {
+			${tw`text-lg md:text-xl tracking-wide mb-4 sm:mb-6 text-gray-600 dark:text-gray-50`};
 		}
 	`,
 ])

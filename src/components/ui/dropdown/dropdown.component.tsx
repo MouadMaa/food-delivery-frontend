@@ -5,18 +5,16 @@ import { StyledDropdown, BackDrop } from './dropdown.styles'
 interface DropdownProps {
 	isOpen: boolean
 	close: () => void
-	items: {
-		text: string
-		onClick: () => void
-	}[]
+	items: string[]
+	onSelect: (item: string) => void
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-	const { items, isOpen, close } = props
+	const { items, isOpen, close, onSelect } = props
 
-	const closeAfterChooseItem = (onClick: () => void) => {
+	const handleClick = (item: string) => {
+		onSelect(item)
 		close()
-		onClick()
 	}
 
 	return (
@@ -25,8 +23,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
 				<BackDrop onClick={close} />
 				<StyledDropdown>
 					{items.map((item) => (
-						<button key={item.text} onClick={() => closeAfterChooseItem(item.onClick)}>
-							{item.text}
+						<button key={item} onClick={() => handleClick(item)}>
+							{item}
 						</button>
 					))}
 				</StyledDropdown>

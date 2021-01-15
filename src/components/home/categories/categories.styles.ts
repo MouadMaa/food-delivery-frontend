@@ -6,5 +6,11 @@ export const StyledCategories = styled.section(() => [
 		h1 {
 			${tw`text-lg md:text-xl tracking-wide mb-4 sm:mb-6 text-gray-600 dark:text-gray-50`};
 		}
+		.rec.rec-pagination {
+			${tw`hidden`};
+		}
+		.rec.rec-slider-container {
+			${tw`m-0`};
+		}
 	`,
 ])

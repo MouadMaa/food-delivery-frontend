@@ -5,18 +5,16 @@ import { ArrowButtonSvg } from './arrow-button.svg'
 
 export interface ArrowButtonProps {
 	pointer: 'PREV' | 'NEXT'
+	onClick: () => void
 }
 
 const ArrowButton: FC<ArrowButtonProps> = (props) => {
-	const { pointer, ...others } = props
+	const { pointer, onClick } = props
 
 	return (
-		<StyledArrowButton pointer={pointer}>
-			<div />
+		<StyledArrowButton pointer={pointer} onClick={onClick}>
 			<div>
-				<div>
-					<ArrowButtonSvg />
-				</div>
+				<ArrowButtonSvg />
 			</div>
 		</StyledArrowButton>
 	)

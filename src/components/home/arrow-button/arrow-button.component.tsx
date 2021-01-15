@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { StyledArrowButton } from './arrow-button.styles'
 import { ArrowButtonSvg } from './arrow-button.svg'
 
-export interface ArrowButtonProps {
+interface ArrowButtonProps {
 	pointer: 'PREV' | 'NEXT'
 	onClick: () => void
 }

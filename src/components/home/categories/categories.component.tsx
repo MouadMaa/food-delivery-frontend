@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
 
 import Category from '../category/category.component'
@@ -7,13 +7,22 @@ import { categories } from './categories.data'
 import { StyledCategories } from './categories.styles'
 
 const Categories: FC = () => {
+	const [ selectedCategory, setSelectedCategory ] = useState('')
+
 	const myArrow = ({ type, onClick }: RenderArrowProps) => <ArrowButton pointer={type} onClick={onClick} />
 
 	return (
 		<StyledCategories>
 			<h1>What would you like to eat ?</h1>
 			<Carousel isRTL={false} renderArrow={myArrow} breakPoints={breakPoints}>
-				{categories.map((category) => <Category key={category.id} category={category} />)}
+				{categories.map((category) => (
+					<Category
+						key={category.id}
+						name={category.name}
+						isSelected={selectedCategory === category.name}
+						setSelected={setSelectedCategory}
+					/>
+				))}
 			</Carousel>
 		</StyledCategories>
 	)

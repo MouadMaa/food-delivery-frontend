@@ -13,7 +13,7 @@ const RestaurantCategories: FC<RestaurantCategoriesProps> = (props) => {
 	return (
 		<StyledRestaurantCategories>
 			{categories.map((category, index) => (
-				<Fragment>
+				<Fragment key={index}>
 					<p>{category}</p>
 					{index !== categories.length - 1 && <DotSvg />}
 				</Fragment>

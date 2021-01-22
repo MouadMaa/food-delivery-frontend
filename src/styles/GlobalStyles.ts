@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   header {
     max-width: 1920px;
     margin: 0 auto;
@@ -12,13 +16,9 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
   }
 
-  /* Modal */
-  .modal {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
+  /* Back Drop Blur */
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    .modal {
+    .backdrop-blur {
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
     }

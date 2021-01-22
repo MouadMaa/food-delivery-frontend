@@ -25,7 +25,7 @@ const RestaurantCard: FC<RestaurantCardProps> = (props) => {
 		<StyledCardRestaurant className='group'>
 			<StyledCardRestaurantPicture>
 				<img src={image} alt={name} />
-				<div className='modal'>
+				<div className='backdrop-blur'>
 					<span>
 						{timeBetween[0]}~{timeBetween[1]} min
 					</span>

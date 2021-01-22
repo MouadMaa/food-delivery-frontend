@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
 import RestaurantCard from '../card-restaurant/card-restaurant.component'
-import { restaurants } from './restaurants.data'
 import SortBy from '../sort-by/sort-by.component'
+import { restaurants } from './restaurants.data'
 import { StyledRestaurants } from './restaurants.styles'
 
 const Restaurants: FC = () => {

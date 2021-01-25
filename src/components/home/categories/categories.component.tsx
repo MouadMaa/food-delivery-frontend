@@ -1,42 +1,70 @@
 import { FC, useState } from 'react'
-import Carousel, { RenderArrowProps } from 'react-elastic-carousel'
+import { useKeenSlider } from 'keen-slider/react'
 
+import 'keen-slider/keen-slider.min.css'
+
+import { ArrowButton } from '@/components/ui'
 import Category from '../category/category.component'
-import ArrowButton from '../arrow-button/arrow-button.component'
 import { categories } from './categories.data'
 import { StyledCategories } from './categories.styles'
 
 const Categories: FC = () => {
-	const [ selectedCategory, setSelectedCategory ] = useState('')
+	const [ selectedCategory, setSelectedCategory ] = useState('All')
+	const [ currentSlide, setCurrentSlide ] = useState(0)
 
-	const myArrow = ({ type, onClick }: RenderArrowProps) => <ArrowButton pointer={type} onClick={onClick} />
+	const [ sliderRef, slider ] = useKeenSlider({
+		spacing: 16,
+		slidesPerView: 2,
+		mode: 'free',
+		breakpoints,
+		slideChanged: (slide) => setCurrentSlide(slide.details().relativeSlide),
+	})
 
 	return (
 		<StyledCategories>
 			<h1>What would you like to eat ?</h1>
-			<Carousel isRTL={false} renderArrow={myArrow} breakPoints={breakPoints}>
+			<nav className='keen-slider' ref={sliderRef}>
+				{slider && <ArrowButton arrow='PREV' onClick={() => slider.prev()} disabled={currentSlide === 0} />}
 				{categories.map((category) => (
 					<Category
 						key={category.id}
+						id={category.id}
 						name={category.name}
 						isSelected={selectedCategory === category.name}
 						setSelected={setSelectedCategory}
 					/>
 				))}
-			</Carousel>
+				{slider && (
+					<ArrowButton
+						arrow='NEXT'
+						onClick={() => slider.next()}
+						disabled={currentSlide === slider.details().size - 1}
+					/>
+				)}
+			</nav>
 		</StyledCategories>
 	)
 }
 
 export default Categories
 
-const breakPoints = [
-	{ width: 100, itemsToShow: 1 },
-	{ width: 200, itemsToShow: 2 },
-	{ width: 350, itemsToShow: 3, itemsToScroll: 2 },
-	{ width: 500, itemsToShow: 4, itemsToScroll: 2 },
-	{ width: 600, itemsToShow: 5, itemsToScroll: 2 },
-	{ width: 700, itemsToShow: 6, itemsToScroll: 2 },
-	{ width: 1000, itemsToShow: 8, itemsToScroll: 2 },
-	{ width: 1300, itemsToShow: 10, itemsToScroll: 2 },
-]
+const breakpoints = {
+	'(min-width: 400px)': {
+		slidesPerView: 3,
+	},
+	'(min-width: 600px)': {
+		slidesPerView: 4,
+	},
+	'(min-width: 800px)': {
+		slidesPerView: 6,
+	},
+	'(min-width: 1000px)': {
+		slidesPerView: 7,
+	},
+	'(min-width: 1200px)': {
+		slidesPerView: 8,
+	},
+	'(min-width: 1400px)': {
+		slidesPerView: 10,
+	},
+}

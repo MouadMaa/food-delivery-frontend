@@ -14,11 +14,11 @@ export const StyledCategory = styled.button(({ isSelected }: { isSelected: boole
 		}
 	`,
 
-	!isSelected && [ tw``, tw`dark:(text-gray-50 bg-gray-900 border-gray-600)` ],
+	!isSelected && [ tw`dark:(text-gray-50 bg-gray-900 border-gray-600)` ],
 
 	isSelected && [
 		tw`bg-primary-default shadow`,
-		tw`focus:outline-none focus-visible:(ring ring-primary-light)`,
+		tw`focus:outline-none border-none focus-visible:(ring ring-primary-light)`,
 		tw`active:bg-primary-default`,
 		css`
 			span {

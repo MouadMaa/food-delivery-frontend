@@ -10,10 +10,10 @@ export const StyledCardRestaurantPicture = styled.div(() => [
 		}
 
 		div {
-			${tw`absolute right-0 flex items-center justify-center w-28 h-7 bg-black bg-opacity-40 rounded-bl-2xl`};
+			${tw`absolute right-0 flex items-center justify-center w-24 h-6 bg-black bg-opacity-40 rounded-bl-2xl`};
 
 			span {
-				${tw`text-sm text-gray-50`};
+				${tw`text-xs text-white`};
 			}
 		}
 	`,

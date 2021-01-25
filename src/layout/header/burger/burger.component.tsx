@@ -3,9 +3,15 @@ import { FC } from 'react'
 import { IconButton } from '@/components/ui'
 import { StyledBurger } from './burger.styles'
 
-const Burger: FC = () => {
+interface BurgerProps {
+	onClick: () => void
+}
+
+const Burger: FC<BurgerProps> = (props) => {
+	const { onClick } = props
+
 	return (
-		<IconButton>
+		<IconButton onClick={onClick}>
 			<StyledBurger>
 				<div />
 				<div />

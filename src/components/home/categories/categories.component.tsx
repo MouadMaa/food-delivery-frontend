@@ -4,7 +4,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
 import { ArrowButton } from '@/components/ui'
-import Category from '../category/category.component'
+import ButtonCategory from '../button-category/button-category.component'
 import { categories } from './categories.data'
 import { StyledCategories } from './categories.styles'
 
@@ -26,7 +26,7 @@ const Categories: FC = () => {
 			<nav className='keen-slider' ref={sliderRef}>
 				{slider && <ArrowButton arrow='PREV' onClick={() => slider.prev()} disabled={currentSlide === 0} />}
 				{categories.map((category) => (
-					<Category
+					<ButtonCategory
 						key={category.id}
 						id={category.id}
 						name={category.name}

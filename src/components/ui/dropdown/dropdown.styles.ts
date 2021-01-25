@@ -2,7 +2,7 @@ import tw, { css, styled } from 'twin.macro'
 
 export const StyledDropdown = styled.div(() => [
 	tw`
-    absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-md overflow-hidden dark:bg-gray-800
+    absolute right-0 z-50 mt-2 w-56 bg-white rounded-xl shadow-md overflow-hidden dark:bg-gray-800
   `,
 	css`
 		button {
@@ -12,5 +12,5 @@ export const StyledDropdown = styled.div(() => [
 ])
 
 export const BackDrop = tw.div`
-  fixed inset-0 h-full w-full bg-gray-900 bg-opacity-10
+  fixed inset-0 z-40 h-full w-full bg-gray-900 bg-opacity-10
 `

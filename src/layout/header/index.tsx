@@ -8,11 +8,18 @@ import SearchForm from './search-form/search-form.component'
 import DesktopSignInOut from './desktop-sign-in-out/desktop-sign-in-out.component'
 // import Avatar from './avatar/avatar.component'
 
-const Header: FC = () => {
+interface HeaderProps {
+	isOpenMenu: boolean
+	setIsOpenMenu: (openMenu: boolean) => void
+}
+
+const Header: FC<HeaderProps> = (props) => {
+	const { isOpenMenu, setIsOpenMenu } = props
+
 	return (
 		<StyledHeader>
 			<div>
-				<Burger />
+				<Burger onClick={() => setIsOpenMenu(!isOpenMenu)} />
 				<Logo />
 				<MobileSignInOut />
 			</div>
@@ -26,7 +33,7 @@ const Header: FC = () => {
 export default Header
 
 const StyledHeader = styled.header(() => [
-	tw`font-body text-md text-gray-700 bg-white`,
+	tw`font-body text-md text-gray-700 bg-white relative z-50`,
 	tw`flex items-center justify-between px-4 md:px-8 py-3 md:py-4 shadow`,
 	tw`dark:(text-gray-50 bg-gray-900 border-gray-600)`,
 	css`

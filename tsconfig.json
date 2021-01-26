@@ -22,6 +22,7 @@
       "@/components/*": [ "components/*" ],
       "@/layout/*": [ "layout/*" ],
       "@/styles/*": [ "styles/*" ],
+      "@/models/*": [ "models/*" ],
     }
   },
   "include": [

@@ -9,10 +9,12 @@
 	},
 	"dependencies": {
 		"body-scroll-lock": "^3.1.5",
+		"firebase": "^8.2.4",
 		"keen-slider": "^5.4.0",
 		"next": "10.0.5",
 		"react": "17.0.1",
 		"react-dom": "17.0.1",
+		"react-firebase-hooks": "^2.2.0",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {

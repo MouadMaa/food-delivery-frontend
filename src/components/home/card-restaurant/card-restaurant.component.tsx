@@ -7,41 +7,32 @@ import {
 	StyledCardRestaurantContent,
 } from './card-restaurant.styles'
 import { HeartSvg } from './card-restaurant.svg'
+import { Restaurant } from '@/models/restaurant'
 
 interface RestaurantCardProps {
-	restaurant: {
-		name: string
-		image: string
-		favorites: number
-		timeBetween: [number, number]
-		categories: string[]
-	}
+	restaurant: Restaurant
 }
 
 const RestaurantCard: FC<RestaurantCardProps> = (props) => {
-	const { restaurant: { name, image, favorites, timeBetween, categories } } = props
+	const { restaurant: { name } } = props
 
 	return (
 		<StyledCardRestaurant className='group'>
 			<StyledCardRestaurantPicture>
-				<img src={image} alt={name} />
+				<img src='https://bonsplansmaroc.com/wp-content/uploads/2020/03/image-pizza-hut-2.jpg' alt='pizza' />
 				<div className='backdrop-blur'>
-					<span>
-						{timeBetween[0]}~{timeBetween[1]} min
-					</span>
+					<span>25~35 min</span>
 				</div>
 			</StyledCardRestaurantPicture>
-
 			<StyledCardRestaurantContent>
 				<div>
 					<h3>{name}</h3>
 					<div>
 						<HeartSvg />
-						<span>{favorites}</span>
+						<span>214</span>
 					</div>
 				</div>
-
-				<RestaurantCategories categories={categories} />
+				<RestaurantCategories categories={[ 'Pizza', 'Moroccan', 'Fast Food' ]} />
 			</StyledCardRestaurantContent>
 		</StyledCardRestaurant>
 	)

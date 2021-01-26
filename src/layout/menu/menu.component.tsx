@@ -1,5 +1,5 @@
-import React, { FC, Fragment, useState } from 'react'
-import 'twin.macro'
+import React, { FC, Fragment, useEffect, useRef, useState } from 'react'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 import {
 	ContactSvg,
@@ -10,7 +10,7 @@ import {
 	OrdersHistorySvg,
 	ProfileSvg,
 } from './menu.svg'
-import { StyledMenu, MenuItem } from './menu.styles'
+import { StyledMenu, MenuItem, BackDrop } from './menu.styles'
 
 interface MenuProps {
 	isOpenMenu: boolean
@@ -20,7 +20,16 @@ interface MenuProps {
 const Menu: FC<MenuProps> = (props) => {
 	const { isOpenMenu, setIsOpenMenu } = props
 
+	const menuRef = useRef(null)
 	const [ activeLink, setActiveLink ] = useState('Home')
+
+	useEffect(
+		() => {
+			if (isOpenMenu) disableBodyScroll(menuRef.current)
+			else enableBodyScroll(menuRef.current)
+		},
+		[ isOpenMenu ],
+	)
 
 	const items = [
 		{ text: 'Home', svg: <HomeSvg /> },
@@ -33,7 +42,7 @@ const Menu: FC<MenuProps> = (props) => {
 
 	return (
 		<Fragment>
-			<StyledMenu isOpenMenu={isOpenMenu}>
+			<StyledMenu isOpenMenu={isOpenMenu} ref={menuRef}>
 				<ul>
 					{items.map((link) => (
 						<MenuItem
@@ -53,9 +62,7 @@ const Menu: FC<MenuProps> = (props) => {
 					<span>Sign Out</span>
 				</button>
 			</StyledMenu>
-			{isOpenMenu && (
-				<div className='backdrop-blur' tw='fixed inset-0 z-40' onClick={() => setIsOpenMenu(!isOpenMenu)} />
-			)}
+			{isOpenMenu && <BackDrop className='backdrop-blur' onClick={() => setIsOpenMenu(!isOpenMenu)} />}
 		</Fragment>
 	)
 }

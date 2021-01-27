@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			restaurants,
-			categories,
+			categories: [ ...categories, ...categories ],
 		},
 	}
 }

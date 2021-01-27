@@ -15,7 +15,7 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 	return (
 		<StyledRestaurants>
 			<article>
-				<h2>Offers Around You</h2>
+				<h2>Popular Near You</h2>
 				<SortBy />
 			</article>
 			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>

@@ -3,7 +3,7 @@ import { useKeenSlider } from 'keen-slider/react'
 
 import 'keen-slider/keen-slider.min.css'
 
-import { ArrowButton } from '@/components/ui'
+import { SliderArrow } from '@/components/ui'
 import ButtonCategory from '../button-category/button-category.component'
 import { Category } from '@/models/category'
 import { StyledCategories } from './categories.styles'
@@ -30,27 +30,21 @@ const Categories: FC<CategoriesProps> = (props) => {
 		<StyledCategories>
 			<h1>Hungry? You're in the right place</h1>
 			<nav className='keen-slider' ref={sliderRef}>
-				{slider && <ArrowButton arrow='PREV' onClick={() => slider.prev()} disabled={currentSlide === 0} />}
 				<ButtonCategory
 					category={allCategory}
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
-				{categories.map((category) => (
+				{categories.map((category, index) => (
 					<ButtonCategory
-						key={category.id}
+						key={index}
 						category={category}
 						selectedCategory={selectedCategory}
 						setSelectedCategory={setSelectedCategory}
 					/>
 				))}
-				{slider && (
-					<ArrowButton
-						arrow='NEXT'
-						onClick={() => slider.next()}
-						disabled={currentSlide === slider.details().size - 1}
-					/>
-				)}
+				<SliderArrow arrow='PREV' slider={slider} currentSlide={currentSlide} />
+				<SliderArrow arrow='NEXT' slider={slider} currentSlide={currentSlide} />
 			</nav>
 		</StyledCategories>
 	)

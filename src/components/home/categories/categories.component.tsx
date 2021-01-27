@@ -5,11 +5,17 @@ import 'keen-slider/keen-slider.min.css'
 
 import { ArrowButton } from '@/components/ui'
 import ButtonCategory from '../button-category/button-category.component'
-import { categories } from './categories.data'
+import { Category } from '@/models/category'
 import { StyledCategories } from './categories.styles'
 
-const Categories: FC = () => {
-	const [ selectedCategory, setSelectedCategory ] = useState('All')
+interface CategoriesProps {
+	categories: Category[]
+}
+
+const Categories: FC<CategoriesProps> = (props) => {
+	const { categories } = props
+
+	const [ selectedCategory, setSelectedCategory ] = useState('all')
 	const [ currentSlide, setCurrentSlide ] = useState(0)
 
 	const [ sliderRef, slider ] = useKeenSlider({
@@ -22,16 +28,20 @@ const Categories: FC = () => {
 
 	return (
 		<StyledCategories>
-			<h1>What would you like to eat ?</h1>
+			<h1>Hungry? You're in the right place</h1>
 			<nav className='keen-slider' ref={sliderRef}>
 				{slider && <ArrowButton arrow='PREV' onClick={() => slider.prev()} disabled={currentSlide === 0} />}
+				<ButtonCategory
+					category={allCategory}
+					selectedCategory={selectedCategory}
+					setSelectedCategory={setSelectedCategory}
+				/>
 				{categories.map((category) => (
 					<ButtonCategory
 						key={category.id}
-						id={category.id}
-						name={category.name}
-						isSelected={selectedCategory === category.name}
-						setSelected={setSelectedCategory}
+						category={category}
+						selectedCategory={selectedCategory}
+						setSelectedCategory={setSelectedCategory}
 					/>
 				))}
 				{slider && (
@@ -47,6 +57,11 @@ const Categories: FC = () => {
 }
 
 export default Categories
+
+const allCategory: Category = {
+	id: 'all',
+	name: 'All',
+}
 
 const breakpoints = {
 	'(min-width: 400px)': {

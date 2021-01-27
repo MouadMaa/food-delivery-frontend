@@ -1,27 +1,27 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
+import { Category } from '@/models/category'
 import { StyledButtonCategory } from './button-category.styles'
 
 export interface ButtonCategoryProps {
-	id: number
-	name: string
-	isSelected: boolean
-	setSelected: (name: string) => void
+	category: Category
+	selectedCategory: string
+	setSelectedCategory: (name: string) => void
 }
 
 const ButtonCategory: FC<ButtonCategoryProps> = (props) => {
-	const { id, name, isSelected, setSelected } = props
+	const { category: { id, name }, selectedCategory, setSelectedCategory } = props
 
 	return (
 		<StyledButtonCategory
 			className='keen-slider__slide'
-			isSelected={isSelected}
-			onClick={() => setSelected(!isSelected ? name : 'All')}
+			isSelected={selectedCategory === id}
+			onClick={() => setSelectedCategory(selectedCategory === id ? 'all' : id)}
 		>
-			{id !== 1 && (
+			{id !== 'all' && (
 				<picture>
-					<Image src={`/svg/${name.toLowerCase()}.svg`} alt={name} layout='fill' />
+					<Image src={`/svg/${name.toLowerCase().replace(' ', '-')}.svg`} alt={name} layout='fill' />
 				</picture>
 			)}
 			<span>{name}</span>

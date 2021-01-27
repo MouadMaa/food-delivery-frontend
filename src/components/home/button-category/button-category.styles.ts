@@ -1,7 +1,7 @@
 import tw, { css, styled } from 'twin.macro'
 
 export const StyledButtonCategory = styled.button(({ isSelected }: { isSelected: boolean }) => [
-	tw`flex items-center justify-center py-2 px-4 space-x-3`,
+	tw`flex items-center justify-around py-2 px-4`,
 	tw`bg-white border-2 border-gray-200 shadow-sm rounded-xl select-none`,
 	tw`transition duration-300`,
 	tw`focus:outline-none focus-visible:(border-gray-300 ring-1 ring-gray-300)`,

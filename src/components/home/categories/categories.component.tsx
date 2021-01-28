@@ -4,7 +4,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
 import { SliderArrow } from '@/components/ui'
-import ButtonCategory from '../button-category/button-category.component'
+import CategoryButton from '../category-button/category-button.component'
 import { Category } from '@/models/category'
 import { StyledCategories } from './categories.styles'
 
@@ -30,13 +30,13 @@ const Categories: FC<CategoriesProps> = (props) => {
 		<StyledCategories>
 			<h1>Hungry? You're in the right place</h1>
 			<nav className='keen-slider' ref={sliderRef}>
-				<ButtonCategory
+				<CategoryButton
 					category={allCategory}
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
 				{categories.map((category, index) => (
-					<ButtonCategory
+					<CategoryButton
 						key={index}
 						category={category}
 						selectedCategory={selectedCategory}

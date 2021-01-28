@@ -2,19 +2,19 @@ import { FC } from 'react'
 import Image from 'next/image'
 
 import { Category } from '@/models/category'
-import { StyledButtonCategory } from './button-category.styles'
+import { StyledCategoryButton } from './category-button.styles'
 
-export interface ButtonCategoryProps {
+export interface CategoryButtonProps {
 	category: Category
 	selectedCategory: string
 	setSelectedCategory: (name: string) => void
 }
 
-const ButtonCategory: FC<ButtonCategoryProps> = (props) => {
+const CategoryButton: FC<CategoryButtonProps> = (props) => {
 	const { category: { id, name }, selectedCategory, setSelectedCategory } = props
 
 	return (
-		<StyledButtonCategory
+		<StyledCategoryButton
 			className='keen-slider__slide'
 			isSelected={selectedCategory === id}
 			onClick={() => setSelectedCategory(selectedCategory === id ? 'all' : id)}
@@ -25,8 +25,8 @@ const ButtonCategory: FC<ButtonCategoryProps> = (props) => {
 				</picture>
 			)}
 			<span>{name}</span>
-		</StyledButtonCategory>
+		</StyledCategoryButton>
 	)
 }
 
-export default ButtonCategory
+export default CategoryButton

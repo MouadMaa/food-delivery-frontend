@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import KeenSlider from 'keen-slider'
 
-import { StyledArrowButton } from './slider-arrow.styles'
+import { StyledSliderArrow } from './slider-arrow.styles'
 import { ArrowButtonSvg } from './slider-arrow.svg'
 
 interface SliderButtonProps {
@@ -19,14 +19,14 @@ const SliderArrow: FC<SliderButtonProps> = (props) => {
 	if (arrow === 'PREV' && currentSlide === 0) return null
 
 	return (
-		<StyledArrowButton className='group' style={{ zIndex: 1 }} arrow={arrow} onClick={handleClick}>
+		<StyledSliderArrow className='group' style={{ zIndex: 1 }} arrow={arrow} onClick={handleClick}>
 			<div />
 			<div>
 				<div>
 					<ArrowButtonSvg />
 				</div>
 			</div>
-		</StyledArrowButton>
+		</StyledSliderArrow>
 	)
 }
 

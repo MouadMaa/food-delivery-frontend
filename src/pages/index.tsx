@@ -1,13 +1,12 @@
 import { FC, Fragment } from 'react'
 import { GetStaticProps } from 'next'
-// import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
 import { Restaurant, RESTAURANTS } from '@/models/restaurant'
 import { Category, CATEGORIES } from '@/models/category'
-import { getCollectionData } from '../firebase/getDataFromCollectionOrDoc'
 import { firestore } from '../firebase'
+import { getCollectionData } from '../firebase/getDataFromCollectionOrDoc'
 
 interface HomeProps {
 	categories: Category[]
@@ -16,7 +15,6 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = (props) => {
 	const { categories, restaurants } = props
-	// const [ restaurants = [] ] = useCollectionData<Restaurant>(firestore.collection('restaurants'), { idField: 'id' })
 
 	return (
 		<Fragment>
@@ -29,11 +27,18 @@ const Home: FC<HomeProps> = (props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-	const categoriesResponse = await firestore.collection(CATEGORIES).get()
+	const categoriesResponse = await firestore.collection(CATEGORIES).orderBy('order', 'asc').get()
 	const categories = getCollectionData<Category>(categoriesResponse)
 
-	const restaurantsResponse = await firestore.collection(RESTAURANTS).get()
+	const restaurantsResponse = await firestore.collection(RESTAURANTS).orderBy('favorites', 'desc').get()
 	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
+
+	// Replace restaurant categoriesIds with categories
+	restaurants.forEach((restaurant) => {
+		restaurant.categories = (restaurant.categories as unknown[]).map((categoryId) => {
+			return categories.find((category) => category.id === categoryId)
+		})
+	})
 
 	return {
 		props: {

@@ -1,6 +1,6 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledArrowButton = styled.button(({ arrow }: { arrow: 'PREV' | 'NEXT' }) => [
+export const StyledSliderArrow = styled.button(({ arrow }: { arrow: 'PREV' | 'NEXT' }) => [
 	tw`absolute top-0 flex w-12 h-full focus:outline-none`,
 	css`
 		> div:first-child {

@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import RestaurantCard from '../card-restaurant/card-restaurant.component'
-import SortBy from '../sort-by/sort-by.component'
 import { Restaurant } from '@/models/restaurant'
+import RestaurantCard from '../restaurant-card/restaurant-card.component'
+import SortBy from '../sort-by/sort-by.component'
 import { StyledRestaurants } from './restaurants.styles'
 
 interface RestaurantsProps {

@@ -2,7 +2,7 @@ import tw, { css, styled } from 'twin.macro'
 
 export const StyledCardRestaurant = styled.article(() => [ tw`min-w-full h-56 cursor-pointer` ])
 
-export const StyledCardRestaurantPicture = styled.div(() => [
+export const StyledRestaurantCardPicture = styled.div(() => [
 	tw`relative block pb-40 rounded-2xl shadow-lg overflow-hidden`,
 	css`
 		img {
@@ -19,7 +19,7 @@ export const StyledCardRestaurantPicture = styled.div(() => [
 	`,
 ])
 
-export const StyledCardRestaurantContent = styled.div(() => [
+export const StyledRestaurantCardContent = styled.div(() => [
 	tw`p-2 space-y-1`,
 	css`
 		> div:first-child {
@@ -38,6 +38,15 @@ export const StyledCardRestaurantContent = styled.div(() => [
 					${tw`text-sm tracking-wide text-gray-600 dark:text-gray-300`};
 				}
 			}
+		}
+	`,
+])
+
+export const StyledRestaurantCardCategories = styled.div(() => [
+	tw`flex items-center text-sm text-gray-600 dark:text-gray-300`,
+	css`
+		svg {
+			${tw`w-3 h-4 fill-current`};
 		}
 	`,
 ])

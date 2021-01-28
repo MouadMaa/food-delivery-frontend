@@ -1,19 +1,16 @@
 import { FC, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useKeenSlider } from 'keen-slider/react'
 
 import 'keen-slider/keen-slider.min.css'
 
 import { SliderArrow } from '@/components/ui'
 import CategoryButton from '../category-button/category-button.component'
-import { Category } from '@/models/category'
+import { RootState } from 'redux/reducers'
 import { StyledCategories } from './categories.styles'
 
-interface CategoriesProps {
-	categories: Category[]
-}
-
-const Categories: FC<CategoriesProps> = (props) => {
-	const { categories } = props
+const Categories: FC = () => {
+	const { categories } = useSelector((state: RootState) => state.category)
 
 	const [ selectedCategory, setSelectedCategory ] = useState('all')
 	const [ currentSlide, setCurrentSlide ] = useState(0)
@@ -30,11 +27,6 @@ const Categories: FC<CategoriesProps> = (props) => {
 		<StyledCategories>
 			<h1>Hungry? You're in the right place</h1>
 			<nav className='keen-slider' ref={sliderRef}>
-				<CategoryButton
-					category={allCategory}
-					selectedCategory={selectedCategory}
-					setSelectedCategory={setSelectedCategory}
-				/>
 				{categories.map((category, index) => (
 					<CategoryButton
 						key={index}
@@ -51,11 +43,6 @@ const Categories: FC<CategoriesProps> = (props) => {
 }
 
 export default Categories
-
-const allCategory: Category = {
-	id: 'all',
-	name: 'All',
-}
 
 const breakpoints = {
 	'(min-width: 400px)': {

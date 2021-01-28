@@ -3,23 +3,19 @@ import { GetStaticProps } from 'next'
 
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
-import { Restaurant, RESTAURANTS } from '@/models/restaurant'
-import { Category, CATEGORIES } from '@/models/category'
 import { firestore } from '../firebase'
 import { getCollectionData } from '../firebase/getDataFromCollectionOrDoc'
+import { setCategories } from '../redux/category/category.actions'
+import { initializeStore } from '../redux/store'
+import { Category } from 'redux/category/category.types'
+import { Restaurant } from 'redux/restaurant/restaurant.types'
+import { setRestaurants } from 'redux/restaurant/restaurant.actions'
 
-interface HomeProps {
-	categories: Category[]
-	restaurants: Restaurant[]
-}
-
-const Home: FC<HomeProps> = (props) => {
-	const { categories, restaurants } = props
-
+const Home: FC = () => {
 	return (
 		<Fragment>
-			<Categories categories={categories} />
-			<Restaurants restaurants={restaurants} />
+			<Categories />
+			<Restaurants />
 		</Fragment>
 	)
 }
@@ -27,23 +23,20 @@ const Home: FC<HomeProps> = (props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-	const categoriesResponse = await firestore.collection(CATEGORIES).orderBy('order', 'asc').get()
+	const { dispatch, getState } = initializeStore()
+
+	const categoriesResponse = await firestore.collection('categories').orderBy('order', 'asc').get()
 	const categories = getCollectionData<Category>(categoriesResponse)
 
-	const restaurantsResponse = await firestore.collection(RESTAURANTS).orderBy('favorites', 'desc').get()
+	const restaurantsResponse = await firestore.collection('restaurants').orderBy('favorites', 'desc').get()
 	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
 
-	// Replace restaurant categoriesIds with categories
-	restaurants.forEach((restaurant) => {
-		restaurant.categories = (restaurant.categories as unknown[]).map((categoryId) => {
-			return categories.find((category) => category.id === categoryId)
-		})
-	})
+	dispatch(setCategories(categories))
+	dispatch(setRestaurants(restaurants, categories))
 
 	return {
 		props: {
-			restaurants,
-			categories: [ ...categories, ...categories ],
+			initialReduxState: getState(),
 		},
 	}
 }

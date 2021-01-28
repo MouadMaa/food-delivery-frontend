@@ -1,12 +1,12 @@
 import { FC, Fragment } from 'react'
 
+import { Restaurant } from 'redux/restaurant/restaurant.types'
 import {
 	StyledCardRestaurant,
 	StyledRestaurantCardPicture,
 	StyledRestaurantCardContent,
 	StyledRestaurantCardCategories,
 } from './restaurant-card.styles'
-import { Restaurant } from '@/models/restaurant'
 import { HeartSvg, DotSvg } from './restaurant-card.svg'
 
 interface RestaurantCardProps {

@@ -17,7 +17,7 @@ const SearchForm: FC = () => {
 					<input type='text' placeholder='Search..' />
 				</div>
 			</FormContainer>
-			<IconButton>
+			<IconButton onClick={() => {}}>
 				<FilterSvg />
 			</IconButton>
 		</StyledSearchForm>

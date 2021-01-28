@@ -1,17 +1,14 @@
 import { FC } from 'react'
+import { useSelector } from 'react-redux'
 
-import { Restaurant } from '@/models/restaurant'
+import { RootState } from 'redux/reducers'
 import RestaurantCard from '../restaurant-card/restaurant-card.component'
 import SortBy from '../sort-by/sort-by.component'
 import { StyledRestaurants } from './restaurants.styles'
 
-interface RestaurantsProps {
-	restaurants: Restaurant[]
-}
-
-const Restaurants: FC<RestaurantsProps> = (props) => {
-	const { restaurants } = props
-
+const Restaurants: FC = () => {
+	const { restaurants } = useSelector((state: RootState) => state.restaurant)
+	console.log(restaurants)
 	return (
 		<StyledRestaurants>
 			<article>

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { Category } from '@/models/category'
+import { Category } from 'redux/category/category.types'
 import { StyledCategoryButton } from './category-button.styles'
 
 export interface CategoryButtonProps {

@@ -7,7 +7,7 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.button(({ level }: StyledButtonProps) => [
-	tw`px-8 py-2 text-sm font-semibold tracking-wider`,
+	tw`px-8 py-2 text-sm font-medium tracking-wider`,
 	tw`shadow rounded-2xl border-0 select-none`,
 	tw`transition duration-300`,
 	tw`focus:outline-none focus-visible:(ring ring-primary-light)`,

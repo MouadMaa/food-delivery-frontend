@@ -12,7 +12,7 @@ const MobileSignInOut: FC = () => {
 
 	return (
 		<StyledMobileSign onClick={() => setIsOpenDropdown(!isOpenDropdown)}>
-			<IconButton>
+			<IconButton onClick={() => {}}>
 				<UserSvg />
 			</IconButton>
 

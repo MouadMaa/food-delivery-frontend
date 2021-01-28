@@ -13,7 +13,7 @@ export const StyledCardRestaurantPicture = styled.div(() => [
 			${tw`absolute right-0 flex items-center justify-center w-24 h-6 bg-black bg-opacity-40 rounded-bl-2xl`};
 
 			span {
-				${tw`text-xs text-white`};
+				${tw`text-xs tracking-wide text-white`};
 			}
 		}
 	`,
@@ -26,7 +26,7 @@ export const StyledCardRestaurantContent = styled.div(() => [
 			${tw`flex items-center justify-between`};
 
 			h3 {
-				${tw`text-lg capitalize text-gray-800 tracking-wider dark:text-white`};
+				${tw`text-lg font-medium tracking-wider capitalize dark:text-white`};
 			}
 
 			div {
@@ -35,7 +35,7 @@ export const StyledCardRestaurantContent = styled.div(() => [
 				}
 
 				span {
-					${tw`text-sm text-gray-600 dark:text-gray-300`};
+					${tw`text-sm tracking-wide text-gray-600 dark:text-gray-300`};
 				}
 			}
 		}

@@ -20,7 +20,7 @@ export const MenuItem = styled.li(({ isActive }: { isActive: boolean }) => [
 			${tw`w-5 h-5 stroke-current`};
 		}
 		span {
-			${tw`text-md font-medium`};
+			${tw`text-md`};
 		}
 	`,
 	isActive

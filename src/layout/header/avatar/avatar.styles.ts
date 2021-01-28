@@ -11,7 +11,7 @@ export const StyledAvatar = styled.button(() => [
 			${tw`w-10 h-full transform scale-105 object-cover rounded-2xl`};
 		}
 		span {
-			${tw`px-3 text-sm text-gray-600 dark:text-gray-200`};
+			${tw`px-3 text-sm font-medium text-gray-600 dark:text-gray-200`};
 		}
 	`,
 ])

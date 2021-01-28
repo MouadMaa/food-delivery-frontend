@@ -6,7 +6,7 @@ export const StyledDesktopSignInOut = styled.div(() => [
   `,
 	css`
 		button {
-			${tw`font-normal px-5 py-1.5`};
+			${tw`font-medium px-5 py-1.5`};
 		}
 	`,
 ])

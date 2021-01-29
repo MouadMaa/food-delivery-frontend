@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react'
 
-import { Restaurant } from 'store/restaurant/restaurant.types'
+import { Restaurant } from '@/store/restaurant/restaurant.types'
 import {
 	StyledCardRestaurant,
 	StyledRestaurantCardPicture,

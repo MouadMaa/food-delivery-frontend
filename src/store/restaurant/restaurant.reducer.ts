@@ -1,5 +1,4 @@
 import { RestaurantAction, RestaurantState, SET_RESTAURANTS } from './restaurant.types'
-import { populateRestaurantWithCategories } from './restaurant.utils'
 
 const initState: RestaurantState = {
 	restaurants: [],
@@ -8,7 +7,7 @@ const initState: RestaurantState = {
 const restaurantReducer = (state = initState, { type, payload }: RestaurantAction): RestaurantState => {
 	switch (type) {
 		case SET_RESTAURANTS:
-			return { ...state, restaurants: populateRestaurantWithCategories(payload) }
+			return { ...state, restaurants: payload }
 		default:
 			return state
 	}

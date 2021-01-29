@@ -3,13 +3,13 @@ import { GetStaticProps } from 'next'
 
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
-import { firestore } from '../firebase'
-import { getCollectionData } from '../firebase/getDataFromCollectionOrDoc'
-import { setCategories } from '../store/category/category.actions'
-import { Category } from 'store/category/category.types'
-import { Restaurant } from 'store/restaurant/restaurant.types'
-import { setRestaurants } from 'store/restaurant/restaurant.actions'
-import { storeWrapper } from 'store/store'
+import { db } from '@/firebase/firebase'
+import { getCollectionData } from '@/firebase/firebase.utils'
+import { setCategories } from '@/store/category/category.actions'
+import { Category } from '@/store/category/category.types'
+import { Restaurant } from '@/store/restaurant/restaurant.types'
+import { setRestaurants } from '@/store/restaurant/restaurant.actions'
+import { storeWrapper } from '@/store/store'
 
 const Home: FC = () => {
 	return (
@@ -23,12 +23,20 @@ const Home: FC = () => {
 export default Home
 
 export const getStaticProps: GetStaticProps = storeWrapper.getStaticProps(async ({ store }) => {
-	const categoriesResponse = await firestore.collection('categories').orderBy('order', 'asc').get()
+	const categoriesResponse = await db.collection('categories').orderBy('order', 'asc').get()
 	const categories = getCollectionData<Category>(categoriesResponse)
 
-	const restaurantsResponse = await firestore.collection('restaurants').orderBy('favorites', 'desc').get()
+	const restaurantsResponse = await db.collection('restaurants').orderBy('favorites', 'desc').get()
 	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
 
+	// Replace restaurant categoriesIds with categories
+	const newPopulatedRestaurants = restaurants.map((restaurant) => ({
+		...restaurant,
+		categories: (restaurant.categories as unknown[]).map((categoryId) => {
+			return categories.find((category) => category.id === categoryId)
+		}),
+	}))
+
 	store.dispatch(setCategories(categories))
-	store.dispatch(setRestaurants(restaurants, categories))
+	store.dispatch(setRestaurants(newPopulatedRestaurants))
 })

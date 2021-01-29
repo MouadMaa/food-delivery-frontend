@@ -23,6 +23,8 @@
       "@/layout/*": [ "layout/*" ],
       "@/styles/*": [ "styles/*" ],
       "@/models/*": [ "models/*" ],
+      "@/firebase/*": [ "firebase/*" ],
+      "@/store/*": [ "store/*" ],
     }
   },
   "include": [

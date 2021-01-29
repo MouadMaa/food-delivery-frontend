@@ -5,12 +5,12 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
 import { SliderArrow } from '@/components/ui'
+import { categoriesSelector } from '@/store/category/category.selectors'
 import CategoryButton from '../category-button/category-button.component'
-import { RootState } from 'store/reducers'
 import { StyledCategories } from './categories.styles'
 
 const Categories: FC = () => {
-	const { categories } = useSelector((state: RootState) => state.category)
+	const categories = useSelector(categoriesSelector)
 
 	const [ selectedCategory, setSelectedCategory ] = useState('all')
 	const [ currentSlide, setCurrentSlide ] = useState(0)

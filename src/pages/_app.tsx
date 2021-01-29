@@ -2,8 +2,8 @@ import { FC, Fragment } from 'react'
 import { AppProps } from 'next/app'
 
 import TwinGlobalStyles from '@/styles/TwinGlobalStyles'
+import { storeWrapper } from '@/store/store'
 import Layout from '@/layout/index'
-import { storeWrapper } from '../store/store'
 
 const MyApp: FC<AppProps> = (props) => {
 	const { Component, pageProps } = props

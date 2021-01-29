@@ -4,7 +4,8 @@ import logger from 'redux-logger'
 
 import combinedReducers, { RootState } from './reducers'
 
-const middleWares = [ logger ]
+const middleWares = []
+if (process.env.NODE_ENV !== 'production') middleWares.push(logger)
 
 // create your reducer
 const reducer = (state: RootState, action: AnyAction) => {
@@ -23,4 +24,4 @@ const reducer = (state: RootState, action: AnyAction) => {
 const makeStore: MakeStore<RootState> = () => createStore(reducer, applyMiddleware(...middleWares))
 
 // export an assembled wrapper
-export const storeWrapper = createWrapper<RootState>(makeStore, { debug: true })
+export const storeWrapper = createWrapper<RootState>(makeStore)

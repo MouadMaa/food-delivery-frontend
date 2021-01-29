@@ -1,4 +1,4 @@
-import { Category } from 'store/category/category.types'
+import { Category } from '@/store/category/category.types'
 
 export interface Restaurant {
 	id: string
@@ -15,10 +15,7 @@ export const SET_RESTAURANTS = 'SET_RESTAURANTS'
 
 interface SetRestaurantsAction {
 	type: typeof SET_RESTAURANTS
-	payload: {
-		restaurants: Restaurant[]
-		categories: Category[]
-	}
+	payload: Restaurant[]
 }
 
 export type RestaurantAction = SetRestaurantsAction

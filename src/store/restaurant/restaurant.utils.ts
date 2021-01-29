@@ -1,4 +1,4 @@
-import { Category } from 'redux/category/category.types'
+import { Category } from 'store/category/category.types'
 import { Restaurant } from './restaurant.types'
 
 interface RestaurantResponse extends Omit<Restaurant, 'categories'> {

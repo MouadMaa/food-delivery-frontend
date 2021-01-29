@@ -6,7 +6,7 @@ import 'keen-slider/keen-slider.min.css'
 
 import { SliderArrow } from '@/components/ui'
 import CategoryButton from '../category-button/category-button.component'
-import { RootState } from 'redux/reducers'
+import { RootState } from 'store/reducers'
 import { StyledCategories } from './categories.styles'
 
 const Categories: FC = () => {

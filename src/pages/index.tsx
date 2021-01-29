@@ -5,11 +5,11 @@ import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
 import { firestore } from '../firebase'
 import { getCollectionData } from '../firebase/getDataFromCollectionOrDoc'
-import { setCategories } from '../redux/category/category.actions'
-import { initializeStore } from '../redux/store'
-import { Category } from 'redux/category/category.types'
-import { Restaurant } from 'redux/restaurant/restaurant.types'
-import { setRestaurants } from 'redux/restaurant/restaurant.actions'
+import { setCategories } from '../store/category/category.actions'
+import { Category } from 'store/category/category.types'
+import { Restaurant } from 'store/restaurant/restaurant.types'
+import { setRestaurants } from 'store/restaurant/restaurant.actions'
+import { storeWrapper } from 'store/store'
 
 const Home: FC = () => {
 	return (
@@ -22,21 +22,13 @@ const Home: FC = () => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { dispatch, getState } = initializeStore()
-
+export const getStaticProps: GetStaticProps = storeWrapper.getStaticProps(async ({ store }) => {
 	const categoriesResponse = await firestore.collection('categories').orderBy('order', 'asc').get()
 	const categories = getCollectionData<Category>(categoriesResponse)
 
 	const restaurantsResponse = await firestore.collection('restaurants').orderBy('favorites', 'desc').get()
 	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
 
-	dispatch(setCategories(categories))
-	dispatch(setRestaurants(restaurants, categories))
-
-	return {
-		props: {
-			initialReduxState: getState(),
-		},
-	}
-}
+	store.dispatch(setCategories(categories))
+	store.dispatch(setRestaurants(restaurants, categories))
+})

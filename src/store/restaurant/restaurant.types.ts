@@ -1,4 +1,4 @@
-import { Category } from 'redux/category/category.types'
+import { Category } from 'store/category/category.types'
 
 export interface Restaurant {
 	id: string

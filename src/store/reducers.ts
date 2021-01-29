@@ -10,9 +10,9 @@ export interface RootState {
 	restaurant: RestaurantState
 }
 
-const reducers = combineReducers({
+const combinedReducers = combineReducers({
 	category: categoryReducer,
 	restaurant: restaurantReducer,
 })
 
-export default reducers
+export default combinedReducers

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useSelector } from 'react-redux'
 
-import { RootState } from 'redux/reducers'
+import { RootState } from 'store/reducers'
 import RestaurantCard from '../restaurant-card/restaurant-card.component'
 import SortBy from '../sort-by/sort-by.component'
 import { StyledRestaurants } from './restaurants.styles'

@@ -17,8 +17,11 @@ const Layout: FC = ({ children }) => {
 			</Head>
 			<GlobalStyles />
 			<Header isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
-			<Menu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
+			<Menu isOpenMenu={isOpenMenu} />
 			<main tw='font-body text-md text-gray-700 bg-white px-2 md:px-6'>{children}</main>
+			{isOpenMenu && (
+				<div tw='fixed inset-0 z-40' className='backdrop-blur' onClick={() => setIsOpenMenu(!isOpenMenu)} />
+			)}
 		</Fragment>
 	)
 }

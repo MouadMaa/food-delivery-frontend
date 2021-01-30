@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react'
 
-import { StyledDropdown, BackDrop } from './dropdown.styles'
+import { StyledDropdown, DropdownBackDrop } from './dropdown.styles'
 
 interface DropdownProps {
 	isOpen: boolean
@@ -20,7 +20,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
 	return (
 		isOpen && (
 			<Fragment>
-				<BackDrop onClick={close} />
+				<DropdownBackDrop onClick={close} />
 				<StyledDropdown>
 					{items.map((item) => (
 						<button key={item} onClick={() => handleClick(item)}>

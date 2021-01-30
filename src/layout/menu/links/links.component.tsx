@@ -19,8 +19,8 @@ const Links: FC = () => {
 	return (
 		<StyledMenuLinks>
 			{items.map((link) => (
-				<Link href={link.href}>
-					<StyledMenuLink key={link.text} isActive={activeLink === link.text} onClick={() => setActiveLink(link.text)}>
+				<Link key={link.text} href={link.href}>
+					<StyledMenuLink isActive={activeLink === link.text} onClick={() => setActiveLink(link.text)}>
 						<div />
 						{link.svg}
 						<span>{link.text}</span>

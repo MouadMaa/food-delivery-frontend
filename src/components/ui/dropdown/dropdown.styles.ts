@@ -11,6 +11,6 @@ export const StyledDropdown = styled.div(() => [
 	`,
 ])
 
-export const BackDrop = tw.div`
+export const DropdownBackDrop = tw.div`
   fixed inset-0 z-50 h-full w-full bg-gray-900 bg-opacity-10
 `

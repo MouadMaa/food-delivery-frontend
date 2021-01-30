@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 
 import TwinGlobalStyles from '@/styles/TwinGlobalStyles'
 import { storeWrapper } from '@/store/store'
-import Layout from '@/layout/index'
+import Layout from '@/layout/layout.component'
 
 const MyApp: FC<AppProps> = (props) => {
 	const { Component, pageProps } = props

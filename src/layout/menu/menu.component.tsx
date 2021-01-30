@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import React, { FC } from 'react'
 
 import Links from './links/links.component'
 import SignOut from './sign-out/sign-out.component'
@@ -12,18 +11,8 @@ interface MenuProps {
 const Menu: FC<MenuProps> = (props) => {
 	const { isOpenMenu } = props
 
-	const menuRef = useRef(null)
-
-	useEffect(
-		() => {
-			if (isOpenMenu) disableBodyScroll(menuRef.current)
-			else enableBodyScroll(menuRef.current)
-		},
-		[ isOpenMenu ],
-	)
-
 	return (
-		<StyledMenu isOpenMenu={isOpenMenu} ref={menuRef}>
+		<StyledMenu isOpenMenu={isOpenMenu}>
 			<Links />
 			<SignOut />
 		</StyledMenu>

@@ -1,14 +1,13 @@
-import { FC, Fragment, useState } from 'react'
+import { FC, Fragment } from 'react'
 import Head from 'next/head'
 
 import GlobalStyles from '@/styles/GlobalStyles'
 import Header from './header/header.component'
 import Menu from './menu/menu.component'
-import Backdrop from './backdrop/backdrop.component'
 import { StyledMain } from './layout.styles'
 
-const Layout: FC = ({ children }) => {
-	const [ isOpenMenu, setIsOpenMenu ] = useState(false)
+const Layout: FC = (props) => {
+	const { children } = props
 
 	return (
 		<Fragment>
@@ -17,10 +16,9 @@ const Layout: FC = ({ children }) => {
 				<title>Food Delivery</title>
 			</Head>
 			<GlobalStyles />
-			<Header isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
-			<Menu isOpenMenu={isOpenMenu} />
+			<Header />
+			<Menu />
 			<StyledMain>{children}</StyledMain>
-			<Backdrop isOpen={isOpenMenu} setIsOpen={setIsOpenMenu} />
 		</Fragment>
 	)
 }

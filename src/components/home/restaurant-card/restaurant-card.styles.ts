@@ -26,7 +26,7 @@ export const StyledRestaurantCardContent = styled.div(() => [
 			${tw`flex items-center justify-between`};
 
 			h3 {
-				${tw`text-lg font-medium tracking-wider capitalize dark:text-white`};
+				${tw`text-lg text-gray-600 font-medium tracking-wider capitalize dark:text-white`};
 			}
 
 			div {

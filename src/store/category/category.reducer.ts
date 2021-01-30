@@ -1,4 +1,4 @@
-import { CategoryAction, CategoryState, SET_CATEGORIES } from './category.types'
+import { CategoryAction, CategoryState, FETCH_CATEGORIES } from './category.types'
 
 const initState: CategoryState = {
 	categories: [
@@ -11,7 +11,7 @@ const initState: CategoryState = {
 
 const categoryReducer = (state = initState, { type, payload }: CategoryAction): CategoryState => {
 	switch (type) {
-		case SET_CATEGORIES:
+		case FETCH_CATEGORIES:
 			return { ...state, categories: [ ...state.categories, ...payload ] }
 		default:
 			return state

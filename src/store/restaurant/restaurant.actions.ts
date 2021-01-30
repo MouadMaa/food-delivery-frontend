@@ -1,6 +1,6 @@
-import { Restaurant, RestaurantAction, SET_RESTAURANTS } from './restaurant.types'
+import { Restaurant, RestaurantAction, FETCH_RESTAURANTS } from './restaurant.types'
 
-export const setRestaurants = (restaurants: Restaurant[]): RestaurantAction => ({
-	type: SET_RESTAURANTS,
+export const fetchRestaurants = (restaurants: Restaurant[]): RestaurantAction => ({
+	type: FETCH_RESTAURANTS,
 	payload: restaurants,
 })

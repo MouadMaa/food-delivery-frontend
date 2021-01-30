@@ -1,10 +1,11 @@
 import { AnyAction, applyMiddleware, createStore } from 'redux'
 import { MakeStore, createWrapper, HYDRATE } from 'next-redux-wrapper'
+import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
 import combinedReducers, { RootState } from './reducers'
 
-const middleWares = []
+const middleWares: any[] = [ thunk ]
 if (process.env.NODE_ENV !== 'production') middleWares.push(logger)
 
 // create your reducer

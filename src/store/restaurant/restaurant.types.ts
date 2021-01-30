@@ -11,11 +11,11 @@ export interface RestaurantState {
 	restaurants: Restaurant[]
 }
 
-export const SET_RESTAURANTS = 'SET_RESTAURANTS'
+export const FETCH_RESTAURANTS = 'FETCH_RESTAURANTS'
 
-interface SetRestaurantsAction {
-	type: typeof SET_RESTAURANTS
+interface FetchRestaurantsAction {
+	type: typeof FETCH_RESTAURANTS
 	payload: Restaurant[]
 }
 
-export type RestaurantAction = SetRestaurantsAction
+export type RestaurantAction = FetchRestaurantsAction

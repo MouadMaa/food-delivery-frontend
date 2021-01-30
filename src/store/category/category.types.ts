@@ -7,11 +7,11 @@ export interface CategoryState {
 	categories: Category[]
 }
 
-export const SET_CATEGORIES = 'SET_CATEGORIES'
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
 
-interface SetCategoriesAction {
-	type: typeof SET_CATEGORIES
+interface FetchCategoriesAction {
+	type: typeof FETCH_CATEGORIES
 	payload: Category[]
 }
 
-export type CategoryAction = SetCategoriesAction
+export type CategoryAction = FetchCategoriesAction

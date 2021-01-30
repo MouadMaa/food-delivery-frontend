@@ -3,13 +3,9 @@ import { GetStaticProps } from 'next'
 
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
-import { db } from '@/firebase/firebase'
-import { getCollectionData } from '@/firebase/firebase.utils'
-import { setCategories } from '@/store/category/category.actions'
-import { Category } from '@/store/category/category.types'
-import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { setRestaurants } from '@/store/restaurant/restaurant.actions'
 import { storeWrapper } from '@/store/store'
+import { fetchRestaurantsAsync } from '@/store/restaurant/restaurant.firebase'
+import { fetchCategoriesAsync } from '@/store/category/category.firebase'
 
 const Home: FC = () => {
 	return (
@@ -23,20 +19,6 @@ const Home: FC = () => {
 export default Home
 
 export const getStaticProps: GetStaticProps = storeWrapper.getStaticProps(async ({ store }) => {
-	const categoriesResponse = await db.collection('categories').orderBy('order', 'asc').get()
-	const categories = getCollectionData<Category>(categoriesResponse)
-
-	const restaurantsResponse = await db.collection('restaurants').orderBy('favorites', 'desc').get()
-	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
-
-	// Replace restaurant categoriesIds with categories
-	const newPopulatedRestaurants = restaurants.map((restaurant) => ({
-		...restaurant,
-		categories: (restaurant.categories as unknown[]).map((categoryId) => {
-			return categories.find((category) => category.id === categoryId)
-		}),
-	}))
-
-	store.dispatch(setCategories(categories))
-	store.dispatch(setRestaurants(newPopulatedRestaurants))
+	await store.dispatch(fetchCategoriesAsync() as any)
+	await store.dispatch(fetchRestaurantsAsync() as any)
 })

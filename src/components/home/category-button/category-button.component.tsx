@@ -15,7 +15,6 @@ const CategoryButton: FC<CategoryButtonProps> = (props) => {
 
 	return (
 		<StyledCategoryButton
-			className='keen-slider__slide'
 			isSelected={selectedCategory === id}
 			onClick={() => setSelectedCategory(selectedCategory === id ? 'all' : id)}
 		>

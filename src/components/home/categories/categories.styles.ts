@@ -4,7 +4,10 @@ export const StyledCategories = styled.section(() => [
 	tw`mt-8`,
 	css`
 		h1 {
-			${tw`text-lg md:text-xl tracking-wide mb-4 sm:mb-6 text-gray-600 dark:text-gray-50`};
+			${tw`text-lg md:text-xl tracking-wide mb-2 sm:mb-4 text-gray-600 dark:text-gray-50`};
+		}
+		nav {
+			${tw`flex items-center py-3 space-x-3 sm:space-x-6 text-gray-600 overflow-auto`};
 		}
 	`,
 ])

@@ -1,5 +1,16 @@
 {
   "cSpell.words": [
     "firestore"
-  ]
+  ],
+  "tailwindCSS.experimental.classRegex": [
+      "tw`([^`]*)", // tw`...`
+      "tw=\"([^\"]*)", // <div tw="..." />
+      "className=\"([^\"]*)", // <div className="..." />
+      "tw='([^']*)", // <div tw='...' />
+      "className='([^']*)", // <div className='...' />
+      "tw={\"([^\"}]*)", // <div tw={"..."} />
+      "tw={'([^'}]*)", // <div tw={'...'} />
+      "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+      "tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+  ],
 }

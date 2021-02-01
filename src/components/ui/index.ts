@@ -1,6 +1,5 @@
 export { default as Button } from './button/button.component'
 export { default as Dropdown } from './dropdown/dropdown.component'
 export { default as IconButton } from './icon-button/icon-button.component'
-export { default as SliderArrow } from './slider-arrow/slider-arrow.component'
 export { default as Backdrop } from './backdrop/backdrop.component'
 export { default as Switch } from './switch/switch.component'

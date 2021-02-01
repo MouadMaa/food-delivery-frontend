@@ -1,7 +1,7 @@
 import tw, { css, styled } from 'twin.macro'
 
 export const StyledRestaurants = styled.section(() => [
-	tw`my-4`,
+	tw`py-4`,
 	css`
 		> article {
 			${tw`flex items-center justify-between flex-wrap`};

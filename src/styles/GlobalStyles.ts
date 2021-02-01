@@ -6,12 +6,12 @@ const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
   }
 
-  header {
+  header, footer {
     max-width: 1920px;
     margin: 0 auto;
   }
 
-  main {
+  main > * {
     max-width: 1536px;
     margin: 0 auto;
   }

@@ -19,7 +19,7 @@ export const StyledMenuLink = styled.a(({ isActive }: { isActive: boolean }) => 
 	`,
 	isActive
 		? [
-				tw`text-primary-default bg-primary-background dark:bg-gray-800`,
+				tw`text-primary-default bg-primary-background dark:text-primary-default dark:bg-gray-800`,
 				css`
 					div {
 						${tw`h-full`};

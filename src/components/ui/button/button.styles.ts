@@ -21,8 +21,7 @@ export const StyledButton = styled.button(({ level }: StyledButtonProps) => [
 	],
 
 	level === 'SubTitle' && [
-		tw`text-primary-default border-2 border-gray-200 shadow-sm`,
-		tw`active:(bg-white border-gray-300)`,
-		tw`dark:(border-gray-600 focus-visible:border-gray-500 active:border-gray-500)`,
+		tw`text-primary-default border-2 bg-transparent border-gray-200 shadow-sm`,
+		tw`active:(bg-transparent border-gray-300)`,
 	],
 ])

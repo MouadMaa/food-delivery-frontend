@@ -7,7 +7,7 @@ export const StyledSwitch = styled.label(({ isChecked }: { isChecked: boolean })
 			${tw`relative block w-8 h-5 bg-gray-200 rounded-3xl cursor-pointer transition-all duration-300`};
 
 			div {
-				${tw`absolute top-0.5 left-0.5 bottom-0.5 w-1/2 bg-white rounded-full transform transition-all duration-300`};
+				${tw`absolute top-0.5 left-0.5 bottom-0.5 w-1/2 bg-white rounded-full transform transition-all duration-300 dark:bg-gray-200`};
 			}
 
 			input {
@@ -15,7 +15,7 @@ export const StyledSwitch = styled.label(({ isChecked }: { isChecked: boolean })
 			}
 		}
 		> span {
-			${tw`text-sm cursor-pointer`};
+			${tw`text-sm tracking-wide cursor-pointer dark:text-gray-50`};
 		}
 	`,
 	isChecked && [

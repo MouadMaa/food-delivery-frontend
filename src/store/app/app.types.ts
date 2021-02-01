@@ -1,5 +1,5 @@
 export interface AppState {
-	menuIsOpen: boolean
+	menu: boolean
 }
 
 export const TOGGLE_MENU = 'TOGGLE_MENU'

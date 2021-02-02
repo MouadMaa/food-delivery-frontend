@@ -6,24 +6,24 @@ import { StyledCategoryButton } from './category-button.styles'
 
 export interface CategoryButtonProps {
 	category: Category
-	selectedCategory: string
-	setSelectedCategory: (name: string) => void
+	selectedCategory: Category
+	setSelectedCategory: (category: Category) => void
 }
 
 const CategoryButton: FC<CategoryButtonProps> = (props) => {
-	const { category: { id, name }, selectedCategory, setSelectedCategory } = props
+	const { category, selectedCategory, setSelectedCategory } = props
+
+	const isSelected = selectedCategory.id === category.id
+	const handleClick = () => !isSelected && setSelectedCategory(category)
 
 	return (
-		<StyledCategoryButton
-			isSelected={selectedCategory === id}
-			onClick={() => setSelectedCategory(selectedCategory === id ? 'all' : id)}
-		>
-			{id !== 'all' && (
+		<StyledCategoryButton isSelected={isSelected} onClick={handleClick}>
+			{category.id !== 'all' && (
 				<picture>
-					<Image src={`/svg/${name.toLowerCase().replace(' ', '-')}.svg`} alt={name} layout='fill' />
+					<Image src={`/svg/${category.name.toLowerCase().replace(' ', '-')}.svg`} alt={category.name} layout='fill' />
 				</picture>
 			)}
-			<span>{name}</span>
+			<span>{category.name}</span>
 		</StyledCategoryButton>
 	)
 }

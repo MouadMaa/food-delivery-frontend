@@ -1,14 +1,18 @@
-import { FC, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { categoriesSelector } from '@/store/category/category.selectors'
+import { categoriesSelector, selectedCategorySelector } from '@/store/category/category.selectors'
+import { selectCategory } from '@/store/category/category.actions'
+import { Category } from '@/store/category/category.types'
 import CategoryButton from '../category-button/category-button.component'
 import { StyledCategories } from './categories.styles'
 
 const Categories: FC = () => {
+	const dispatch = useDispatch()
 	const categories = useSelector(categoriesSelector)
+	const selectedCategory = useSelector(selectedCategorySelector)
 
-	const [ selectedCategory, setSelectedCategory ] = useState('all')
+	const setSelectedCategory = (category: Category) => dispatch(selectCategory(category))
 
 	return (
 		<StyledCategories>

@@ -6,7 +6,7 @@ export const StyledDropdown = styled.div(() => [
   `,
 	css`
 		button {
-			${tw`flex w-full px-4 py-2 space-x-2 text-sm font-medium text-gray-500 hover:(bg-gray-100 text-gray-700) focus:outline-none dark:(text-gray-100 hover:bg-gray-700)`};
+			${tw`flex w-full px-4 py-2 space-x-2 text-sm text-gray-500 hover:(bg-gray-100 text-gray-700) focus:outline-none dark:(text-gray-100 hover:bg-gray-700)`};
 		}
 	`,
 ])

@@ -3,24 +3,24 @@ import { FC, Fragment } from 'react'
 import { StyledDropdown, DropdownBackDrop } from './dropdown.styles'
 
 interface DropdownProps {
-	isOpen: boolean
-	close: () => void
 	items: string[]
+	show: boolean
+	onHide: () => void
 	onSelect: (item: string) => void
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-	const { items, isOpen, close, onSelect } = props
+	const { items, show, onHide, onSelect } = props
 
 	const handleClick = (item: string) => {
 		onSelect(item)
-		close()
+		onHide()
 	}
 
 	return (
-		isOpen && (
+		show && (
 			<Fragment>
-				<DropdownBackDrop onClick={close} />
+				<DropdownBackDrop onClick={onHide} />
 				<StyledDropdown>
 					{items.map((item) => (
 						<button key={item} onClick={() => handleClick(item)}>

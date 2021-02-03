@@ -1,37 +1,37 @@
 import { FC, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { sortRestaurants } from '@/store/restaurant/restaurant.actions'
+import { sortRestaurantsSelector } from '@/store/restaurant/restaurant.selectors'
 import { Dropdown } from '@/components/ui'
 import { StyledSortBy } from './sort-by.styles'
 import { SortBySvg } from './sort-by.svg'
+import { sortRestaurantsByData } from './sort-by.data'
 
 const SortBy: FC = () => {
-	const [ isOpenDropdown, setIsOpenDropdown ] = useState(false)
-	const [ sortBy, setSortBy ] = useState('Popularity')
+	const dispatch = useDispatch()
+	const sortBy = useSelector(sortRestaurantsSelector)
 
-	const itemsDropdown = [
-		'Popularity',
-		'Price (Low to high)',
-		'Price (High to low)',
-		'Duration (Low to high)',
-		'Duration (High to low)',
-	]
+	const [ showDropdown, setShowDropdown ] = useState(false)
+
+	const onSelect = (item: string) => {
+		const sortBy = sortRestaurantsByData.find((sort) => sort.name === item)
+		dispatch(sortRestaurants(sortBy))
+	}
+
+	const itemsDropdown = sortRestaurantsByData.map((sortBy) => sortBy.name)
 
 	return (
 		<StyledSortBy>
 			<div>
 				<span>Sort by:</span>
-				<button onClick={() => setIsOpenDropdown(!isOpenDropdown)}>
-					<span>{sortBy}</span>
+				<button onClick={() => setShowDropdown(!showDropdown)}>
+					<span>{sortBy.name}</span>
 					<SortBySvg />
 				</button>
 			</div>
 
-			<Dropdown
-				isOpen={isOpenDropdown}
-				close={() => setIsOpenDropdown(false)}
-				items={itemsDropdown}
-				onSelect={setSortBy}
-			/>
+			<Dropdown show={showDropdown} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={onSelect} />
 		</StyledSortBy>
 	)
 }

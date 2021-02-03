@@ -1,7 +1,7 @@
 import { db } from '@/firebase/firebase'
 import { getCollectionData } from '@/firebase/firebase.utils'
 import { Category } from '../category/category.types'
-import { Restaurant } from './restaurant.types'
+import { Restaurant, RestaurantState } from './restaurant.types'
 
 export const populateRestaurantsWithCategories = async (restaurants: Restaurant[]): Promise<Restaurant[]> => {
 	// Fetch Categories
@@ -17,4 +17,30 @@ export const populateRestaurantsWithCategories = async (restaurants: Restaurant[
 	}))
 
 	return newPopulatedRestaurants
+}
+
+export const filterAndSortRestaurants = (restaurant: RestaurantState, selectedCategory: Category): Restaurant[] => {
+	let newRestaurants = [ ...restaurant.restaurants ]
+
+	// Filter restaurants by category
+	if (selectedCategory.id !== 'all') {
+		newRestaurants = restaurant.restaurants.filter((restaurant) =>
+			restaurant.categories.find((category) => category.id === selectedCategory.id),
+		)
+	}
+
+	// Sort restaurants
+	if (restaurant.sortBy.value === 'favorites') {
+		newRestaurants = newRestaurants.sort(
+			(res1, res2) =>
+				restaurant.sortBy.sort === 'asc' ? res1.favorites - res2.favorites : res2.favorites - res1.favorites,
+		)
+	} else if (restaurant.sortBy.value === 'duration') {
+		newRestaurants = newRestaurants.sort(
+			(res1, res2) =>
+				restaurant.sortBy.sort === 'asc' ? res1.duration[0] - res2.duration[0] : res2.duration[0] - res1.duration[0],
+		)
+	}
+
+	return newRestaurants
 }

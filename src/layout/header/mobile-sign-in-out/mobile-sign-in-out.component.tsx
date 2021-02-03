@@ -5,23 +5,18 @@ import { StyledMobileSign } from './mobile-sign-in-out.styles'
 import { UserSvg } from './mobile-sign-in-out.svg'
 
 const MobileSignInOut: FC = () => {
-	const [ isOpenDropdown, setIsOpenDropdown ] = useState(false)
+	const [ show, setShowDropdown ] = useState(false)
 	const [ selected, setSelected ] = useState('')
 
 	const itemsDropdown = [ 'Sign In', 'Create Account' ]
 
 	return (
-		<StyledMobileSign onClick={() => setIsOpenDropdown(!isOpenDropdown)}>
+		<StyledMobileSign onClick={() => setShowDropdown(!show)}>
 			<IconButton onClick={() => {}}>
 				<UserSvg />
 			</IconButton>
 
-			<Dropdown
-				isOpen={isOpenDropdown}
-				close={() => setIsOpenDropdown(false)}
-				items={itemsDropdown}
-				onSelect={setSelected}
-			/>
+			<Dropdown show={show} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={setSelected} />
 		</StyledMobileSign>
 	)
 }

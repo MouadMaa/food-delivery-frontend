@@ -14,14 +14,14 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard: FC<RestaurantCardProps> = (props) => {
-	const { restaurant: { name, favorites, categories } } = props
+	const { restaurant: { name, favorites, duration, categories } } = props
 
 	return (
 		<StyledCardRestaurant className='group'>
 			<StyledRestaurantCardPicture>
 				<img src='https://bonsplansmaroc.com/wp-content/uploads/2020/03/image-pizza-hut-2.jpg' alt='pizza' />
 				<div className='backdrop-blur'>
-					<span>25~35 mins</span>
+					<span>{`${duration[0]}~${duration[1]} mins`}</span>
 				</div>
 			</StyledRestaurantCardPicture>
 			<StyledRestaurantCardContent>

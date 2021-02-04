@@ -15,7 +15,7 @@ export const StyledSearchForm = styled.div(() => [
 	`,
 ])
 
-export const FormContainer = styled.div(() => [
+export const FormContainer = styled.form(() => [
 	tw`
     flex
   `,
@@ -41,7 +41,7 @@ export const FormContainer = styled.div(() => [
 		}
 
 		> div:last-child {
-			${tw`w-80 space-x-4 text-gray-400 border-l-4 border-r-2 transform -translate-x-6 transition duration-300 focus-within:(border-transparent ring-2 ring-gray-300) dark:(focus-within:ring-gray-700)`};
+			${tw`relative w-80 space-x-4 text-gray-400 border-l-4 border-r-2 transform -translate-x-6 transition duration-300 focus-within:(border-transparent ring-2 ring-gray-300) dark:(focus-within:ring-gray-700)`};
 
 			svg {
 				${tw`w-5 h-5 text-current stroke-current`};

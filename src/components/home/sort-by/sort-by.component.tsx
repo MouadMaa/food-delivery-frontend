@@ -31,7 +31,14 @@ const SortBy: FC = () => {
 				</button>
 			</div>
 
-			<Dropdown show={showDropdown} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={onSelect} />
+			<Dropdown
+				show={showDropdown}
+				onHide={() => setShowDropdown(false)}
+				items={itemsDropdown}
+				onSelect={onSelect}
+				selectedItem={sortBy.name}
+				withCheckMark
+			/>
 		</StyledSortBy>
 	)
 }

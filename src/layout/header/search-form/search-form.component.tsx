@@ -1,14 +1,16 @@
-import React, { FC, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { IconButton } from '@/components/ui'
 import { useDebounce } from '@/hooks/useDebounce'
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { searchForCategoriesAndRestaurantsAsync } from '@/store/app/app.firebase'
+import { categoriesSelector } from '@/store/category/category.selectors'
+import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 import SearchDropdown from '../search-dropdown/search-dropdown.component'
 import { StyledSearchForm, FormContainer } from './search-form.styles'
 import { AddressSvg, FilterSvg, SearchSvg } from './search-form.svg'
+import { searchForCategories, searchForRestaurants } from './search-form.utils'
 
 export interface SearchResults {
 	categories: Category[]
@@ -16,22 +18,32 @@ export interface SearchResults {
 }
 
 const SearchForm: FC = () => {
-	const dispatch = useDispatch()
+	const categories = useSelector(categoriesSelector)
+
+	const ref = useRef()
+	useOnClickOutside(ref, () => setSearchTerm(''))
 
 	const [ searchTerm, setSearchTerm ] = useState('')
-	const [ isSearching, setIsSearching ] = useState(false)
-	const [ results, setResults ] = useState<SearchResults>(null)
+	const [ isSearching, setIsSearching ] = useState(true)
+	const [ results, setResults ] = useState<SearchResults>(initResults)
 
 	const debouncedSearchTerm = useDebounce(searchTerm, 300)
 
 	useEffect(
 		() => {
-			if (debouncedSearchTerm) {
-				setIsSearching(true)
-				dispatch(searchForCategoriesAndRestaurantsAsync(debouncedSearchTerm))
-				setIsSearching(false)
-				setResults(null)
-			}
+			;(async () => {
+				if (debouncedSearchTerm) {
+					setIsSearching(true)
+					setResults({
+						categories: searchForCategories(categories, debouncedSearchTerm),
+						restaurants: await searchForRestaurants(debouncedSearchTerm),
+					})
+					setIsSearching(false)
+				} else {
+					setIsSearching(true)
+					setResults(initResults)
+				}
+			})()
 		},
 		[ debouncedSearchTerm ],
 	)
@@ -39,7 +51,7 @@ const SearchForm: FC = () => {
 	const handleChange = (event: React.FormEvent<HTMLInputElement>) => setSearchTerm(event.currentTarget.value)
 
 	return (
-		<StyledSearchForm>
+		<StyledSearchForm ref={ref}>
 			<FormContainer>
 				<div>
 					<AddressSvg />
@@ -48,7 +60,7 @@ const SearchForm: FC = () => {
 				<div>
 					<SearchSvg />
 					<input type='text' value={searchTerm} onChange={handleChange} placeholder='Search..' />
-					<SearchDropdown />
+					{searchTerm && <SearchDropdown results={results} isSearching={isSearching} />}
 				</div>
 			</FormContainer>
 			<IconButton onClick={() => {}}>
@@ -59,3 +71,8 @@ const SearchForm: FC = () => {
 }
 
 export default SearchForm
+
+const initResults: SearchResults = {
+	categories: [],
+	restaurants: [],
+}

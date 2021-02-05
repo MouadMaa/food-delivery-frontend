@@ -1,17 +1,22 @@
-import React, { FC, Fragment, useEffect, useState } from 'react'
+import React, { FC, Fragment, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from 'next-themes'
 
-import { menuSelector } from '@/store/app/app.selectors'
+import { isSideMenuOpenSelector } from '@/store/app/app.selectors'
 import { toggleMenu } from '@/store/app/app.actions'
 import { Backdrop, Button, Switch } from '@/components/ui'
 import Links from './links/links.component'
 import SignOut from './sign-out/sign-out.component'
 import { StyledMenu } from './menu.styles'
+import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 
 const Menu: FC = () => {
 	const dispatch = useDispatch()
-	const menu = useSelector(menuSelector)
+
+	const ref = useRef()
+	const isSideMenuOpen = useSelector(isSideMenuOpenSelector)
+
+	useOnClickOutside(ref, () => isSideMenuOpen && dispatch(toggleMenu()))
 
 	const { theme, setTheme } = useTheme()
 	const [ isMounted, setIsMounted ] = useState(false)
@@ -31,7 +36,7 @@ const Menu: FC = () => {
 
 	return (
 		<Fragment>
-			<StyledMenu show={menu}>
+			<StyledMenu isOpen={isSideMenuOpen} ref={ref}>
 				<Links />
 				<div>
 					<div>
@@ -46,7 +51,7 @@ const Menu: FC = () => {
 					<SignOut />
 				</div>
 			</StyledMenu>
-			<Backdrop show={menu} onHide={() => dispatch(toggleMenu())} />
+			{isSideMenuOpen && <Backdrop />}
 		</Fragment>
 	)
 }

@@ -25,6 +25,7 @@
       "@/models/*": [ "models/*" ],
       "@/firebase/*": [ "firebase/*" ],
       "@/store/*": [ "store/*" ],
+      "@/hooks/*": [ "hooks/*" ],
     }
   },
   "include": [

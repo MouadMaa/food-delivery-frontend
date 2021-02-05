@@ -1,11 +1,11 @@
 export interface AppState {
-	menu: boolean
+	isSideMenuOpen: boolean
 }
 
-export const TOGGLE_MENU = 'TOGGLE_MENU'
+export const TOGGLE_SIDE_MENU = 'TOGGLE_SIDE_MENU'
 
 interface ToggleMenuAction {
-	type: typeof TOGGLE_MENU
+	type: typeof TOGGLE_SIDE_MENU
 }
 
 export type AppAction = ToggleMenuAction

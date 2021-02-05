@@ -1,13 +1,13 @@
-import { AppAction, AppState, TOGGLE_MENU } from './app.types'
+import { AppAction, AppState, TOGGLE_SIDE_MENU } from './app.types'
 
 const initState: AppState = {
-	menu: false,
+	isSideMenuOpen: false,
 }
 
-const appReducer = (state = initState, { type }: AppAction): AppState => {
-	switch (type) {
-		case TOGGLE_MENU:
-			return { ...state, menu: !state.menu }
+const appReducer = (state = initState, action: AppAction): AppState => {
+	switch (action.type) {
+		case TOGGLE_SIDE_MENU:
+			return { ...state, isSideMenuOpen: !state.isSideMenuOpen }
 		default:
 			return state
 	}

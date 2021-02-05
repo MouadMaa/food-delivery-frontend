@@ -5,11 +5,15 @@ export const StyledSearchForm = styled.div(() => [
     hidden xl:(flex items-center)
   `,
 	css`
-		> button {
-			${tw`transform -translate-x-4`};
+		> div {
+			${tw`relative`};
 
-			svg {
-				${tw`w-4 h-4 text-gray-600 stroke-current dark:text-gray-100`};
+			> button {
+				${tw`transform -translate-x-4`};
+
+				svg {
+					${tw`w-4 h-4 text-gray-600 stroke-current dark:text-gray-100`};
+				}
 			}
 		}
 	`,

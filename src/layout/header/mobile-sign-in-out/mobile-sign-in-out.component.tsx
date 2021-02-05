@@ -16,7 +16,7 @@ const MobileSignInOut: FC = () => {
 				<UserSvg />
 			</IconButton>
 
-			<Dropdown show={show} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={setSelected} />
+			<Dropdown isOpen={show} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={setSelected} />
 		</StyledMobileSign>
 	)
 }

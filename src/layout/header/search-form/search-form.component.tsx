@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { IconButton } from '@/components/ui'
+import { Dropdown, IconButton } from '@/components/ui'
 import { useDebounce } from '@/hooks/useDebounce'
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
@@ -27,6 +27,9 @@ const SearchForm: FC = () => {
 	const [ isSearching, setIsSearching ] = useState(true)
 	const [ results, setResults ] = useState<SearchResults>(initResults)
 
+	const [ isDropdownFilterOpen, setIsDropdownFilterOpen ] = useState(false)
+	const [ filterBy, setFilterBy ] = useState('All')
+
 	const debouncedSearchTerm = useDebounce(searchTerm, 300)
 
 	useEffect(
@@ -35,8 +38,8 @@ const SearchForm: FC = () => {
 				if (debouncedSearchTerm) {
 					setIsSearching(true)
 					setResults({
-						categories: searchForCategories(categories, debouncedSearchTerm),
-						restaurants: await searchForRestaurants(debouncedSearchTerm),
+						categories: filterBy !== 'Restaurant' ? searchForCategories(categories, debouncedSearchTerm) : [],
+						restaurants: filterBy !== 'Category' ? await searchForRestaurants(debouncedSearchTerm) : [],
 					})
 					setIsSearching(false)
 				} else {
@@ -48,6 +51,7 @@ const SearchForm: FC = () => {
 		[ debouncedSearchTerm ],
 	)
 
+	const onSelect = (item: string) => setFilterBy(item)
 	const handleChange = (event: React.FormEvent<HTMLInputElement>) => setSearchTerm(event.currentTarget.value)
 
 	return (
@@ -63,9 +67,19 @@ const SearchForm: FC = () => {
 					{searchTerm && <SearchDropdown results={results} isSearching={isSearching} />}
 				</div>
 			</FormContainer>
-			<IconButton onClick={() => {}}>
-				<FilterSvg />
-			</IconButton>
+			<div>
+				<IconButton onClick={() => setIsDropdownFilterOpen(true)}>
+					<FilterSvg />
+				</IconButton>
+				<Dropdown
+					isOpen={isDropdownFilterOpen}
+					onHide={() => setIsDropdownFilterOpen(false)}
+					items={itemsDropdownFilter}
+					onSelect={onSelect}
+					selectedItem={filterBy}
+					withCheckMark
+				/>
+			</div>
 		</StyledSearchForm>
 	)
 }
@@ -76,3 +90,5 @@ const initResults: SearchResults = {
 	categories: [],
 	restaurants: [],
 }
+
+const itemsDropdownFilter = [ 'All', 'Category', 'Restaurant' ]

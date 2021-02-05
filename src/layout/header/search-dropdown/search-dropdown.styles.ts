@@ -7,7 +7,7 @@ export const StyledSearchDropdown = styled.div(() => [
 			${tw`text-primary-dark`};
 		}
 		article div {
-			${tw`text-gray-700 py-1 px-3 cursor-pointer rounded-lg transition-colors duration-300 hover:bg-gray-100`};
+			${tw`text-gray-600 py-1 px-3 cursor-pointer rounded-lg transition-colors duration-300 hover:text-gray-700 hover:bg-gray-100`};
 		}
 	`,
 ])

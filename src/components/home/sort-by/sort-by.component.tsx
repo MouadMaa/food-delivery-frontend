@@ -12,7 +12,7 @@ const SortBy: FC = () => {
 	const dispatch = useDispatch()
 	const sortBy = useSelector(sortRestaurantsSelector)
 
-	const [ showDropdown, setShowDropdown ] = useState(false)
+	const [ isSortByDropdownOpen, setIsSortByDropdownOpen ] = useState(false)
 
 	const onSelect = (item: string) => {
 		const sortBy = sortRestaurantsByData.find((sort) => sort.name === item)
@@ -25,15 +25,15 @@ const SortBy: FC = () => {
 		<StyledSortBy>
 			<div>
 				<span>Sort by:</span>
-				<button onClick={() => setShowDropdown(!showDropdown)}>
+				<button onClick={() => setIsSortByDropdownOpen(!isSortByDropdownOpen)}>
 					<span>{sortBy.name}</span>
 					<SortBySvg />
 				</button>
 			</div>
 
 			<Dropdown
-				show={showDropdown}
-				onHide={() => setShowDropdown(false)}
+				isOpen={isSortByDropdownOpen}
+				onHide={() => setIsSortByDropdownOpen(false)}
 				items={itemsDropdown}
 				onSelect={onSelect}
 				selectedItem={sortBy.name}

@@ -5,7 +5,7 @@ import { DropdownSvg } from './dropdown.svg'
 
 interface DropdownProps {
 	items: string[]
-	show: boolean
+	isOpen: boolean
 	onHide: () => void
 	onSelect: (item: string) => void
 	selectedItem?: string
@@ -13,7 +13,7 @@ interface DropdownProps {
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-	const { items, show, onHide, onSelect, selectedItem, withCheckMark = false } = props
+	const { items, isOpen, onHide, onSelect, selectedItem, withCheckMark = false } = props
 
 	const handleClick = (item: string) => {
 		onSelect(item)
@@ -21,7 +21,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
 	}
 
 	return (
-		show && (
+		isOpen && (
 			<Fragment>
 				<DropdownBackDrop onClick={onHide} />
 				<StyledDropdown>

@@ -20,7 +20,7 @@ const CategoryButton: FC<CategoryButtonProps> = (props) => {
 		<StyledCategoryButton isSelected={isSelected} onClick={handleClick}>
 			{category.id !== 'all' && (
 				<picture>
-					<Image src={`/svg/${category.name.toLowerCase().replace(' ', '-')}.svg`} alt={category.name} layout='fill' />
+					<Image src={category.image} alt={category.name} layout='fill' objectFit='cover' />
 				</picture>
 			)}
 			<span>{category.name}</span>

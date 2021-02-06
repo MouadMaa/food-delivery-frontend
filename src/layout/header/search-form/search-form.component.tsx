@@ -64,7 +64,12 @@ const SearchForm: FC = () => {
 				<div>
 					<SearchSvg />
 					<input type='text' value={searchTerm} onChange={handleChange} placeholder='Search..' />
-					{searchTerm && <SearchDropdown results={results} isSearching={isSearching} />}
+					<SearchDropdown
+						results={results}
+						isSearching={isSearching}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+					/>
 				</div>
 			</FormContainer>
 			<div>

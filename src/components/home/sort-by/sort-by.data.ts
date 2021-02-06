@@ -3,7 +3,7 @@ import { SortRestaurants } from '@/store/restaurant/restaurant.types'
 export const sortRestaurantsByData: SortRestaurants[] = [
 	{
 		name: 'Popularity',
-		value: 'favorites',
+		value: 'favoritesCount',
 		sort: 'desc',
 	},
 	{

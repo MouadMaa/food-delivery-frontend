@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from 'next-themes'
 
 import { isSideMenuOpenSelector } from '@/store/app/app.selectors'
-import { toggleMenu } from '@/store/app/app.actions'
+import { toggleSideMenu } from '@/store/app/app.actions'
 import { Backdrop, Button, Switch } from '@/components/ui'
 import Links from './links/links.component'
 import SignOut from './sign-out/sign-out.component'
@@ -12,11 +12,10 @@ import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 
 const Menu: FC = () => {
 	const dispatch = useDispatch()
-
-	const ref = useRef()
 	const isSideMenuOpen = useSelector(isSideMenuOpenSelector)
 
-	useOnClickOutside(ref, () => isSideMenuOpen && dispatch(toggleMenu()))
+	const ref = useRef()
+	useOnClickOutside(ref, () => isSideMenuOpen && dispatch(toggleSideMenu()))
 
 	const { theme, setTheme } = useTheme()
 	const [ isMounted, setIsMounted ] = useState(false)

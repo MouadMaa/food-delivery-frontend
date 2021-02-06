@@ -30,10 +30,12 @@ export const filterAndSortRestaurants = (restaurant: RestaurantState, selectedCa
 	}
 
 	// Sort restaurants
-	if (restaurant.sortBy.value === 'favorites') {
+	if (restaurant.sortBy.value === 'favoritesCount') {
 		newRestaurants = newRestaurants.sort(
 			(res1, res2) =>
-				restaurant.sortBy.sort === 'asc' ? res1.favorites - res2.favorites : res2.favorites - res1.favorites,
+				restaurant.sortBy.sort === 'asc'
+					? res1.favoritesCount - res2.favoritesCount
+					: res2.favoritesCount - res1.favoritesCount,
 		)
 	} else if (restaurant.sortBy.value === 'duration') {
 		newRestaurants = newRestaurants.sort(

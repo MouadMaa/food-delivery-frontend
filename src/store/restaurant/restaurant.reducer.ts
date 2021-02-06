@@ -4,7 +4,7 @@ const initState: RestaurantState = {
 	restaurants: [],
 	sortBy: {
 		name: 'Popularity',
-		value: 'favorites',
+		value: 'favoritesCount',
 		sort: 'desc',
 	},
 }

@@ -4,8 +4,8 @@ export interface AppState {
 
 export const TOGGLE_SIDE_MENU = 'TOGGLE_SIDE_MENU'
 
-interface ToggleMenuAction {
+interface ToggleSideMenuAction {
 	type: typeof TOGGLE_SIDE_MENU
 }
 
-export type AppAction = ToggleMenuAction
+export type AppAction = ToggleSideMenuAction

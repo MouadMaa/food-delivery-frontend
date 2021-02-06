@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { toggleMenu } from '@/store/app/app.actions'
+import { toggleSideMenu } from '@/store/app/app.actions'
 import Burger from './burger/burger.component'
 import Logo from './logo/logo.component'
 import MobileSignInOut from './mobile-sign-in-out/mobile-sign-in-out.component'
@@ -16,7 +16,7 @@ const Header: FC = () => {
 	return (
 		<StyledHeader>
 			<div>
-				<Burger onClick={() => dispatch(toggleMenu())} />
+				<Burger onClick={() => dispatch(toggleSideMenu())} />
 				<Logo />
 				<MobileSignInOut />
 			</div>

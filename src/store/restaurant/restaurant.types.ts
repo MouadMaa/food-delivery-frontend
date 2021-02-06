@@ -3,8 +3,9 @@ import { Category } from '@/store/category/category.types'
 export interface Restaurant {
 	id: string
 	name: string
+	imageCover: string
 	categories: Category[]
-	favorites: number
+	favoritesCount: number
 	duration: [number, number]
 }
 

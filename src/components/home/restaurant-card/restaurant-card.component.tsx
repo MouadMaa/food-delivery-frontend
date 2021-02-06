@@ -1,25 +1,26 @@
 import { FC, Fragment } from 'react'
+import Image from 'next/image'
 
 import { Restaurant } from '@/store/restaurant/restaurant.types'
+import { HeartSvg, DotSvg } from './restaurant-card.svg'
 import {
 	StyledCardRestaurant,
 	StyledRestaurantCardPicture,
 	StyledRestaurantCardContent,
 	StyledRestaurantCardCategories,
 } from './restaurant-card.styles'
-import { HeartSvg, DotSvg } from './restaurant-card.svg'
 
 interface RestaurantCardProps {
 	restaurant: Restaurant
 }
 
 const RestaurantCard: FC<RestaurantCardProps> = (props) => {
-	const { restaurant: { name, favorites, duration, categories } } = props
+	const { restaurant: { name, imageCover, favoritesCount, duration, categories } } = props
 
 	return (
 		<StyledCardRestaurant className='group'>
 			<StyledRestaurantCardPicture>
-				<img src='https://bonsplansmaroc.com/wp-content/uploads/2020/03/image-pizza-hut-2.jpg' alt='pizza' />
+				<Image src={imageCover} alt={name} layout='fill' objectFit='cover' />
 				<div className='backdrop-blur'>
 					<span>{`${duration[0]}~${duration[1]} mins`}</span>
 				</div>
@@ -29,7 +30,7 @@ const RestaurantCard: FC<RestaurantCardProps> = (props) => {
 					<h3>{name}</h3>
 					<div>
 						<HeartSvg />
-						<span>{favorites}</span>
+						<span>{favoritesCount}</span>
 					</div>
 				</div>
 				<StyledRestaurantCardCategories>

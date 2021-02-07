@@ -1,22 +1,23 @@
-import { FC } from "react"
+import { FC } from 'react'
 
-import { StyledButton } from "./button.styles"
+import { StyledButton } from './button.styles'
 
 export type ButtonLevels = 'Primary' | 'Secondary' | 'SubTitle' | 'Title'
 
 interface ButtonProps {
-  text: string,
-  level?: ButtonLevels
+	text: string
+	level?: ButtonLevels
+	onClick?: () => void
 }
 
-const Button: FC<ButtonProps> = props => {
-  const { text, level = 'Primary' } = props
+const Button: FC<ButtonProps> = (props) => {
+	const { text, level = 'Primary', onClick } = props
 
-  return (
-    <StyledButton level={level}>
-      {text}
-    </StyledButton>
-  )
+	return (
+		<StyledButton level={level} onClick={onClick}>
+			{text}
+		</StyledButton>
+	)
 }
 
 export default Button

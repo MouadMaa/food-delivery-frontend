@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -18,3 +19,15 @@ export default firebase
 
 // Firestore exports
 export const db = firebase.firestore()
+
+// Auth exports
+export const auth = firebase.auth()
+
+// Firebase ui config
+export const firebaseUIConfig = {
+	signInFlow: 'popup',
+	signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ],
+	callbacks: {
+		signInSuccessWithAuthResult: () => false,
+	},
+}

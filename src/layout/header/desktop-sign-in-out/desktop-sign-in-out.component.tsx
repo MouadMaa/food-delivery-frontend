@@ -7,7 +7,7 @@ import { StyledDesktopSignInOut } from './desktop-sign-in-out.styles'
 const DesktopSignInOut: FC = () => {
 	const router = useRouter()
 
-	const signIn = () => router.push('/sign-in')
+	const signIn = () => router.push('/auth')
 
 	return (
 		<StyledDesktopSignInOut>

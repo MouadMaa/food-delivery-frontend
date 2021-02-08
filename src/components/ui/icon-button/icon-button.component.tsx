@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { StyledIconButton } from './icon-button.styles'
 
 interface IconButtonProps {
-	onClick: () => void
+	onClick?: () => void
 }
 
 const IconButton: FC<IconButtonProps> = (props) => {

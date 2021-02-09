@@ -1,13 +1,9 @@
 import { useEffect } from 'react'
-import { atom, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import nookies from 'nookies'
 
 import { auth } from '@/firebase/firebase'
-
-export const userState = atom({
-	key: 'userState', // unique ID (with respect to other atoms/selectors)
-	default: null, // default value (aka initial value)
-})
+import { userState } from '@/store/user/user.state'
 
 export const useFirebaseAuth = () => {
 	const setUser = useSetRecoilState(userState)
@@ -17,7 +13,6 @@ export const useFirebaseAuth = () => {
 			if (user) {
 				setUser({
 					id: user.uid,
-					name: user.displayName,
 					phone: user.phoneNumber,
 				})
 				const token = await user.getIdToken()

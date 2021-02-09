@@ -27,7 +27,12 @@ export const auth = firebase.auth()
 // Firebase ui config
 export const firebaseUIConfig = {
 	signInFlow: 'popup',
-	signInOptions: [ firebase.auth.PhoneAuthProvider.PROVIDER_ID ],
+	signInOptions: [
+		{
+			provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+			defaultCountry: 'MA',
+		},
+	],
 	callbacks: {
 		signInSuccessWithAuthResult: () => false,
 	},

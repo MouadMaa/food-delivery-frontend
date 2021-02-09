@@ -1,7 +1,6 @@
 import React, { FC, Fragment } from 'react'
-import { useRecoilState } from 'recoil'
 
-import { sideMenuState } from '@/store/app/app.state'
+import { useSideMenuState } from '@/store/app/app.state'
 import { Backdrop, Button } from '@/components/ui'
 import Links from './links/links.component'
 import DarkMode from './dark-mode/dark-mode.component'
@@ -9,7 +8,7 @@ import SignOut from './sign-out/sign-out.component'
 import { StyledMenu } from './menu.styles'
 
 const Menu: FC = () => {
-	const [ isSideMenuOpen, setIsSideMenuOpen ] = useRecoilState(sideMenuState)
+	const [ isSideMenuOpen, setIsSideMenuOpen ] = useSideMenuState()
 
 	return (
 		<Fragment>

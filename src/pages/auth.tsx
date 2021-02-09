@@ -1,5 +1,6 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import nookies from 'nookies'
 
@@ -7,6 +8,12 @@ import { auth, firebaseUIConfig } from '@/firebase/firebase'
 import { firebaseAdmin } from '@/firebase/firebase.admin'
 
 const Auth: FC = () => {
+	const router = useRouter()
+
+	useEffect(() => {
+		return auth.onAuthStateChanged(async (user) => user && router.push('/'))
+	}, [])
+
 	return (
 		<section style={{ height: getRemainingHeight(), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 			<StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />

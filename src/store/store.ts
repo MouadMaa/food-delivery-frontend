@@ -6,7 +6,7 @@ import logger from 'redux-logger'
 import combinedReducers, { RootState } from './reducers'
 
 const middleWares: any[] = [ thunk ]
-if (process.env.NODE_ENV !== 'production') middleWares.push(logger)
+// if (process.env.NODE_ENV !== 'production') middleWares.push(logger)
 
 // create your reducer
 const reducer = (state: RootState, action: AnyAction) => {

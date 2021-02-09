@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import GlobalStyles from '@/styles/GlobalStyles'
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
+import { useRecoilDebugObserver } from '@/hooks/useRecoilDebugObserver'
 import Header from './header/header.component'
 import Menu from './menu/menu.component'
 import { StyledMain } from './layout.styles'
@@ -11,6 +12,7 @@ const Layout: FC = (props) => {
 	const { children } = props
 
 	useFirebaseAuth()
+	useRecoilDebugObserver()
 
 	return (
 		<Fragment>

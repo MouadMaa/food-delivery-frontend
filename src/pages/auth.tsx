@@ -11,7 +11,7 @@ const Auth: FC = () => {
 	const router = useRouter()
 
 	useEffect(() => {
-		return auth.onAuthStateChanged(async (user) => user && router.push('/'))
+		return auth.onAuthStateChanged((user) => user && router.push('/'))
 	}, [])
 
 	return (

@@ -1,9 +1,6 @@
 import { atom } from 'recoil'
 
-interface UserState {
-	id: string
-	phone: string
-}
+import { UserState } from './user.types'
 
 export const userState = atom<UserState>({
 	key: 'userState',

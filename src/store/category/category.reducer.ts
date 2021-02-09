@@ -3,6 +3,7 @@ import { CategoryAction, CategoryState, FETCH_CATEGORIES, SELECT_CATEGORY } from
 const defaultCategory = {
 	id: 'all',
 	name: 'All',
+	image: '',
 }
 
 const initState: CategoryState = {

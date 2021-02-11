@@ -1,4 +1,4 @@
-import { atom, useRecoilValue } from 'recoil'
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Category } from './category.types'
 
@@ -8,3 +8,4 @@ export const categoriesState = atom<Category[]>({
 })
 
 export const useCategoriesValue = () => useRecoilValue(categoriesState)
+export const useSetCategoriesState = () => useSetRecoilState(categoriesState)

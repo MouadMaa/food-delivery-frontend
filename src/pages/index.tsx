@@ -1,30 +1,26 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import { GetStaticProps } from 'next'
-import { RecoilRoot } from 'recoil'
 
 import { fetchCategories } from '@/store/category/category.firebase'
 import { fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { initializeState } from '@/store/initializeState'
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
 
 interface HomeProps {
-	initState: {
-		categoriesState: Category[]
-		restaurantsState: Restaurant[]
-	}
+	categories: Category[]
+	restaurants: Restaurant[]
 }
 
 const Home: FC<HomeProps> = (props) => {
-	const { initState } = props
+	const { categories, restaurants } = props
 
 	return (
-		<RecoilRoot initializeState={initializeState(initState)}>
-			<Categories />
-			<Restaurants />
-		</RecoilRoot>
+		<Fragment>
+			<Categories categories={categories} />
+			<Restaurants restaurants={restaurants} />
+		</Fragment>
 	)
 }
 
@@ -36,10 +32,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: {
-			initState: {
-				categoriesState: categories,
-				restaurantsState: restaurants,
-			},
+			categories,
+			restaurants,
 		},
 	}
 }

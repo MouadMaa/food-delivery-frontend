@@ -1,18 +1,31 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { selectedCategorySelector } from '@/store/category/category.selectors'
 import { selectCategory } from '@/store/category/category.actions'
+import { useSetCategoriesState } from '@/store/category/category.state'
 import { Category } from '@/store/category/category.types'
-import { useCategoriesValue } from '@/store/category/category.state'
 import CategoryButton from '../category-button/category-button.component'
 import { StyledCategories } from './categories.styles'
 
-const Categories: FC = () => {
+interface CategoriesProps {
+	categories: Category[]
+}
+
+const Categories: FC<CategoriesProps> = (props) => {
+	const { categories } = props
+
+	const setCategories = useSetCategoriesState()
+
 	const dispatch = useDispatch()
 	const selectedCategory = useSelector(selectedCategorySelector)
 
-	const categories = useCategoriesValue()
+	useEffect(
+		() => {
+			setCategories(categories)
+		},
+		[ categories ],
+	)
 
 	const setSelectedCategory = (category: Category) => dispatch(selectCategory(category))
 

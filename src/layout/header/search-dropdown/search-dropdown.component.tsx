@@ -1,9 +1,8 @@
 import { FC } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { Loader } from '@/components/ui'
+import { useSetSelectedCategoryState } from '@/store/category/category.state'
 import { Category } from '@/store/category/category.types'
-import { selectCategory } from '@/store/category/category.actions'
+import { Loader } from '@/components/ui'
 import { StyledSearchDropdown } from './search-dropdown.styles'
 import { SearchResults } from '../search-form/search-form.component'
 
@@ -17,10 +16,10 @@ interface SearchDropdownProps {
 const SearchDropdown: FC<SearchDropdownProps> = (props) => {
 	const { results: { categories, restaurants }, isSearching, searchTerm, setSearchTerm } = props
 
-	const dispatch = useDispatch()
+	const setSelectedCategory = useSetSelectedCategoryState()
 
 	const handleCategoryClick = (category: Category) => {
-		dispatch(selectCategory(category))
+		setSelectedCategory(category)
 		setSearchTerm('')
 	}
 

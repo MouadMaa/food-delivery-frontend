@@ -1,9 +1,10 @@
 import { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
-import { selectedCategorySelector } from '@/store/category/category.selectors'
-import { selectCategory } from '@/store/category/category.actions'
-import { useSetCategoriesState } from '@/store/category/category.state'
+import {
+	useSetCategoriesState,
+	useSelectedCategoryState,
+	defaultSelectedCategory,
+} from '@/store/category/category.state'
 import { Category } from '@/store/category/category.types'
 import CategoryButton from '../category-button/category-button.component'
 import { StyledCategories } from './categories.styles'
@@ -16,9 +17,7 @@ const Categories: FC<CategoriesProps> = (props) => {
 	const { categories } = props
 
 	const setCategories = useSetCategoriesState()
-
-	const dispatch = useDispatch()
-	const selectedCategory = useSelector(selectedCategorySelector)
+	const [ selectedCategory, setSelectedCategory ] = useSelectedCategoryState()
 
 	useEffect(
 		() => {
@@ -27,14 +26,12 @@ const Categories: FC<CategoriesProps> = (props) => {
 		[ categories ],
 	)
 
-	const setSelectedCategory = (category: Category) => dispatch(selectCategory(category))
-
 	return (
 		<StyledCategories>
 			<h1>Hungry? You're in the right place</h1>
 			<nav>
 				<CategoryButton
-					category={firstCategory}
+					category={defaultSelectedCategory}
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
@@ -52,9 +49,3 @@ const Categories: FC<CategoriesProps> = (props) => {
 }
 
 export default Categories
-
-const firstCategory = {
-	id: 'all',
-	name: 'All',
-	image: '',
-}

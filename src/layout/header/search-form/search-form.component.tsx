@@ -1,24 +1,18 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 
-import { Dropdown, IconButton } from '@/components/ui'
-import { useDebounce } from '@/hooks/useDebounce'
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { categoriesSelector } from '@/store/category/category.selectors'
+import { useCategoriesValue } from '@/store/category/category.state'
+import { useDebounce } from '@/hooks/useDebounce'
 import { useOnClickOutside } from '@/hooks/useOnClickOutside'
+import { Dropdown, IconButton } from '@/components/ui'
 import SearchDropdown from '../search-dropdown/search-dropdown.component'
 import { StyledSearchForm, FormContainer } from './search-form.styles'
 import { AddressSvg, FilterSvg, SearchSvg } from './search-form.svg'
 import { searchForCategories, searchForRestaurants } from './search-form.utils'
 
-export interface SearchResults {
-	categories: Category[]
-	restaurants: Restaurant[]
-}
-
 const SearchForm: FC = () => {
-	const categories = useSelector(categoriesSelector)
+	const categories = useCategoriesValue()
 
 	const ref = useRef()
 	useOnClickOutside(ref, () => setSearchTerm(''))
@@ -90,6 +84,11 @@ const SearchForm: FC = () => {
 }
 
 export default SearchForm
+
+export interface SearchResults {
+	categories: Category[]
+	restaurants: Restaurant[]
+}
 
 const initResults: SearchResults = {
 	categories: [],

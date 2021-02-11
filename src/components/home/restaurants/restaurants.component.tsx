@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react'
 import RestaurantCard from '../restaurant-card/restaurant-card.component'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
 import { useSetRestaurantsState } from '@/store/restaurant/restaurant.state'
+import { useFilteredRestaurants } from '@/store/restaurant/restaurant.selectors'
 import SortBy from '../sort-by/sort-by.component'
 import { StyledRestaurants } from './restaurants.styles'
 
@@ -14,6 +15,7 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 	const { restaurants } = props
 
 	const setRestaurants = useSetRestaurantsState()
+	const filteredRestaurants = useFilteredRestaurants()
 
 	useEffect(
 		() => {
@@ -28,7 +30,9 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 				<h2>Popular Near You</h2>
 				<SortBy />
 			</article>
-			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
+			<div>
+				{filteredRestaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}
+			</div>
 		</StyledRestaurants>
 	)
 }

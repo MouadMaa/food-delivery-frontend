@@ -1,24 +1,45 @@
-import { FC, Fragment } from 'react'
+import { FC } from 'react'
 import { GetStaticProps } from 'next'
+import { RecoilRoot } from 'recoil'
 
+import { fetchCategories } from '@/store/category/category.firebase'
+import { fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
+import { Category } from '@/store/category/category.types'
+import { Restaurant } from '@/store/restaurant/restaurant.types'
+import { initializeState } from '@/store/initializeState'
 import Categories from '@/components/home/categories/categories.component'
 import Restaurants from '@/components/home/restaurants/restaurants.component'
-import { storeWrapper } from '@/store/store'
-import { fetchRestaurantsAsync } from '@/store/restaurant/restaurant.firebase'
-import { fetchCategoriesAsync } from '@/store/category/category.firebase'
 
-const Home: FC = () => {
+interface HomeProps {
+	initState: {
+		categoriesState: Category[]
+		restaurantsState: Restaurant[]
+	}
+}
+
+const Home: FC<HomeProps> = (props) => {
+	const { initState } = props
+
 	return (
-		<Fragment>
+		<RecoilRoot initializeState={initializeState(initState)}>
 			<Categories />
 			<Restaurants />
-		</Fragment>
+		</RecoilRoot>
 	)
 }
 
 export default Home
 
-export const getStaticProps: GetStaticProps = storeWrapper.getStaticProps(async ({ store }) => {
-	await store.dispatch(fetchCategoriesAsync() as any)
-	await store.dispatch(fetchRestaurantsAsync() as any)
-})
+export const getStaticProps: GetStaticProps = async () => {
+	const categories = await fetchCategories()
+	const restaurants = await fetchRestaurants(categories)
+
+	return {
+		props: {
+			initState: {
+				categoriesState: categories,
+				restaurantsState: restaurants,
+			},
+		},
+	}
+}

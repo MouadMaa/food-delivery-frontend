@@ -9,6 +9,7 @@ export const categoriesState = atom<Category[]>({
 
 export const useCategoriesValue = () => useRecoilValue(categoriesState)
 export const useSetCategoriesState = () => useSetRecoilState(categoriesState)
+export const useCategoriesState = () => useRecoilState(categoriesState)
 
 export const defaultSelectedCategory = { id: 'all', name: 'All', image: '' }
 

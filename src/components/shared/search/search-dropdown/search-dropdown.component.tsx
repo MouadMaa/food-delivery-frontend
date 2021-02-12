@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useRouter } from 'next/router'
 
 import { useSetSelectedCategoryState } from '@/store/category/category.state'
 import { Category } from '@/store/category/category.types'
@@ -17,6 +18,8 @@ interface SearchDropdownProps {
 const SearchDropdown: FC<SearchDropdownProps> = (props) => {
 	const { results: { categories, restaurants }, isSearching, searchTerm, setSearchTerm } = props
 
+	const router = useRouter()
+
 	const setSelectedCategory = useSetSelectedCategoryState()
 	const setIsSideMenuOpen = useSetSideMenuState()
 
@@ -24,6 +27,7 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
 		setSelectedCategory(category)
 		setIsSideMenuOpen(false)
 		setSearchTerm('')
+		router.pathname !== '/' && router.push('/')
 	}
 
 	return (

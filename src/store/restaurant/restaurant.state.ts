@@ -9,6 +9,7 @@ export const restaurantsState = atom<Restaurant[]>({
 
 export const useRestaurantsValue = () => useRecoilValue(restaurantsState)
 export const useSetRestaurantsState = () => useSetRecoilState(restaurantsState)
+export const useRestaurantsState = () => useRecoilState(restaurantsState)
 
 export const sortRestaurantsByState = atom<SortRestaurantsBy>({
 	key: 'sortRestaurantsByState',

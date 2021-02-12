@@ -20,7 +20,7 @@ const RestaurantCard: FC<RestaurantCardProps> = (props) => {
 	return (
 		<StyledCardRestaurant className='group'>
 			<StyledRestaurantCardPicture>
-				<Image src={imageCover} alt={name} layout='fill' objectFit='cover' />
+				{/* <Image src={imageCover} alt={name} layout='fill' objectFit='cover' /> */}
 				<div className='backdrop-blur'>
 					<span>{`${duration[0]}~${duration[1]} mins`}</span>
 				</div>

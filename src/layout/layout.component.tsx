@@ -31,7 +31,7 @@ const Layout: FC = (props) => {
 export default Layout
 
 const getRemainingMainHeight = () => {
-	if (typeof window === 'undefined') return 600
+	if (typeof window === 'undefined') return `80vh`
 	const header = document.querySelector('header')
 	const footer = document.querySelector('footer')
 	return `calc(100vh - ${(header ? header.offsetHeight : 0) + (footer ? footer.offsetHeight : 0)}px)`

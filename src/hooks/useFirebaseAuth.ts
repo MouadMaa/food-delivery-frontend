@@ -16,13 +16,13 @@ export const useFirebaseAuth = () => {
 					id: user.uid,
 					phone: user.phoneNumber,
 				})
-				setUserLoading(false)
 				const token = await user.getIdToken()
 				nookies.set(undefined, 'token', token)
 			} else {
 				setUser(null)
 				nookies.set(undefined, 'token', '')
 			}
+			setUserLoading(false)
 		})
 	}, [])
 

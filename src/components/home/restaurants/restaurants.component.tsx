@@ -1,9 +1,11 @@
 import { FC, useEffect, useState } from 'react'
 
-import RestaurantCard from '../restaurant-card/restaurant-card.component'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { useSetRestaurantsState } from '@/store/restaurant/restaurant.state'
+import { fetchMoreRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { useFilteredAndSortedRestaurantsValue } from '@/store/restaurant/restaurant.selectors'
+import { useCategoriesValue } from '@/store/category/category.state'
+import { useRestaurantsState } from '@/store/restaurant/restaurant.state'
+import RestaurantCard from '../restaurant-card/restaurant-card.component'
 import SortRestaurantsBy from '../sort-restaurants-by/sort-restaurants-by.component'
 import { StyledRestaurants } from './restaurants.styles'
 
@@ -12,13 +14,30 @@ interface RestaurantsProps {
 }
 
 const Restaurants: FC<RestaurantsProps> = (props) => {
-	const [ restaurants, setRestaurants ] = useState(props.restaurants)
+	const [ data, setData ] = useState(props.restaurants)
 
-	const setRestaurantsState = useSetRestaurantsState()
-	useEffect(() => setRestaurantsState(props.restaurants), [ props ])
+	const categories = useCategoriesValue()
+
+	const [ restaurants, setRestaurants ] = useRestaurantsState()
+	useEffect(
+		() => {
+			setRestaurants(restaurants.length > props.restaurants.length ? restaurants : props.restaurants)
+		},
+		[ props ],
+	)
 
 	const filteredAndSortedRestaurants = useFilteredAndSortedRestaurantsValue()
-	useEffect(() => setRestaurants(filteredAndSortedRestaurants), [ restaurants, filteredAndSortedRestaurants ])
+	useEffect(
+		() => {
+			setData(filteredAndSortedRestaurants)
+		},
+		[ restaurants, filteredAndSortedRestaurants ],
+	)
+
+	const fetchMore = async () => {
+		const newRestaurants = await fetchMoreRestaurants(categories, restaurants[restaurants.length - 1])
+		newRestaurants.length && setRestaurants(restaurants.concat(newRestaurants))
+	}
 
 	return (
 		<StyledRestaurants>
@@ -26,7 +45,8 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 				<h2>Popular Near You</h2>
 				<SortRestaurantsBy />
 			</article>
-			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
+			<div>{data.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
+			<button onClick={fetchMore}>load more</button>
 		</StyledRestaurants>
 	)
 }

@@ -23,9 +23,16 @@ const Layout: FC = (props) => {
 			<GlobalStyles />
 			<Header />
 			<Menu />
-			<StyledMain>{children}</StyledMain>
+			<StyledMain style={{ minHeight: getRemainingMainHeight() }}>{children}</StyledMain>
 		</Fragment>
 	)
 }
 
 export default Layout
+
+const getRemainingMainHeight = () => {
+	if (typeof window === 'undefined') return 600
+	const header = document.querySelector('header')
+	const footer = document.querySelector('footer')
+	return `calc(100vh - ${(header ? header.offsetHeight : 0) + (footer ? footer.offsetHeight : 0)}px)`
+}

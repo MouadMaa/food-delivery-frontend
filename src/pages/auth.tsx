@@ -15,7 +15,7 @@ const Auth: FC = () => {
 	}, [])
 
 	return (
-		<section style={{ height: getRemainingHeight(), display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+		<section style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 			<StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
 		</section>
 	)
@@ -38,11 +38,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	} catch (error) {
 		return { props: {} }
 	}
-}
-
-const getRemainingHeight = () => {
-	if (typeof window === 'undefined') return 600
-	const header = document.querySelector('header')
-	const footer = document.querySelector('footer')
-	return `calc(100vh - ${(header ? header.offsetHeight : 0) + (footer ? footer.offsetHeight : 0)}px)`
 }

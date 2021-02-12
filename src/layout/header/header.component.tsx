@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { useUserValue } from '@/store/user/user.state'
+import { useUserLoadingValue, useUserValue } from '@/store/user/user.state'
 import { useSideMenuState } from '@/store/app/app.state'
 import SearchForm from '@/components/shared/search/search-form/search-form.component'
 import Burger from './burger/burger.component'
@@ -12,6 +12,8 @@ import { StyledHeader } from './header.styles'
 
 const Header: FC = () => {
 	const user = useUserValue()
+	const userLoading = useUserLoadingValue()
+
 	const [ isSideMenuOpen, setIsSideMenuOpen ] = useSideMenuState()
 
 	return (
@@ -19,12 +21,10 @@ const Header: FC = () => {
 			<div>
 				<Burger onClick={() => !isSideMenuOpen && setIsSideMenuOpen(true)} />
 				<Logo />
-				{!user && <MobileAuth />}
-				{user && <Avatar />}
+				{userLoading ? <div /> : user ? <Avatar /> : <MobileAuth />}
 			</div>
 			<SearchForm />
-			{!user && <DesktopAuth />}
-			{user && <Avatar />}
+			{userLoading ? <div /> : user ? <Avatar /> : <DesktopAuth />}
 		</StyledHeader>
 	)
 }

@@ -3,7 +3,6 @@ import { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import { RecoilRoot } from 'recoil'
 
-import { storeWrapper } from '@/store/store'
 import Layout from '@/layout/layout.component'
 import TwinGlobalStyles from '@/styles/TwinGlobalStyles'
 
@@ -22,4 +21,4 @@ const MyApp: FC<AppProps> = (props) => {
 	)
 }
 
-export default storeWrapper.withRedux(MyApp)
+export default MyApp

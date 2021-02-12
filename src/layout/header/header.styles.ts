@@ -8,6 +8,14 @@ export const StyledHeader = styled.header(() => [
 		> div:first-child {
 			${tw`flex items-center justify-between w-full`};
 			${tw`md:(w-auto space-x-3)`};
+
+			> button:last-child {
+				${tw`flex md:hidden`};
+			}
+		}
+
+		> button:last-child {
+			${tw`hidden md:flex`};
 		}
 	`,
 ])

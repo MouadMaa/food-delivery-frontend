@@ -12,15 +12,13 @@ interface RestaurantsProps {
 }
 
 const Restaurants: FC<RestaurantsProps> = (props) => {
-	const { restaurants } = props
+	const [ restaurants, setRestaurants ] = useState(props.restaurants)
 
-	const [ data, setData ] = useState(restaurants)
-
-	const setRestaurants = useSetRestaurantsState()
-	useEffect(() => setRestaurants(restaurants), [ restaurants ])
+	const setRestaurantsState = useSetRestaurantsState()
+	useEffect(() => setRestaurantsState(props.restaurants), [ props ])
 
 	const filteredAndSortedRestaurants = useFilteredAndSortedRestaurantsValue()
-	useEffect(() => setData(filteredAndSortedRestaurants), [ restaurants, filteredAndSortedRestaurants ])
+	useEffect(() => setRestaurants(filteredAndSortedRestaurants), [ restaurants, filteredAndSortedRestaurants ])
 
 	return (
 		<StyledRestaurants>
@@ -28,7 +26,7 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 				<h2>Popular Near You</h2>
 				<SortRestaurantsBy />
 			</article>
-			<div>{data.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
+			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
 		</StyledRestaurants>
 	)
 }

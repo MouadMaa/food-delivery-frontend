@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react'
 
 import { useSideMenuState } from '@/store/app/app.state'
-import { Backdrop, Button } from '@/components/ui'
+import { Backdrop, IconButton } from '@/components/ui'
 import SearchForm from '@/components/shared/search/search-form/search-form.component'
 import Links from './links/links.component'
 import DarkMode from './dark-mode/dark-mode.component'
@@ -21,7 +21,7 @@ const Menu: FC = () => {
 				<div>
 					<div>
 						<DarkMode />
-						<Button text='Install The Application' level='SubTitle' />
+						<IconButton>Install The Application</IconButton>
 					</div>
 					<SignOut />
 				</div>

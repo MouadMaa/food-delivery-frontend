@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { CSSProperties, FC } from 'react'
 import Image from 'next/image'
 
 import { Category } from '@/store/category/category.types'
@@ -17,7 +17,7 @@ const CategoryButton: FC<CategoryButtonProps> = (props) => {
 	const handleClick = () => !isSelected && setSelectedCategory(category)
 
 	return (
-		<StyledCategoryButton isSelected={isSelected} onClick={handleClick}>
+		<StyledCategoryButton isSelected={isSelected} onClick={handleClick} style={isSelected ? styles : {}}>
 			{category.id !== 'all' && (
 				<picture>
 					<Image src={category.image} alt={category.name} layout='fill' objectFit='cover' />
@@ -29,3 +29,5 @@ const CategoryButton: FC<CategoryButtonProps> = (props) => {
 }
 
 export default CategoryButton
+
+const styles: CSSProperties = { backgroundColor: '#ED5359', borderColor: '#DF494E' }

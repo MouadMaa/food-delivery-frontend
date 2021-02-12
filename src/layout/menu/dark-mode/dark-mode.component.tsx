@@ -7,28 +7,21 @@ const DarkMode: FC = () => {
 	const { theme, setTheme } = useTheme()
 
 	const [ isMounted, setIsMounted ] = useState(false)
-	const [ darkMode, setDarkMode ] = useState(false)
+	const [ isDarkMode, setIsDarkMode ] = useState(false)
 
 	useEffect(() => {
 		setIsMounted(true)
-		setDarkMode(theme === 'dark')
+		setIsDarkMode(theme === 'dark')
 	}, [])
 
 	const switchTheme = () => {
 		if (isMounted) {
 			setTheme(theme === 'light' ? 'dark' : 'light')
-			setDarkMode(!darkMode)
+			setIsDarkMode(!isDarkMode)
 		}
 	}
 
-	return (
-		<Switch
-			name='dark-mode'
-			label={`Switch To ${darkMode ? 'Dark' : 'Light'} Mode`}
-			value={darkMode}
-			onChange={switchTheme}
-		/>
-	)
+	return <Switch text={`Switch To ${isDarkMode ? 'Light' : 'Dark'} Mode`} value={isDarkMode} onClick={switchTheme} />
 }
 
 export default DarkMode

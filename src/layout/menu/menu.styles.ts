@@ -37,10 +37,10 @@ export const StyledMenu = styled.menu(({ isOpen }: { isOpen: boolean }) => [
 
 			> div {
 				${tw`mx-4 my-2 space-y-6`};
-			}
 
-			button {
-				${tw`w-full`};
+				> button {
+					${tw`w-full py-5 text-primary-default rounded-2xl dark:text-primary-default`};
+				}
 			}
 		}
 	`,

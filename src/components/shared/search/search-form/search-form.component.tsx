@@ -42,7 +42,7 @@ const SearchForm: FC = () => {
 				}
 			})()
 		},
-		[ debouncedSearchTerm ],
+		[ debouncedSearchTerm, filterBy ],
 	)
 
 	const onSelect = (item: string) => setFilterBy(item)

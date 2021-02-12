@@ -1,17 +1,13 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledSwitch = styled.label(({ isChecked }: { isChecked: boolean }) => [
+export const StyledSwitch = styled.div(({ isChecked }: { isChecked: boolean }) => [
 	tw`flex items-center space-x-3 cursor-pointer select-none`,
 	css`
-		> div {
-			${tw`relative block w-8 h-5 bg-gray-200 rounded-3xl cursor-pointer transition-all duration-300`};
+		> button {
+			${tw`relative block w-8 h-5 bg-gray-200 rounded-3xl cursor-pointer transition-all duration-300 shadow border-0 select-none focus:outline-none focus-visible:(ring ring-primary-light)`};
 
 			div {
 				${tw`absolute top-0.5 left-0.5 bottom-0.5 w-1/2 bg-white rounded-full transform transition-all duration-300 dark:bg-gray-200`};
-			}
-
-			input {
-				${tw`w-0 h-0 invisible`};
 			}
 		}
 		> span {
@@ -20,7 +16,7 @@ export const StyledSwitch = styled.label(({ isChecked }: { isChecked: boolean })
 	`,
 	isChecked && [
 		css`
-			> div {
+			> button {
 				${tw`bg-primary-default`};
 
 				div {

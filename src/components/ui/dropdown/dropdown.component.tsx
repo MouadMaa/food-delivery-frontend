@@ -1,6 +1,7 @@
-import { FC, Fragment } from 'react'
+import { FC, useRef } from 'react'
 
-import { StyledDropdown, DropdownBackDrop } from './dropdown.styles'
+import { useOnClickOutside } from '@/hooks/useOnClickOutside'
+import { StyledDropdown } from './dropdown.styles'
 import { DropdownSvg } from './dropdown.svg'
 
 interface DropdownProps {
@@ -15,6 +16,9 @@ interface DropdownProps {
 const Dropdown: FC<DropdownProps> = (props) => {
 	const { items, isOpen, onHide, onSelect, selectedItem, withCheckMark = false } = props
 
+	const ref = useRef()
+	useOnClickOutside(ref, onHide)
+
 	const handleClick = (item: string) => {
 		onSelect(item)
 		onHide()
@@ -22,17 +26,14 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
 	return (
 		isOpen && (
-			<Fragment>
-				<DropdownBackDrop onClick={onHide} />
-				<StyledDropdown>
-					{items.map((item) => (
-						<button key={item} onClick={() => handleClick(item)}>
-							<span>{item}</span>
-							{withCheckMark && item === selectedItem && <DropdownSvg />}
-						</button>
-					))}
-				</StyledDropdown>
-			</Fragment>
+			<StyledDropdown ref={ref}>
+				{items.map((item) => (
+					<button key={item} onClick={() => handleClick(item)}>
+						<span>{item}</span>
+						{withCheckMark && item === selectedItem && <DropdownSvg />}
+					</button>
+				))}
+			</StyledDropdown>
 		)
 	)
 }

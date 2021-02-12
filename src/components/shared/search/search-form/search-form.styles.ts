@@ -9,10 +9,10 @@ export const StyledSearchForm = styled.div(() => [
 			${tw`relative`};
 
 			> button {
-				${tw`transform -translate-x-4`};
+				${tw`transform -translate-x-4 py-3.5`};
 
 				svg {
-					${tw`w-4 h-4 text-gray-600 stroke-current dark:text-gray-100`};
+					${tw`text-gray-600 stroke-current dark:text-gray-100`};
 				}
 			}
 		}

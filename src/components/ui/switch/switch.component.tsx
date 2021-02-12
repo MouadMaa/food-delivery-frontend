@@ -3,22 +3,20 @@ import { FC } from 'react'
 import { StyledSwitch } from './switch.styles'
 
 interface SwitchProps {
-	name: string
-	label: string
+	text: string
 	value: boolean
-	onChange: () => void
+	onClick: () => void
 }
 
 const Switch: FC<SwitchProps> = (props) => {
-	const { name, label, value, onChange } = props
+	const { text, value, onClick } = props
 
 	return (
-		<StyledSwitch htmlFor={name} isChecked={value}>
-			<div>
+		<StyledSwitch isChecked={value} onClick={onClick}>
+			<button>
 				<div />
-				<input type='checkbox' id={name} checked={value} onChange={onChange} />
-			</div>
-			<span>{label}</span>
+			</button>
+			<span>{text}</span>
 		</StyledSwitch>
 	)
 }

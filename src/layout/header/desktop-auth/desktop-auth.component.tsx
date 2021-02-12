@@ -2,9 +2,9 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 
 import { Button } from '@/components/ui'
-import { StyledDesktopSignInOut } from './desktop-sign-in-out.styles'
+import { StyledDesktopSignInOut } from './desktop-auth.styles'
 
-const DesktopSignInOut: FC = () => {
+const DesktopAuth: FC = () => {
 	const router = useRouter()
 
 	const signIn = () => router.push('/auth')
@@ -17,4 +17,4 @@ const DesktopSignInOut: FC = () => {
 	)
 }
 
-export default DesktopSignInOut
+export default DesktopAuth

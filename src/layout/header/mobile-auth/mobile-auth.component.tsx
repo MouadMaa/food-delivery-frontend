@@ -1,11 +1,11 @@
 import { FC, useState } from 'react'
 
 import { IconButton, Dropdown } from '@/components/ui'
-import { StyledMobileSign } from './mobile-sign-in-out.styles'
-import { UserSvg } from './mobile-sign-in-out.svg'
+import { StyledMobileSign } from './mobile-auth.styles'
+import { UserSvg } from './mobile-auth.svg'
 import { useRouter } from 'next/router'
 
-const MobileSignInOut: FC = () => {
+const MobileAuth: FC = () => {
 	const router = useRouter()
 
 	const [ show, setShowDropdown ] = useState(false)
@@ -25,4 +25,4 @@ const MobileSignInOut: FC = () => {
 	)
 }
 
-export default MobileSignInOut
+export default MobileAuth

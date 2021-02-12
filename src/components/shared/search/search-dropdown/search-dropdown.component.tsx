@@ -5,6 +5,7 @@ import { Category } from '@/store/category/category.types'
 import { Loader } from '@/components/ui'
 import { StyledSearchDropdown } from './search-dropdown.styles'
 import { SearchResults } from '../search-form/search-form.component'
+import { useSetSideMenuState } from '@/store/app/app.state'
 
 interface SearchDropdownProps {
 	results: SearchResults
@@ -17,9 +18,11 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
 	const { results: { categories, restaurants }, isSearching, searchTerm, setSearchTerm } = props
 
 	const setSelectedCategory = useSetSelectedCategoryState()
+	const setIsSideMenuOpen = useSetSideMenuState()
 
 	const handleCategoryClick = (category: Category) => {
 		setSelectedCategory(category)
+		setIsSideMenuOpen(false)
 		setSearchTerm('')
 	}
 

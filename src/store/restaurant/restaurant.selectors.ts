@@ -1,30 +1,21 @@
 import { selector, useRecoilValue } from 'recoil'
-import { createSelector } from 'reselect'
 
-import { RootState } from '../reducers'
 import { selectedCategoryState } from '../category/category.state'
-import { restaurantsState } from './restaurant.state'
+import { restaurantsState, sortRestaurantsByState } from './restaurant.state'
+import { filterRestaurants, sortRestaurants } from './restaurant.utils'
 
-const restaurantSelector = (state: RootState) => state.restaurant
-
-export const restaurantsSelector = createSelector([ restaurantSelector ], (restaurant) => restaurant.restaurants)
-
-export const sortRestaurantsSelector = createSelector([ restaurantSelector ], (restaurant) => restaurant.sortBy)
-
-export const filteredRestaurantsSelector = selector({
-	key: 'filteredRestaurantsSelector',
+export const filteredAndSortedRestaurantsState = selector({
+	key: 'filteredAndSortedRestaurantsState',
 	get: ({ get }) => {
-		const restaurants = get(restaurantsState)
+		let restaurants = get(restaurantsState)
 		const selectedCategory = get(selectedCategoryState)
+		const sortRestaurantsBy = get(sortRestaurantsByState)
 
-		if (selectedCategory.id !== 'all') {
-			return restaurants.filter((restaurant) =>
-				restaurant.categories.find((category) => category.id === selectedCategory.id),
-			)
-		}
+		restaurants = filterRestaurants(restaurants, selectedCategory)
+		restaurants = sortRestaurants(restaurants, sortRestaurantsBy)
 
 		return restaurants
 	},
 })
 
-export const useFilteredRestaurants = () => useRecoilValue(filteredRestaurantsSelector)
+export const useFilteredAndSortedRestaurantsValue = () => useRecoilValue(filteredAndSortedRestaurantsState)

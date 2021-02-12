@@ -1,6 +1,6 @@
-import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { Restaurant } from './restaurant.types'
+import { Restaurant, SortRestaurantsBy } from './restaurant.types'
 
 export const restaurantsState = atom<Restaurant[]>({
 	key: 'restaurantsState',
@@ -9,3 +9,14 @@ export const restaurantsState = atom<Restaurant[]>({
 
 export const useRestaurantsValue = () => useRecoilValue(restaurantsState)
 export const useSetRestaurantsState = () => useSetRecoilState(restaurantsState)
+
+export const sortRestaurantsByState = atom<SortRestaurantsBy>({
+	key: 'sortRestaurantsByState',
+	default: {
+		name: 'Popularity',
+		value: 'favoritesCount',
+		sort: 'desc',
+	},
+})
+
+export const useSortRestaurantsByState = () => useRecoilState(sortRestaurantsByState)

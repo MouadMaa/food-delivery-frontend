@@ -1,4 +1,4 @@
-import { Restaurant, RestaurantState } from './restaurant.types'
+import { Restaurant, SortRestaurantsBy } from './restaurant.types'
 import { Category } from '../category/category.types'
 
 // Replace restaurant categoriesIds with categories
@@ -11,30 +11,28 @@ export const populateRestaurantsWithCategories = (restaurants: Restaurant[], cat
 	}))
 }
 
-export const filterAndSortRestaurants = (restaurant: RestaurantState, selectedCategory: Category): Restaurant[] => {
-	let newRestaurants = [ ...restaurant.restaurants ]
+// Filter restaurants by category
+export const filterRestaurants = (restaurants: Restaurant[], selectedCategory: Category) => {
+	return selectedCategory.id !== 'all'
+		? restaurants.filter((restaurant) => restaurant.categories.find((category) => category.id === selectedCategory.id))
+		: restaurants
+}
 
-	// Filter restaurants by category
-	if (selectedCategory.id !== 'all') {
-		newRestaurants = restaurant.restaurants.filter((restaurant) =>
-			restaurant.categories.find((category) => category.id === selectedCategory.id),
-		)
+// Sort restaurants
+export const sortRestaurants = (restaurants: Restaurant[], sortBy: SortRestaurantsBy): Restaurant[] => {
+	switch (sortBy.value) {
+		case 'favoritesCount':
+			return [ ...restaurants ].sort(
+				(res1, res2) =>
+					sortBy.sort === 'asc' ? res1.favoritesCount - res2.favoritesCount : res2.favoritesCount - res1.favoritesCount,
+			)
+		case 'duration':
+			return [ ...restaurants ].sort(
+				(res1, res2) =>
+					sortBy.sort === 'asc' ? res1.duration[0] - res2.duration[0] : res2.duration[0] - res1.duration[0],
+			)
+
+		default:
+			return restaurants
 	}
-
-	// Sort restaurants
-	if (restaurant.sortBy.value === 'favoritesCount') {
-		newRestaurants = newRestaurants.sort(
-			(res1, res2) =>
-				restaurant.sortBy.sort === 'asc'
-					? res1.favoritesCount - res2.favoritesCount
-					: res2.favoritesCount - res1.favoritesCount,
-		)
-	} else if (restaurant.sortBy.value === 'duration') {
-		newRestaurants = newRestaurants.sort(
-			(res1, res2) =>
-				restaurant.sortBy.sort === 'asc' ? res1.duration[0] - res2.duration[0] : res2.duration[0] - res1.duration[0],
-		)
-	}
-
-	return newRestaurants
 }

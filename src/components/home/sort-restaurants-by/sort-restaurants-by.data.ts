@@ -1,6 +1,6 @@
-import { SortRestaurants } from '@/store/restaurant/restaurant.types'
+import { SortRestaurantsBy } from '@/store/restaurant/restaurant.types'
 
-export const sortRestaurantsByData: SortRestaurants[] = [
+export const sortRestaurantsByList: SortRestaurantsBy[] = [
 	{
 		name: 'Popularity',
 		value: 'favoritesCount',

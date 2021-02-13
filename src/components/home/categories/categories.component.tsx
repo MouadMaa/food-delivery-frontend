@@ -1,6 +1,10 @@
 import { FC, useEffect } from 'react'
 
-import { useSelectedCategoryState, defaultSelectedCategory, useCategoriesState } from '@/store/category/category.state'
+import {
+	useSelectedCategoryState,
+	defaultSelectedCategory,
+	useSetCategoriesState,
+} from '@/store/category/category.state'
 import { Category } from '@/store/category/category.types'
 import CategoryButton from '../category-button/category-button.component'
 import { StyledCategories } from './categories.styles'
@@ -10,15 +14,12 @@ interface CategoriesProps {
 }
 
 const Categories: FC<CategoriesProps> = (props) => {
-	const [ categories, setCategories ] = useCategoriesState()
+	const { categories } = props
+
+	const setCategories = useSetCategoriesState()
 	const [ selectedCategory, setSelectedCategory ] = useSelectedCategoryState()
 
-	useEffect(
-		() => {
-			setCategories(props.categories.length > categories.length ? props.categories : categories)
-		},
-		[ props ],
-	)
+	useEffect(() => setCategories(categories), [ props ])
 
 	return (
 		<StyledCategories>
@@ -29,9 +30,9 @@ const Categories: FC<CategoriesProps> = (props) => {
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
 				/>
-				{categories.map((category, index) => (
+				{categories.map((category) => (
 					<CategoryButton
-						key={index}
+						key={category.id}
 						category={category}
 						selectedCategory={selectedCategory}
 						setSelectedCategory={setSelectedCategory}

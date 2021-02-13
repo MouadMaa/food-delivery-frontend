@@ -47,8 +47,8 @@ export const StyledRestaurantCardContent = styled.div(() => [
 export const StyledRestaurantCardCategories = styled.div(() => [
 	tw`flex items-center text-sm text-gray-600 dark:text-gray-300`,
 	css`
-		svg {
-			${tw`w-3 h-4 fill-current`};
+		span {
+			${tw`flex items-center justify-center w-4 h-4`};
 		}
 	`,
 ])

@@ -25,16 +25,14 @@ const Dropdown: FC<DropdownProps> = (props) => {
 	}
 
 	return (
-		isOpen && (
-			<StyledDropdown ref={ref}>
-				{items.map((item) => (
-					<button key={item} onClick={() => handleClick(item)}>
-						<span>{item}</span>
-						{withCheckMark && item === selectedItem && <DropdownSvg />}
-					</button>
-				))}
-			</StyledDropdown>
-		)
+		<StyledDropdown ref={ref} isOpen={isOpen}>
+			{items.map((item) => (
+				<button key={item} onClick={() => handleClick(item)}>
+					<span>{item}</span>
+					{withCheckMark && item === selectedItem && <DropdownSvg />}
+				</button>
+			))}
+		</StyledDropdown>
 	)
 }
 

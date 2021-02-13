@@ -2,7 +2,7 @@ import { FC, Fragment } from 'react'
 import Image from 'next/image'
 
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { HeartSvg, DotSvg } from './restaurant-card.svg'
+import { HeartSvg } from './restaurant-card.svg'
 import {
 	StyledCardRestaurant,
 	StyledRestaurantCardPicture,
@@ -37,7 +37,7 @@ const RestaurantCard: FC<RestaurantCardProps> = (props) => {
 					{categories.slice(0, 4).map((category, index) => (
 						<Fragment key={index}>
 							<p>{category.name}</p>
-							{index < categories.slice(0, 4).length - 1 && <DotSvg />}
+							{index < categories.slice(0, 4).length - 1 && <span>&bull;</span>}
 						</Fragment>
 					))}
 				</StyledRestaurantCardCategories>

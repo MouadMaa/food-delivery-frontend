@@ -4,7 +4,7 @@ import { Restaurant } from './restaurant.types'
 import { populateRestaurantsWithCategories } from './restaurant.utils'
 import { Category } from '../category/category.types'
 
-const RESTAURANTS_LIMIT = 3
+const RESTAURANTS_LIMIT = 12
 let noMoreRestaurants = false
 
 export const fetchRestaurants = async (categories: Category[]): Promise<Restaurant[]> => {

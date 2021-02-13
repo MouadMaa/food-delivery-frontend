@@ -11,8 +11,12 @@ export const StyledRestaurants = styled.section(() => [
 			}
 		}
 
-		> div {
+		> div:first-of-type {
 			${tw`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 my-6`};
+		}
+
+		> div:last-of-type {
+			${tw`flex items-center justify-center my-8`};
 		}
 	`,
 ])

@@ -1,8 +1,9 @@
-import { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import nookies from 'nookies'
+import tw from 'twin.macro'
 
 import { auth, firebaseUIConfig } from '@/firebase/firebase'
 import { firebaseAdmin } from '@/firebase/firebase.admin'
@@ -15,9 +16,9 @@ const Auth: FC = () => {
 	}, [])
 
 	return (
-		<section style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+		<StyledAuth style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 			<StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
-		</section>
+		</StyledAuth>
 	)
 }
 
@@ -39,3 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		return { props: {} }
 	}
 }
+
+const StyledAuth = tw.section`
+	flex items-center justify-center min-h-screen
+`

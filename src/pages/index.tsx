@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect } from 'react'
+import { FC, Fragment } from 'react'
 import { GetStaticProps } from 'next'
 
 import { fetchCategories } from '@/store/category/category.firebase'

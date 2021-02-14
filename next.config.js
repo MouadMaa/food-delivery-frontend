@@ -11,7 +11,7 @@ module.exports = withPWA({
 	},
 	pwa: {
 		dest: 'public',
-		// disable: process.env.NODE_ENV !== 'production',
+		disable: process.env.NODE_ENV !== 'production',
 		register: true,
 		scope: '/',
 		sw: 'service-worker.js',

@@ -13,7 +13,7 @@ const Switch: FC<SwitchProps> = (props) => {
 
 	return (
 		<StyledSwitch isChecked={value} onClick={onClick}>
-			<button>
+			<button aria-label='switch button'>
 				<div />
 			</button>
 			<span>{text}</span>

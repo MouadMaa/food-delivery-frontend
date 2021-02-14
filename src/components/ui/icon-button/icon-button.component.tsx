@@ -10,7 +10,7 @@ const IconButton: FC<IconButtonProps> = (props) => {
 	const { onClick, children } = props
 
 	return (
-		<StyledIconButton className='group' onClick={onClick}>
+		<StyledIconButton className='group' onClick={onClick} aria-label='icon button'>
 			{children}
 		</StyledIconButton>
 	)

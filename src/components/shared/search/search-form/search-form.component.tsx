@@ -53,11 +53,13 @@ const SearchForm: FC = () => {
 			<FormContainer>
 				<div>
 					<AddressSvg />
-					<input type='text' value='Larache' disabled />
+					<label htmlFor='address-input' />
+					<input id='address-input' type='text' value='Larache' disabled />
 				</div>
 				<div>
 					<SearchSvg />
-					<input type='text' value={searchTerm} onChange={handleChange} placeholder='Search..' />
+					<label htmlFor='search-input' />
+					<input id='search-input' type='text' value={searchTerm} onChange={handleChange} placeholder='Search..' />
 					<SearchDropdown
 						results={results}
 						isSearching={isSearching}

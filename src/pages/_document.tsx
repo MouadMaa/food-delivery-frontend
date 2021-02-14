@@ -58,7 +58,7 @@ const HeadMeta = () => (
 		<meta name='msapplication-tap-highlight' content='no' />
 		<meta name='theme-color' content='#000000' />
 
-		{/* <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' /> */}
+		<link rel='apple-touch-icon' sizes='192x192' href='/icon-192x192.png' />
 		<link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
 		<link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
 		<link rel='manifest' href='/manifest.json' />
@@ -76,6 +76,6 @@ const HeadMeta = () => (
 		<meta property='og:description' content='Best Food Delivery in the world' />
 		<meta property='og:site_name' content='Food Delivery' />
 		{/* <meta property='og:url' content='https://yourdomain.com' /> */}
-		{/* <meta property='og:image' content='https://yourdomain.com/apple-touch-icon.png' /> */}
+		{/* <meta property='og:image' content='https://yourdomain.com/icon-192x192.png' /> */}
 	</Fragment>
 )

@@ -5,8 +5,10 @@ export const useRecoilDebugObserver = () => {
 	const snapshot = useRecoilSnapshot()
 	useEffect(
 		() => {
-			for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
-				console.log(node.key, snapshot.getLoadable(node).contents)
+			if (process.env.NODE_ENV !== 'production') {
+				for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
+					console.log(node.key, snapshot.getLoadable(node).contents)
+				}
 			}
 		},
 		[ snapshot ],

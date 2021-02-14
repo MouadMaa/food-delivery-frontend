@@ -5,7 +5,7 @@ import { populateRestaurantsWithCategories } from './restaurant.utils'
 import { Category } from '../category/category.types'
 
 const RESTAURANTS_LIMIT = 12
-let noMoreRestaurants = false
+let hasMoreRestaurants = true
 
 export const fetchRestaurants = async (categories: Category[]): Promise<Restaurant[]> => {
 	const restaurantsResponse = await db
@@ -22,7 +22,7 @@ export const fetchMoreRestaurants = async (
 	categories: Category[],
 	latestRestaurant: Restaurant,
 ): Promise<Restaurant[]> => {
-	if (noMoreRestaurants) return []
+	if (!hasMoreRestaurants) return null
 
 	const restaurantsResponse = await db
 		.collection('restaurants')
@@ -31,7 +31,7 @@ export const fetchMoreRestaurants = async (
 		.limit(RESTAURANTS_LIMIT)
 		.get()
 
-	if (restaurantsResponse.empty) noMoreRestaurants = true
+	if (restaurantsResponse.empty) hasMoreRestaurants = false
 
 	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
 	return populateRestaurantsWithCategories(restaurants, categories)

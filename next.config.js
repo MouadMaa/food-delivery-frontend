@@ -1,4 +1,5 @@
 const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPWA({
 	webpack: (config, { isServer }) => {
@@ -10,11 +11,12 @@ module.exports = withPWA({
 		return config
 	},
 	pwa: {
-		dest: 'public',
 		disable: process.env.NODE_ENV !== 'production',
+		dest: 'public',
+		sw: 'service-worker.js',
 		register: true,
 		scope: '/',
-		sw: 'service-worker.js',
+		runtimeCaching,
 	},
 	images: {
 		domains: [ 'firebasestorage.googleapis.com' ],

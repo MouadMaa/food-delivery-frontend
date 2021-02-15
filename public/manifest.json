@@ -3,9 +3,11 @@
 	"short_name": "Food Delivery",
 	"theme_color": "#FFFFFF",
 	"background_color": "#FFFFFF",
+	"scope": "/",
 	"start_url": "/",
-	"display": "standalone",
+	"display": "fullscreen",
 	"orientation": "portrait",
+	"splash_pages": null,
 	"icons": [
 		{
 			"src": "/icon-192x192.png",

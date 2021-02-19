@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Restaurant } from '@/store/restaurant/restaurant.types'
 import { fetchMoreRestaurants } from '@/store/restaurant/restaurant.firebase'
@@ -16,19 +16,23 @@ interface RestaurantsProps {
 }
 
 const Restaurants: FC<RestaurantsProps> = (props) => {
+	const [ restaurants, setRestaurants ] = useState(props.restaurants)
+
 	const categories = useCategoriesValue()
-	const restaurants = useFilteredAndSortedRestaurantsValue()
-	const setRestaurants = useSetRestaurantsState()
 
 	const fetchMoreRef = useRef()
 	const fetchMoreOnScreen = useOnScreen(fetchMoreRef, '200px')
 	const [ fetchMoreLoading, setFetchMoreLoading ] = useState(false)
 
+	const setRestaurantsState = useSetRestaurantsState()
+	useEffect(() => setRestaurantsState(props.restaurants), [ restaurants ])
+
+	const filteredAndSortedRestaurants = useFilteredAndSortedRestaurantsValue()
 	useEffect(
 		() => {
-			setRestaurants(restaurants.length >= props.restaurants.length ? restaurants : props.restaurants)
+			if (filteredAndSortedRestaurants.length) setRestaurants(filteredAndSortedRestaurants)
 		},
-		[ props ],
+		[ filteredAndSortedRestaurants ],
 	)
 
 	useEffect(
@@ -52,11 +56,14 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 				<h2>Popular Near You</h2>
 				<SortRestaurantsBy />
 			</article>
-			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
 			<div>
-				<span ref={fetchMoreRef} />
-				{fetchMoreLoading && <Loader />}
+				{useMemo(
+					() => restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />),
+					[ restaurants ],
+				)}
 			</div>
+			<div>{fetchMoreLoading && <Loader />}</div>
+			<span ref={fetchMoreRef} />
 		</StyledRestaurants>
 	)
 }

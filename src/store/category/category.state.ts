@@ -19,4 +19,5 @@ export const selectedCategoryState = atom<Category>({
 })
 
 export const useSelectedCategoryState = () => useRecoilState(selectedCategoryState)
+export const useSelectedCategoryValue = () => useRecoilValue(selectedCategoryState)
 export const useSetSelectedCategoryState = () => useSetRecoilState(selectedCategoryState)

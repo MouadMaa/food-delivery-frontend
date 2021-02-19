@@ -1,10 +1,10 @@
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import { Restaurant } from '@/store/restaurant/restaurant.types'
 import { fetchMoreRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { useFilteredAndSortedRestaurantsValue } from '@/store/restaurant/restaurant.selectors'
 import { useCategoriesValue } from '@/store/category/category.state'
-import { useRestaurantsState } from '@/store/restaurant/restaurant.state'
+import { useSetRestaurantsState } from '@/store/restaurant/restaurant.state'
 import { useOnScreen } from '@/hooks/useOnScreen'
 import { Loader } from '@/components/ui'
 import RestaurantCard from '../restaurant-card/restaurant-card.component'
@@ -16,15 +16,13 @@ interface RestaurantsProps {
 }
 
 const Restaurants: FC<RestaurantsProps> = (props) => {
-	const [ data, setData ] = useState(props.restaurants)
+	const categories = useCategoriesValue()
+	const restaurants = useFilteredAndSortedRestaurantsValue()
+	const setRestaurants = useSetRestaurantsState()
 
 	const fetchMoreRef = useRef()
 	const fetchMoreOnScreen = useOnScreen(fetchMoreRef, '200px')
 	const [ fetchMoreLoading, setFetchMoreLoading ] = useState(false)
-
-	const categories = useCategoriesValue()
-	const [ restaurants, setRestaurants ] = useRestaurantsState()
-	const filteredAndSortedRestaurants = useFilteredAndSortedRestaurantsValue()
 
 	useEffect(
 		() => {
@@ -35,24 +33,20 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 
 	useEffect(
 		() => {
-			setData(filteredAndSortedRestaurants)
-		},
-		[ restaurants, filteredAndSortedRestaurants ],
-	)
-
-	useEffect(
-		() => {
-			fetchMoreOnScreen && fetchMore()
+			if (fetchMoreOnScreen) fetchMore()
 		},
 		[ fetchMoreOnScreen ],
 	)
 
 	const fetchMore = async () => {
 		setFetchMoreLoading(true)
-		const newRestaurants = await fetchMoreRestaurants(categories, restaurants[restaurants.length - 1])
+		const latestRestaurant = restaurants[restaurants.length - 1]
+		const newRestaurants = await fetchMoreRestaurants(latestRestaurant, categories)
 		if (newRestaurants) setRestaurants(restaurants.concat(newRestaurants))
 		setFetchMoreLoading(false)
 	}
+
+	const data = restaurants.length > props.restaurants.length ? restaurants : props.restaurants
 
 	return (
 		<StyledRestaurants>
@@ -60,11 +54,7 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 				<h2>Popular Near You</h2>
 				<SortRestaurantsBy />
 			</article>
-			<div>
-				{useMemo(() => data.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />), [
-					data,
-				])}
-			</div>
+			<div>{data.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
 			<div>
 				<span ref={fetchMoreRef} />
 				{fetchMoreLoading && <Loader />}

@@ -16,7 +16,7 @@ export const StyledRestaurants = styled.section(() => [
 		}
 
 		> div:last-of-type {
-			${tw`flex items-center justify-center my-8`};
+			${tw`my-10`};
 		}
 	`,
 ])

@@ -19,7 +19,7 @@ const Categories: FC<CategoriesProps> = (props) => {
 	const setCategories = useSetCategoriesState()
 	const [ selectedCategory, setSelectedCategory ] = useSelectedCategoryState()
 
-	useEffect(() => setCategories(categories), [ props ])
+	useEffect(() => setCategories(categories), [ categories ])
 
 	return (
 		<StyledCategories>

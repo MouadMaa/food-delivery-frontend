@@ -2,7 +2,6 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
-import { useCategoriesValue } from '@/store/category/category.state'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 import { Dropdown, IconButton } from '@/components/ui'
@@ -12,8 +11,6 @@ import { AddressSvg, FilterSvg, SearchSvg } from './search-form.svg'
 import { searchForCategories, searchForRestaurants } from './search-form.utils'
 
 const SearchForm: FC = () => {
-	const categories = useCategoriesValue()
-
 	const ref = useRef()
 	useOnClickOutside(ref, () => setSearchTerm(''))
 
@@ -32,7 +29,7 @@ const SearchForm: FC = () => {
 				if (debouncedSearchTerm) {
 					setIsSearching(true)
 					setResults({
-						categories: filterBy !== 'Restaurant' ? searchForCategories(categories, debouncedSearchTerm) : [],
+						categories: filterBy !== 'Restaurant' ? await searchForCategories(debouncedSearchTerm) : [],
 						restaurants: filterBy !== 'Category' ? await searchForRestaurants(debouncedSearchTerm) : [],
 					})
 					setIsSearching(false)

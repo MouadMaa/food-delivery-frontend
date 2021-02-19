@@ -11,7 +11,7 @@ export const StyledMenuLink = styled.a(({ isActive }: { isActive: boolean }) => 
 			${tw`w-1 h-0 bg-primary-default transition-all duration-300`};
 		}
 		svg {
-			${tw`w-5 h-5 text-gray-600 stroke-current dark:text-gray-100`};
+			${tw`w-5 h-5 stroke-current dark:text-gray-100`};
 		}
 		span {
 			${tw`text-md`};

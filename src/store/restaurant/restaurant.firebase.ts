@@ -19,8 +19,8 @@ export const fetchRestaurants = async (categories: Category[]): Promise<Restaura
 }
 
 export const fetchMoreRestaurants = async (
-	categories: Category[],
 	latestRestaurant: Restaurant,
+	categories: Category[],
 ): Promise<Restaurant[]> => {
 	if (!hasMoreRestaurants) return null
 
@@ -31,8 +31,7 @@ export const fetchMoreRestaurants = async (
 		.limit(RESTAURANTS_LIMIT)
 		.get()
 
-	if (restaurantsResponse.empty) hasMoreRestaurants = false
+	if (restaurantsResponse.empty || restaurantsResponse.size !== RESTAURANTS_LIMIT) hasMoreRestaurants = false
 
-	const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
-	return populateRestaurantsWithCategories(restaurants, categories)
+	return populateRestaurantsWithCategories(getCollectionData<Restaurant>(restaurantsResponse), categories)
 }

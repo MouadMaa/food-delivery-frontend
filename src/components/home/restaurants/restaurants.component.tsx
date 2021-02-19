@@ -26,7 +26,7 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 
 	useEffect(
 		() => {
-			setRestaurants(restaurants.length > props.restaurants.length ? restaurants : props.restaurants)
+			setRestaurants(restaurants.length >= props.restaurants.length ? restaurants : props.restaurants)
 		},
 		[ props ],
 	)
@@ -46,15 +46,13 @@ const Restaurants: FC<RestaurantsProps> = (props) => {
 		setFetchMoreLoading(false)
 	}
 
-	const data = restaurants.length > props.restaurants.length ? restaurants : props.restaurants
-
 	return (
 		<StyledRestaurants>
 			<article>
 				<h2>Popular Near You</h2>
 				<SortRestaurantsBy />
 			</article>
-			<div>{data.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
+			<div>{restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}</div>
 			<div>
 				<span ref={fetchMoreRef} />
 				{fetchMoreLoading && <Loader />}

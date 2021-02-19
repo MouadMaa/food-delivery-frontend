@@ -3,10 +3,17 @@ import { getCollectionData } from '@/firebase/firebase.utils'
 import { Category } from '@/store/category/category.types'
 import { Restaurant } from '@/store/restaurant/restaurant.types'
 
-export const searchForCategories = (categories: Category[], value: string): Category[] =>
-	categories
-		.filter((category) => category.id !== 'all')
-		.filter((category) => category.name.toLowerCase().includes(value.toLowerCase()))
+export const searchForCategories = async (value: string): Promise<Category[]> => {
+	const searchTerm = capitalizeWords(value)
+	const categoriesResponse = await db
+		.collection('categories')
+		.orderBy('name')
+		.startAt(searchTerm)
+		.endAt(searchTerm + '\uf8ff')
+		.limit(5)
+		.get()
+	return getCollectionData<Category>(categoriesResponse)
+}
 
 export const searchForRestaurants = async (value: string): Promise<Restaurant[]> => {
 	const searchTerm = capitalizeWords(value)

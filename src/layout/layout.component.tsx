@@ -1,5 +1,6 @@
 import { FC, Fragment } from 'react'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 import GlobalStyles from '@/styles/GlobalStyles'
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
@@ -25,6 +26,7 @@ const Layout: FC = (props) => {
 				<title>Food Delivery</title>
 			</Head>
 			<GlobalStyles />
+			<TopProgress />
 			<Header />
 			<Menu />
 			<StyledMain>{children}</StyledMain>
@@ -33,3 +35,10 @@ const Layout: FC = (props) => {
 }
 
 export default Layout
+
+const TopProgress = dynamic(
+	() => {
+		return import('./top-progress/top-progress')
+	},
+	{ ssr: false },
+)

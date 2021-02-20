@@ -24,6 +24,15 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  /* NProgress */
+  #nprogress > div.bar {
+    background-color: #ED5359;
+  }
+  #nprogress > div.spinner > div {
+    border-top-color: #ED5359;
+    border-left-color: #ED5359;
+  }
+
 `
 
 export default GlobalStyles

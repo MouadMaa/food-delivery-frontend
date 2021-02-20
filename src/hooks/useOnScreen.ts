@@ -14,11 +14,15 @@ export const useOnScreen = (ref: MutableRefObject<any>, rootMargin = '0px') => {
 				rootMargin,
 			},
 		)
+
 		if (ref.current) {
 			observer.observe(ref.current)
 		}
+
 		return () => {
-			observer.unobserve(ref.current)
+			try {
+				observer.unobserve(ref.current)
+			} catch (error) {}
 		}
 	}, []) // Empty array ensures that effect is only run on mount and unmount
 

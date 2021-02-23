@@ -1,12 +1,12 @@
-import { FC, Fragment } from "react"
-import { GetStaticProps } from "next"
+import { FC, Fragment } from 'react'
+import { GetStaticProps } from 'next'
 
-import { fetchCategories } from "@/store/category/category.firebase"
-import { fetchRestaurants } from "@/store/restaurant/restaurant.firebase"
-import { Category } from "@/store/category/category.types"
-import { Restaurant } from "@/store/restaurant/restaurant.types"
-import Categories from "@/components/home/categories/categories.component"
-import Restaurants from "@/components/home/restaurants/restaurants.component"
+import { fetchCategories } from '@/store/category/category.firebase'
+import { fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
+import { Category } from '@/store/category/category.types'
+import { Restaurant } from '@/store/restaurant/restaurant.types'
+import Categories from '@/components/home/categories/categories.component'
+import Restaurants from '@/components/home/restaurants/restaurants.component'
 
 interface HomeProps {
   categories: Category[]

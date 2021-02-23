@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 const customForms = require('@tailwindcss/custom-forms')
 
@@ -7,7 +8,7 @@ module.exports = {
 	theme: {
 		extend: {},
 		fontFamily: {
-			body: [ 'Poppins', 'Arial', 'Helvetica', 'sans-serif' ],
+			body: [ 'Poppins', ...defaultTheme.fontFamily.sans ],
 		},
 		fontSize: {
 			xs: '0.75rem',

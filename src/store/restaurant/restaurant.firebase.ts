@@ -39,8 +39,8 @@ export const fetchMoreRestaurants = async (
 		return populateRestaurantsWithCategories(restaurants, categories)
 	}
 
-export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
+export const fetchRestaurant = async (slug: string, categories: Category[]): Promise<Restaurant> => {
 	const res = await db.collection('restaurants').where('slug', '==', slug).get()
-	const restaurant = getCollectionData<Restaurant>(res)[0]
-	return restaurant
+	const restaurants = getCollectionData<Restaurant>(res)
+	return populateRestaurantsWithCategories(restaurants, categories)[0]
 }

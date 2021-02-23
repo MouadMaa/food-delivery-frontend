@@ -1,12 +1,13 @@
-import { FC } from "react"
-import { useRouter } from "next/router"
+import { FC } from 'react'
+import { useRouter } from 'next/router'
 
-import { useSetSelectedCategoryState } from "@/store/category/category.state"
-import { Category } from "@/store/category/category.types"
-import { Loader } from "@/components/ui"
-import { StyledSearchDropdown } from "./search-dropdown.styles"
-import { SearchResults } from "../search-form/search-form.component"
-import { useSetSideMenuState } from "@/store/global/global.state"
+import { useSetSelectedCategoryState } from '@/store/category/category.state'
+import { useSetSideMenuState } from '@/store/global/global.state'
+import { Category } from '@/store/category/category.types'
+import { Restaurant } from '@/store/restaurant/restaurant.types'
+import { Loader } from '@/components/ui'
+import { StyledSearchDropdown } from './search-dropdown.styles'
+import { SearchResults } from '../search-form/search-form.component'
 
 interface SearchDropdownProps {
   results: SearchResults
@@ -29,10 +30,17 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
   const setIsSideMenuOpen = useSetSideMenuState()
 
   const handleCategoryClick = (category: Category) => {
+    router.pathname !== '/' && router.push('/')
     setSelectedCategory(category)
     setIsSideMenuOpen(false)
-    setSearchTerm("")
-    router.pathname !== "/" && router.push("/")
+    setSearchTerm('')
+  }
+
+  const handleRestaurantClick = (restaurant: Restaurant) => {
+    const path = `/restaurant/larache/${restaurant.slug}`
+    router.pathname !== path && router.push(path)
+    setIsSideMenuOpen(false)
+    setSearchTerm('')
   }
 
   return (
@@ -43,10 +51,7 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
           <article>
             <span>Categories</span>
             {categories.map((category) => (
-              <div
-                key={category.id}
-                onClick={() => handleCategoryClick(category)}
-              >
+              <div key={category.id} onClick={() => handleCategoryClick(category)}>
                 {category.name}
               </div>
             ))}
@@ -56,13 +61,13 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
           <article>
             <span>Restaurants</span>
             {restaurants.map((restaurant) => (
-              <div key={restaurant.id}>{restaurant.name}</div>
+              <div key={restaurant.id} onClick={() => handleRestaurantClick(restaurant)}>
+                {restaurant.name}
+              </div>
             ))}
           </article>
         )}
-        {!isSearching && !categories.length && !restaurants.length && (
-          <p>No results were found!</p>
-        )}
+        {!isSearching && !categories.length && !restaurants.length && <p>No results were found!</p>}
       </StyledSearchDropdown>
     )
   )

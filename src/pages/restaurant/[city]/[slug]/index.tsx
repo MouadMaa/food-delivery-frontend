@@ -6,6 +6,7 @@ import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import { fetchCategories } from '@/store/category/category.firebase'
+import DishesCategories from '@/components/restaurant/dishes-categories/dishes-categories.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -18,6 +19,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
     <StyledRestaurant>
       <section>
         <RestaurantDetails restaurant={restaurant} />
+        <DishesCategories dishes={restaurant.dishes} />
       </section>
     </StyledRestaurant>
   )

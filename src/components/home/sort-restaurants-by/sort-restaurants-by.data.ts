@@ -1,19 +1,19 @@
 import { SortRestaurantsBy } from '@/store/restaurant/restaurant.types'
 
 export const sortRestaurantsByList: SortRestaurantsBy[] = [
-	{
-		name: 'Popularity',
-		value: 'favoritesCount',
-		sort: 'desc',
-	},
-	{
-		name: 'Duration (Low to high)',
-		value: 'duration',
-		sort: 'asc',
-	},
-	{
-		name: 'Duration (High to low)',
-		value: 'duration',
-		sort: 'desc',
-	},
+  {
+    title: 'Popularity',
+    key: 'favoritesCount',
+    sort: 'desc',
+  },
+  {
+    title: 'Duration (Low to high)',
+    key: 'duration',
+    sort: 'asc',
+  },
+  {
+    title: 'Duration (High to low)',
+    key: 'duration',
+    sort: 'desc',
+  },
 ]

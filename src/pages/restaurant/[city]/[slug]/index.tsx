@@ -3,10 +3,11 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import tw, { css, styled } from 'twin.macro'
 
 import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
+import { fetchCategories } from '@/store/category/category.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
-import { fetchCategories } from '@/store/category/category.firebase'
 import DishesCategories from '@/components/restaurant/dishes-categories/dishes-categories.component'
+import Dishes from '@/components/restaurant/dishes/dishes.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -20,6 +21,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
       <section>
         <RestaurantDetails restaurant={restaurant} />
         <DishesCategories dishes={restaurant.dishes} />
+        <Dishes dishes={restaurant.dishes} />
       </section>
     </StyledRestaurant>
   )

@@ -7,7 +7,7 @@ export const StyledDishesCategories = styled.section(() => [
       ${tw`flex items-center text-sm text-gray-600`};
 
       a {
-        ${tw`px-4 py-2 tracking-wider leading-none whitespace-nowrap border-b-2 border-gray-200 cursor-pointer transition-colors duration-300 hover:border-primary-light dark:text-gray-300 dark:border-gray-600 dark:hover:border-primary-default`}
+        ${tw`px-4 py-2 tracking-wider uppercase leading-none whitespace-nowrap border-b-2 border-gray-200 cursor-pointer transition-colors duration-300 hover:border-primary-light dark:text-gray-300 dark:border-gray-600 dark:hover:border-primary-default`}
       }
     }
   `,

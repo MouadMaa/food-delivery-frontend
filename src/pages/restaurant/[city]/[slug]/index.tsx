@@ -8,6 +8,7 @@ import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
+import DeliveryAddress from '@/components/restaurant/delivery-address/delivery-address.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -23,6 +24,9 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         <CategoriesMenu dishes={restaurant.dishes} />
         <Dishes dishes={restaurant.dishes} />
       </section>
+      <aside>
+        <DeliveryAddress duration={restaurant.duration} />
+      </aside>
     </StyledRestaurant>
   )
 }
@@ -50,6 +54,10 @@ const StyledRestaurant = styled.section(() => [
   css`
     > section {
       ${tw`col-span-2`};
+    }
+
+    > aside {
+      ${tw`sticky top-0 max-h-screen py-4 px-0 sm:p-4 space-y-4 sm:space-y-6 border-none lg:border-l-2`}
     }
   `,
 ])

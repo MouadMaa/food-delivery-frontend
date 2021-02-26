@@ -1,6 +1,6 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledDishesCategories = styled.section(() => [
+export const StyledCategoriesMenu = styled.section(() => [
   tw`sticky top-0 z-10 overflow-x-auto py-2 sm:py-4 bg-white dark:bg-gray-900`,
   css`
     nav > {

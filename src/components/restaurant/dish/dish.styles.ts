@@ -8,7 +8,7 @@ export const StyledDish = styled.section(() => [
     }
 
     > div {
-      ${tw`space-y-8`};
+      ${tw`space-y-6`};
     }
   `,
 ])

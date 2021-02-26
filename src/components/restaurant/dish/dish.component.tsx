@@ -10,11 +10,11 @@ interface DishProps {
 
 const Dish: FC<DishProps> = (props) => {
   const {
-    dish: { category, foods },
+    dish: { order, category, foods },
   } = props
 
   return (
-    <StyledDish id={`#${category}`}>
+    <StyledDish id={`#category-menu-${order}`}>
       <h3>{category}</h3>
       <div>
         {foods.map((food) => (

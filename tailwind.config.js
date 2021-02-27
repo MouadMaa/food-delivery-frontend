@@ -40,6 +40,7 @@ module.exports = {
       ringWidth: ['focus-visible'],
       ringColor: ['focus-visible'],
       scale: ['active', 'group-hover'],
+      translate: ['group-hover'],
     },
   },
   plugins: [customForms],

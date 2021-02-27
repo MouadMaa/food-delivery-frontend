@@ -18,7 +18,7 @@ export const StyledOrderCard = styled.article(() => [
         ${tw`cursor-pointer`}
 
         h4 {
-          ${tw`tracking-wide text-gray-600 mb-0.5 dark:text-gray-200`}
+          ${tw`tracking-wide text-gray-600 mb-0.5 dark:text-gray-300`}
         }
 
         span {

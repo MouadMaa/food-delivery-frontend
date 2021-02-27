@@ -10,6 +10,7 @@ import CategoriesMenu from '@/components/restaurant/categories-menu/categories-m
 import Dishes from '@/components/restaurant/dishes/dishes.component'
 import DeliveryAddress from '@/components/restaurant/delivery-address/delivery-address.component'
 import Orders from '@/components/restaurant/orders/orders.component'
+import OrderButton from '@/components/restaurant/order-button/order-button.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -26,8 +27,11 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         <Dishes dishes={restaurant.dishes} />
       </section>
       <aside style={asideStyle()}>
-        <DeliveryAddress duration={restaurant.duration} />
-        <Orders />
+        <div>
+          <DeliveryAddress duration={restaurant.duration} />
+          <Orders />
+        </div>
+        <OrderButton />
       </aside>
     </StyledRestaurant>
   )
@@ -59,7 +63,7 @@ const StyledRestaurant = styled.section(() => [
     }
 
     > aside {
-      ${tw`sticky top-0 z-10 max-h-screen py-4 px-0 sm:p-4 space-y-4 sm:space-y-6 border-gray-200 lg:border-l-2 dark:border-gray-600`}
+      ${tw`sticky top-0 z-10 flex justify-between flex-col max-h-screen py-4 px-0 sm:p-4 shadow-lg rounded-3xl`}
     }
   `,
 ])

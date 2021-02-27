@@ -18,6 +18,10 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
   }
 
+  aside .orders {
+    max-height: 60vh;
+  }
+
   /* Back Drop Blur */
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     .backdrop-blur {

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { CSSProperties, FC } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import tw, { css, styled } from 'twin.macro'
 
@@ -9,6 +9,7 @@ import RestaurantDetails from '@/components/restaurant/restaurant-details/restau
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
 import DeliveryAddress from '@/components/restaurant/delivery-address/delivery-address.component'
+import Orders from '@/components/restaurant/orders/orders.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -24,8 +25,9 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         <CategoriesMenu dishes={restaurant.dishes} />
         <Dishes dishes={restaurant.dishes} />
       </section>
-      <aside>
+      <aside style={asideStyle()}>
         <DeliveryAddress duration={restaurant.duration} />
+        <Orders />
       </aside>
     </StyledRestaurant>
   )
@@ -57,7 +59,12 @@ const StyledRestaurant = styled.section(() => [
     }
 
     > aside {
-      ${tw`sticky top-0 max-h-screen py-4 px-0 sm:p-4 space-y-4 sm:space-y-6 border-none lg:border-l-2`}
+      ${tw`sticky top-0 z-10 max-h-screen py-4 px-0 sm:p-4 space-y-4 sm:space-y-6 border-gray-200 lg:border-l-2 dark:border-gray-600`}
     }
   `,
 ])
+
+const asideStyle = (): CSSProperties => {
+  if (typeof window === 'undefined') return { height: '80vh' }
+  return { height: `calc(100vh - ${document.querySelector('header').offsetHeight}px)` }
+}

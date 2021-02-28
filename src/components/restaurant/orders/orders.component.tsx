@@ -26,5 +26,5 @@ export default Orders
 
 const ordersStyle = (): CSSProperties =>
   typeof window !== 'undefined'
-    ? { maxHeight: `calc(${document.querySelector('aside').offsetHeight}px - 252px)` }
+    ? { maxHeight: `calc(${document.querySelector('aside').offsetHeight}px - 300px)` }
     : {}

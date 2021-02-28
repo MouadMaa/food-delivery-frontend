@@ -64,7 +64,7 @@ const StyledRestaurant = styled.section(() => [
     }
 
     > aside {
-      ${tw`sticky top-0 z-10 flex justify-between flex-col h-full py-4 px-0 sm:p-4 shadow-lg rounded-3xl`}
+      ${tw`sticky top-0 z-10 flex justify-between flex-col h-full py-4 px-2 sm:p-4 shadow-lg rounded-3xl`}
 
       max-height: 80vh;
 

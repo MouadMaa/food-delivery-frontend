@@ -28,6 +28,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
       </section>
       <aside style={asideStyle()}>
         <div>
+          <h5>My Orders</h5>
           <DeliveryAddress duration={restaurant.duration} />
           <Orders />
         </div>
@@ -63,12 +64,20 @@ const StyledRestaurant = styled.section(() => [
     }
 
     > aside {
-      ${tw`sticky top-0 z-10 flex justify-between flex-col max-h-screen py-4 px-0 sm:p-4 shadow-lg rounded-3xl`}
+      ${tw`sticky top-0 z-10 flex justify-between flex-col h-full py-4 px-0 sm:p-4 shadow-lg rounded-3xl`}
+
+      max-height: 80vh;
+
+      > div > h5 {
+        ${tw`text-lg tracking-wide text-gray-500 ml-2 mb-4`}
+      }
     }
   `,
 ])
 
-const asideStyle = (): CSSProperties => {
-  if (typeof window === 'undefined') return { height: '80vh' }
-  return { height: `calc(100vh - ${document.querySelector('header').offsetHeight}px)` }
-}
+const asideStyle = (): CSSProperties =>
+  typeof window !== 'undefined'
+    ? {
+        maxHeight: `calc(100vh - ${document.querySelector('header').offsetHeight}px)`,
+      }
+    : {}

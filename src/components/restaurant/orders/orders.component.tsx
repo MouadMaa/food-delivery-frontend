@@ -1,5 +1,4 @@
-import { FC } from 'react'
-import { CSSProperties } from 'styled-components'
+import { CSSProperties, FC } from 'react'
 
 import OrderCard from '../order-card/order-card.component'
 import { StyledOrders } from './orders.styles'
@@ -26,5 +25,5 @@ export default Orders
 
 const ordersStyle = (): CSSProperties =>
   typeof window !== 'undefined'
-    ? { maxHeight: `calc(${document.querySelector('aside').offsetHeight}px - 300px)` }
+    ? { maxHeight: `calc(${document.querySelector('aside')?.offsetHeight}px - 300px)` }
     : {}

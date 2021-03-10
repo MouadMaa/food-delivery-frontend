@@ -43,34 +43,32 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
     setSearchTerm('')
   }
 
-  return (
-    searchTerm && (
-      <StyledSearchDropdown>
-        {isSearching && <Loader />}
-        {!isSearching && !!categories.length && (
-          <article>
-            <span>Categories</span>
-            {categories.map((category) => (
-              <div key={category.id} onClick={() => handleCategoryClick(category)}>
-                {category.name}
-              </div>
-            ))}
-          </article>
-        )}
-        {!isSearching && !!restaurants.length && (
-          <article>
-            <span>Restaurants</span>
-            {restaurants.map((restaurant) => (
-              <div key={restaurant.id} onClick={() => handleRestaurantClick(restaurant)}>
-                {restaurant.name}
-              </div>
-            ))}
-          </article>
-        )}
-        {!isSearching && !categories.length && !restaurants.length && <p>No results were found!</p>}
-      </StyledSearchDropdown>
-    )
-  )
+  return searchTerm ? (
+    <StyledSearchDropdown>
+      {isSearching && <Loader />}
+      {!isSearching && !!categories.length && (
+        <article>
+          <span>Categories</span>
+          {categories.map((category) => (
+            <div key={category.id} onClick={() => handleCategoryClick(category)}>
+              {category.name}
+            </div>
+          ))}
+        </article>
+      )}
+      {!isSearching && !!restaurants.length && (
+        <article>
+          <span>Restaurants</span>
+          {restaurants.map((restaurant) => (
+            <div key={restaurant.id} onClick={() => handleRestaurantClick(restaurant)}>
+              {restaurant.name}
+            </div>
+          ))}
+        </article>
+      )}
+      {!isSearching && !categories.length && !restaurants.length && <p>No results were found!</p>}
+    </StyledSearchDropdown>
+  ) : null
 }
 
 export default SearchDropdown

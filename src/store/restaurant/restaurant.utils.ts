@@ -6,12 +6,12 @@ export const populateRestaurantsWithCategories = (
   restaurants: Restaurant[],
   categories: Category[],
 ): Restaurant[] => {
-  return restaurants.map((restaurant) => ({
-    ...restaurant,
-    categories: (restaurant.categories as unknown[]).map((categoryId) => {
-      return categories.find((category) => category.id === categoryId)
-    }),
-  }))
+  return restaurants.map((restaurant) => {
+    const newCategories = (restaurant.categories as unknown[]).map((categoryId) => {
+      return categories.find((category) => category.id === categoryId) as Category
+    })
+    return { ...restaurant, categories: newCategories }
+  })
 }
 
 // Filter restaurants by category

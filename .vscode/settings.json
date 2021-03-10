@@ -3,7 +3,8 @@
     "Larache",
     "firebasestorage",
     "firebaseui",
-    "firestore"
+    "firestore",
+    "nprogress"
   ],
   "tailwindCSS.experimental.classRegex": [
       "tw`([^`]*)", // tw`...`

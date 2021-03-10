@@ -11,8 +11,10 @@ const SortRestaurantsBy: FC = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const onSelect = (name: string) =>
-    setSortRestaurantsBy(sortRestaurantsByList.find((sortBy) => sortBy.title === name))
+  const onSelect = (name: string) => {
+    const sortBy = sortRestaurantsByList.find((sortBy) => sortBy.title === name)
+    if (sortBy) setSortRestaurantsBy(sortBy)
+  }
 
   const dropdownList = sortRestaurantsByList.map((sortBy) => sortBy.title)
 

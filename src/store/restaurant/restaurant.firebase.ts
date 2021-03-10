@@ -4,14 +4,14 @@ import { Food, Restaurant } from './restaurant.types'
 import { populateRestaurantsWithCategories } from './restaurant.utils'
 import { Category } from '../category/category.types'
 
-const RESTAURANTS_LIMIT = 12
-let hasMoreRestaurants = true
+// const RESTAURANTS_LIMIT = 12
+// let hasMoreRestaurants = true
 
 export const fetchRestaurants = async (categories?: Category[]): Promise<Restaurant[]> => {
   const restaurantsResponse = await db
     .collection('restaurants')
     .orderBy('favoritesCount', 'desc')
-    .limit(RESTAURANTS_LIMIT)
+    // .limit(RESTAURANTS_LIMIT)
     .get()
 
   const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
@@ -19,26 +19,26 @@ export const fetchRestaurants = async (categories?: Category[]): Promise<Restaur
   return categories ? populateRestaurantsWithCategories(restaurants, categories) : restaurants
 }
 
-export const fetchMoreRestaurants = async (
-  latestRestaurant: Restaurant,
-  categories: Category[],
-): Promise<Restaurant[]> => {
-  if (!hasMoreRestaurants) return null
+// export const fetchMoreRestaurants = async (
+//   latestRestaurant: Restaurant,
+//   categories: Category[],
+// ): Promise<Restaurant[]> => {
+//   if (!hasMoreRestaurants) return []
 
-  const restaurantsResponse = await db
-    .collection('restaurants')
-    .orderBy('favoritesCount', 'desc')
-    .startAfter(latestRestaurant.favoritesCount)
-    .limit(RESTAURANTS_LIMIT)
-    .get()
+//   const restaurantsResponse = await db
+//     .collection('restaurants')
+//     .orderBy('favoritesCount', 'desc')
+//     .startAfter(latestRestaurant.favoritesCount)
+//     .limit(RESTAURANTS_LIMIT)
+//     .get()
 
-  if (restaurantsResponse.empty || restaurantsResponse.size !== RESTAURANTS_LIMIT)
-    hasMoreRestaurants = false
+//   if (restaurantsResponse.empty || restaurantsResponse.size !== RESTAURANTS_LIMIT)
+//     hasMoreRestaurants = false
 
-  const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
+//   const restaurants = getCollectionData<Restaurant>(restaurantsResponse)
 
-  return populateRestaurantsWithCategories(restaurants, categories)
-}
+//   return populateRestaurantsWithCategories(restaurants, categories)
+// }
 
 export const fetchRestaurant = async (
   slug: string,
@@ -49,11 +49,11 @@ export const fetchRestaurant = async (
 
   const restaurant = populateRestaurantsWithCategories(restaurants, categories)[0]
 
-  const dishesAsync = restaurant.dishes.map(async (dish) => {
+  const dishesAsync = restaurant.dishes?.map(async (dish) => {
     const foods = await readIds<Food>(db.collection('foods'), dish.foods as any)
     return { ...dish, foods }
   })
-  const dishes = await Promise.all(dishesAsync)
+  const dishes = dishesAsync ? await Promise.all(dishesAsync) : []
 
   return { ...restaurant, dishes }
 }

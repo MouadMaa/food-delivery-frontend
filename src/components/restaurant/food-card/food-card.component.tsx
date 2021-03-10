@@ -16,9 +16,17 @@ const FoodCard: FC<FoodCardProps> = (props) => {
 
   return (
     <StyledFoodCard className='group'>
-      <figure>
-        <Image src={image} alt={name} layout='fill' objectFit='cover' tw='group-hover:scale-105' />
-      </figure>
+      {image && (
+        <figure>
+          <Image
+            src={image}
+            alt={name}
+            layout='fill'
+            objectFit='cover'
+            tw='group-hover:scale-105'
+          />
+        </figure>
+      )}
       <div>
         <div>
           <h4>{name}</h4>

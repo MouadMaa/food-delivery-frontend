@@ -9,36 +9,35 @@ import { auth, firebaseUIConfig } from '@/firebase/firebase'
 import { firebaseAdmin } from '@/firebase/firebase.admin'
 
 const Auth: FC = () => {
-	const router = useRouter()
+  const router = useRouter()
 
-	useEffect(() => {
-		return auth.onAuthStateChanged((user) => user && router.push('/'))
-	}, [])
+  useEffect(() => {
+    return auth.onAuthStateChanged((user) => user && router.push('/'))
+  }, [])
 
-	return (
-		<StyledAuth style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-			<StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
-		</StyledAuth>
-	)
+  return (
+    <StyledAuth style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
+    </StyledAuth>
+  )
 }
 
 export default Auth
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	try {
-		const cookies = nookies.get(context)
-		const token = await firebaseAdmin.auth().verifyIdToken(cookies.token)
-		if (token) {
-			return {
-				redirect: {
-					permanent: false,
-					destination: '/',
-				},
-			}
-		}
-	} catch (error) {
-		return { props: {} }
-	}
+  try {
+    const cookies = nookies.get(context)
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token)
+    if (token) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/',
+        },
+      }
+    }
+  } catch {}
+  return { props: {} }
 }
 
 const StyledAuth = tw.section`

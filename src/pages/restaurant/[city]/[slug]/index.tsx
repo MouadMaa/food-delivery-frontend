@@ -6,7 +6,7 @@ import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant
 import { fetchCategories } from '@/store/category/category.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { IconButton } from '@/components/ui'
+import { IconButton, Modal } from '@/components/ui'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
@@ -14,6 +14,7 @@ import DeliveryAddress from '@/components/restaurant/delivery-address/delivery-a
 import Orders from '@/components/restaurant/orders/orders.component'
 import OrderButton from '@/components/restaurant/order-button/order-button.component'
 import MobileOrdersButton from '@/components/restaurant/mobile-orders-button/mobile-orders-button.component'
+import FoodModal from '@/components/restaurant/food-modal/food-modal.component'
 
 interface RestaurantProps {
   restaurant: IRestaurant
@@ -23,20 +24,23 @@ const Restaurant: FC<RestaurantProps> = (props) => {
   const { restaurant } = props
 
   const [show, setShow] = useState('both')
+  const [showModal, setShowModal] = useState(false)
 
   const { width } = useWindowSize()
 
   useEffect(() => {
-    setShow(width < 1024 ? 'dishes' : 'both')
+    if (width) setShow(width < 1024 ? 'dishes' : 'both')
   }, [width])
 
   const handleClickShow = () => {
-    if (width >= 1024) setShow('both')
-    else setShow(show === 'dishes' ? 'orders' : 'dishes')
+    if (width) {
+      if (width >= 1024) setShow('both')
+      else setShow(show === 'dishes' ? 'orders' : 'dishes')
+    }
   }
 
   const dishes = (
-    <section key={1}>
+    <section key={1} onClick={() => setShowModal(true)}>
       <RestaurantDetails restaurant={restaurant} />
       <CategoriesMenu dishes={restaurant.dishes} />
       <Dishes dishes={restaurant.dishes} />
@@ -74,6 +78,9 @@ const Restaurant: FC<RestaurantProps> = (props) => {
     <StyledRestaurant fixOrders={show === 'orders'}>
       {htmlContent}
       {show !== 'orders' && <MobileOrdersButton onClick={handleClickShow} />}
+      <Modal isOpen={showModal} onHide={() => setShowModal(false)}>
+        <FoodModal />
+      </Modal>
     </StyledRestaurant>
   )
 }
@@ -92,7 +99,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const categories = await fetchCategories()
-  const restaurant = await fetchRestaurant(params.slug as string, categories)
+  const restaurant = await fetchRestaurant(params!.slug as string, categories)
   return { revalidate: 60, props: { restaurant } }
 }
 
@@ -112,7 +119,7 @@ const StyledRestaurant = styled.section(({ fixOrders }: { fixOrders: boolean }) 
         ${tw`flex items-center justify-between ml-2 mb-4`}
 
         span {
-          ${tw`text-md md:text-lg tracking-wide text-gray-600`}
+          ${tw`text-md md:text-lg tracking-wide text-gray-600 dark:text-gray-300`}
         }
 
         button {
@@ -145,6 +152,6 @@ const StyledRestaurant = styled.section(({ fixOrders }: { fixOrders: boolean }) 
 const asideStyle = (): CSSProperties =>
   typeof window !== 'undefined'
     ? {
-        maxHeight: `calc(100vh - ${document.querySelector('header').offsetHeight}px)`,
+        maxHeight: `calc(100vh - ${document.querySelector('header')!.offsetHeight}px)`,
       }
     : {}

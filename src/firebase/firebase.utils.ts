@@ -1,6 +1,6 @@
 // Get doc data and merge doc.id
-export const getDocData = <T>(doc: any): T | null => {
-  return doc.exists ? { id: doc.id, ...doc.data() } : null
+export const getDocData = <T>(doc: any): T => {
+  return doc.exists ? { id: doc.id, ...doc.data() } : {}
 }
 
 // Get array of doc data from collection

@@ -4,30 +4,30 @@ import NProgress from 'nprogress'
 
 import 'nprogress/nprogress.css'
 
-let timer = null
-let state = null
+let timer: any = null
+let state: string = ''
 let activeRequests = 0
 const delay = 250
 
 NProgress.configure({ showSpinner: false })
 
 const load = () => {
-	if (state === 'loading') return
+  if (state === 'loading') return
 
-	state = 'loading'
+  state = 'loading'
 
-	timer = setTimeout(() => {
-		NProgress.start()
-	}, delay) // only show progress bar if it takes longer than the delay
+  timer = setTimeout(() => {
+    NProgress.start()
+  }, delay) // only show progress bar if it takes longer than the delay
 }
 
 const stop = () => {
-	if (activeRequests > 0) return
+  if (activeRequests > 0) return
 
-	state = 'stop'
+  state = 'stop'
 
-	clearTimeout(timer)
-	NProgress.done()
+  clearTimeout(timer)
+  NProgress.done()
 }
 
 Router.events.on('routeChangeStart', load)
@@ -36,19 +36,19 @@ Router.events.on('routeChangeError', stop)
 
 const originalFetch = window.fetch
 window.fetch = async (...args) => {
-	if (activeRequests === 0) load()
+  if (activeRequests === 0) load()
 
-	activeRequests++
+  activeRequests++
 
-	try {
-		const response = await originalFetch(...args)
-		return response
-	} catch (error) {
-		return Promise.reject(error)
-	} finally {
-		activeRequests -= 1
-		if (activeRequests === 0) stop()
-	}
+  try {
+    const response = await originalFetch(...args)
+    return response
+  } catch (error) {
+    return Promise.reject(error)
+  } finally {
+    activeRequests -= 1
+    if (activeRequests === 0) stop()
+  }
 }
 
 const TopProgress: FC = () => null

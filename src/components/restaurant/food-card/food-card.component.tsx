@@ -2,20 +2,24 @@ import { FC } from 'react'
 import Image from 'next/image'
 import 'twin.macro'
 
-import { Food } from '@/store/restaurant/restaurant.types'
+import { Food } from '@/store/food/food.types'
 import { StyledFoodCard } from './food-card.styles'
+import { useSetSelectedFoodState } from '@/store/food/food.state'
 
 interface FoodCardProps {
   food: Food
 }
 
 const FoodCard: FC<FoodCardProps> = (props) => {
-  const {
-    food: { name, desc, price, image },
-  } = props
+  const { food } = props
+
+  const setSelectedFood = useSetSelectedFoodState()
+  const handleClick = () => setSelectedFood(food)
+
+  const { name, desc, price, image } = food
 
   return (
-    <StyledFoodCard className='group'>
+    <StyledFoodCard className='group' imageIsExits={!!image} onClick={handleClick}>
       {image && (
         <figure>
           <Image

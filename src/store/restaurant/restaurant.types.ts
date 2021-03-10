@@ -1,4 +1,5 @@
 import { Category } from '@/store/category/category.types'
+import { Food } from '../food/food.types'
 
 export interface Restaurant {
   id: string
@@ -15,26 +16,6 @@ export interface Dish {
   category: string
   order: number
   foods: Food[]
-}
-
-export interface Food {
-  id: string
-  name: string
-  desc?: string
-  price: number
-  image?: string
-  choices: Choice[]
-}
-
-export interface Choice {
-  title: string
-  type: 'single' | 'multiple'
-  options: Option[]
-}
-
-export interface Option {
-  name: string
-  price?: number
 }
 
 export interface SortRestaurantsBy {

@@ -6,7 +6,7 @@ import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant
 import { fetchCategories } from '@/store/category/category.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { IconButton, Modal } from '@/components/ui'
+import { IconButton } from '@/components/ui'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
@@ -24,7 +24,6 @@ const Restaurant: FC<RestaurantProps> = (props) => {
   const { restaurant } = props
 
   const [show, setShow] = useState('both')
-  const [showModal, setShowModal] = useState(false)
 
   const { width } = useWindowSize()
 
@@ -40,7 +39,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
   }
 
   const dishes = (
-    <section key={1} onClick={() => setShowModal(true)}>
+    <section key={1}>
       <RestaurantDetails restaurant={restaurant} />
       <CategoriesMenu dishes={restaurant.dishes} />
       <Dishes dishes={restaurant.dishes} />
@@ -65,22 +64,12 @@ const Restaurant: FC<RestaurantProps> = (props) => {
     </aside>
   )
 
-  let htmlContent = []
-  if (show === 'dishes') {
-    htmlContent.push(dishes)
-  } else if (show === 'orders') {
-    htmlContent.push(orders)
-  } else if (show === 'both') {
-    htmlContent.push(dishes, orders)
-  }
-
   return (
     <StyledRestaurant fixOrders={show === 'orders'}>
-      {htmlContent}
+      {show !== 'orders' && dishes}
+      {show !== 'dishes' && orders}
       {show !== 'orders' && <MobileOrdersButton onClick={handleClickShow} />}
-      <Modal isOpen={showModal} onHide={() => setShowModal(false)}>
-        <FoodModal />
-      </Modal>
+      <FoodModal imageCover={restaurant.imageCover} />
     </StyledRestaurant>
   )
 }
@@ -98,8 +87,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params!.slug as string
   const categories = await fetchCategories()
-  const restaurant = await fetchRestaurant(params!.slug as string, categories)
+  const restaurant = await fetchRestaurant(slug, categories)
   return { revalidate: 60, props: { restaurant } }
 }
 
@@ -152,6 +142,6 @@ const StyledRestaurant = styled.section(({ fixOrders }: { fixOrders: boolean }) 
 const asideStyle = (): CSSProperties =>
   typeof window !== 'undefined'
     ? {
-        maxHeight: `calc(100vh - ${document.querySelector('header')!.offsetHeight}px)`,
+        maxHeight: `calc(100vh - ${document.querySelector('header')?.offsetHeight}px)`,
       }
     : {}

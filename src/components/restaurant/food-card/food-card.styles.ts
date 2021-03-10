@@ -1,6 +1,6 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledFoodCard = styled.article(() => [
+export const StyledFoodCard = styled.article(({ imageIsExits }: { imageIsExits: boolean }) => [
   tw`grid grid-cols-5 items-center h-32 border-2 border-gray-200 shadow-sm rounded-lg overflow-hidden cursor-pointer transition duration-300 transform scale-100 hover:shadow hover:border-primary-light active:scale-95 dark:border-gray-600 dark:hover:border-primary-default`,
   css`
     figure {
@@ -31,4 +31,11 @@ export const StyledFoodCard = styled.article(() => [
       }
     }
   `,
+  !imageIsExits && [
+    css`
+      > div {
+        ${tw`col-span-full`}
+      }
+    `,
+  ],
 ])

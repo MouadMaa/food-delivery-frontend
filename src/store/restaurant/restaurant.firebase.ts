@@ -1,8 +1,9 @@
 import { db } from '@/firebase/firebase'
 import { getCollectionData, readIds } from '@/firebase/firebase.utils'
-import { Food, Restaurant } from './restaurant.types'
-import { populateRestaurantsWithCategories } from './restaurant.utils'
+import { Restaurant } from './restaurant.types'
+import { Food } from '../food/food.types'
 import { Category } from '../category/category.types'
+import { populateRestaurantsWithCategories } from './restaurant.utils'
 
 // const RESTAURANTS_LIMIT = 12
 // let hasMoreRestaurants = true

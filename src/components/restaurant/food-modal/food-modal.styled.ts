@@ -1,14 +1,12 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledFoodModal = styled.div(() => [
+import { Food } from '@/store/food/food.types'
+
+export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
   tw`max-w-2xl w-full`,
   css`
     figure {
       ${tw`relative h-48`};
-
-      img {
-        ${tw`absolute h-full w-full object-cover`}
-      }
 
       button {
         ${tw`absolute top-2 right-2 flex items-center justify-center w-10 h-10 bg-gray-100 rounded-2xl transition duration-300 focus:outline-none focus-visible:ring focus-visible:ring-primary-light active:bg-gray-200`};
@@ -54,38 +52,6 @@ export const StyledFoodModal = styled.div(() => [
         ${tw`text-xs sm:text-sm mt-1 mb-2`}
       }
 
-      > div:nth-of-type(2) {
-        ${tw`my-4 py-4 px-2 space-y-6 border-t-2 border-b-2 border-gray-200 border-dashed overflow-y-auto dark:border-gray-600`};
-
-        > div {
-          ${tw`space-y-2`};
-
-          h5 {
-            ${tw`text-sm sm:text-md font-semibold text-gray-600 dark:text-gray-200`}
-          }
-
-          > div {
-            ${tw`text-sm space-y-2`};
-
-            > div {
-              ${tw`flex items-center justify-between`};
-
-              > div {
-                ${tw`flex items-center justify-between space-x-3`};
-
-                label {
-                  ${tw`text-sm text-gray-700 cursor-pointer select-none dark:text-gray-50`};
-                }
-              }
-
-              span {
-                ${tw`text-primary-default`}
-              }
-            }
-          }
-        }
-      }
-
       > div:last-of-type {
         ${tw`flex flex-col sm:flex-row items-center justify-between mt-4 space-x-0 sm:space-x-6 space-y-6 sm:space-y-0 text-sm`};
 
@@ -111,4 +77,18 @@ export const StyledFoodModal = styled.div(() => [
       }
     }
   `,
+  !food.image && [
+    css`
+      figure {
+        ${tw`h-20`}
+      }
+    `,
+  ],
+  food.choices && [
+    css`
+      article > div:nth-of-type(2) {
+        ${tw`my-4 py-4 px-2 space-y-6 border-t-2 border-b-2 border-gray-200 border-dashed overflow-y-auto dark:border-gray-600`};
+      }
+    `,
+  ],
 ])

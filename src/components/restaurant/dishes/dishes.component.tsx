@@ -15,6 +15,9 @@ const Dishes: FC<DishesProps> = (props) => {
       {dishes.map((dish) => (
         <Dish key={dish.order} dish={dish} />
       ))}
+      {dishes.map((dish) => (
+        <Dish key={dish.order} dish={dish} />
+      ))}
     </Fragment>
   )
 }

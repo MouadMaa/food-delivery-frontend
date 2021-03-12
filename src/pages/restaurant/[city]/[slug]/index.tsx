@@ -1,12 +1,10 @@
-import { CSSProperties, FC, useEffect } from 'react'
+import { CSSProperties, FC, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import tw, { css, styled } from 'twin.macro'
 
 import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { fetchCategories } from '@/store/category/category.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
-import { useSowDishesOrdersState } from '@/store/restaurant/restaurant.state'
-import { useWindowSize } from '@/hooks/useWindowSize'
 import { IconButton } from '@/components/ui'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
@@ -24,52 +22,33 @@ interface RestaurantProps {
 const Restaurant: FC<RestaurantProps> = (props) => {
   const { restaurant } = props
 
-  const [show, setShow] = useSowDishesOrdersState()
+  const [showOrders, setShowOrders] = useState(false)
 
-  const { width } = useWindowSize()
-
-  useEffect(() => {
-    if (width) setShow(width < 1024 ? 'dishes' : 'both')
-  }, [width])
-
-  const handleClickShow = () => {
-    if (width) {
-      if (width >= 1024) setShow('both')
-      else setShow(show === 'dishes' ? 'orders' : 'dishes')
-    }
-  }
-
-  const dishes = (
-    <section key={1}>
-      <RestaurantDetails restaurant={restaurant} />
-      <CategoriesMenu dishes={restaurant.dishes} />
-      <Dishes dishes={restaurant.dishes} />
-    </section>
-  )
-
-  const orders = (
-    <aside key={2} style={asideStyle()}>
-      <div>
-        <div>
-          <span>My Orders</span>
-          <IconButton onClick={handleClickShow}>
-            <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M17.59 5L12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41 17.59 5z' />
-            </svg>
-          </IconButton>
-        </div>
-        <DeliveryAddress duration={restaurant.duration} />
-        <Orders />
-      </div>
-      <OrderButton />
-    </aside>
-  )
+  const handleClickShowOrders = () => setShowOrders(!showOrders)
 
   return (
-    <StyledRestaurant fixOrders={show === 'orders'}>
-      {show !== 'orders' && dishes}
-      {show !== 'dishes' && orders}
-      {show !== 'orders' && <MobileOrdersButton onClick={handleClickShow} />}
+    <StyledRestaurant showOrders={showOrders}>
+      <section>
+        <RestaurantDetails restaurant={restaurant} />
+        <CategoriesMenu dishes={restaurant.dishes} />
+        <Dishes dishes={restaurant.dishes} />
+      </section>
+      <aside style={asideStyle()}>
+        <div>
+          <div>
+            <span>My Orders</span>
+            <IconButton onClick={handleClickShowOrders}>
+              <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M17.59 5L12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41 17.59 5z' />
+              </svg>
+            </IconButton>
+          </div>
+          <DeliveryAddress duration={restaurant.duration} />
+          <Orders />
+        </div>
+        <OrderButton />
+      </aside>
+      {!showOrders && <MobileOrdersButton onClick={handleClickShowOrders} />}
       <FoodModal imageCover={restaurant.imageCover} />
     </StyledRestaurant>
   )
@@ -94,47 +73,59 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { revalidate: 60, props: { restaurant } }
 }
 
-const StyledRestaurant = styled.section(({ fixOrders }: { fixOrders: boolean }) => [
-  tw`grid grid-cols-1 lg:grid-cols-3`,
+const StyledRestaurant = styled.section(({ showOrders }: { showOrders: boolean }) => [
+  tw`-mx-2 lg:mx-0 grid grid-cols-1 lg:grid-cols-3 h-full`,
   css`
-    > section {
+    > section:first-of-type {
       ${tw`col-span-2`};
     }
 
     > aside {
-      ${tw`z-10 flex justify-between flex-col h-full p-2 sm:p-4 shadow-lg rounded-3xl`}
+      ${tw`sticky top-0 z-20 justify-between flex-col h-full p-2 sm:p-4 shadow-lg rounded-3xl`}
 
-      max-height: 85vh;
+      max-height: 80vh;
 
-      > div > div {
-        ${tw`flex items-center justify-between ml-2 mb-4`}
+      > div {
+        ${tw`h-full`}
 
-        span {
-          ${tw`text-md md:text-lg tracking-wide text-gray-600 dark:text-gray-300`}
-        }
+        > div {
+          ${tw`flex items-center justify-between ml-2 mb-4`}
 
-        button {
-          ${tw`flex lg:hidden`}
+          span {
+            ${tw`text-md md:text-lg tracking-wide text-gray-600 dark:text-gray-300`}
+          }
 
-          svg {
-            ${tw`w-5 h-5 text-gray-400 fill-current`}
+          button {
+            ${tw`flex lg:hidden`}
+
+            svg {
+              ${tw`w-5 h-5 text-gray-400 fill-current`}
+            }
           }
         }
       }
     }
   `,
-  fixOrders
+  showOrders
     ? [
         css`
+          > section:first-of-type {
+            ${tw`hidden lg:block`}
+          }
+
           > aside {
-            ${tw`fixed bottom-0 left-0 right-0`}
+            ${tw`flex`}
           }
         `,
       ]
     : [
         css`
+          > section:first-of-type {
+            ${tw`block`}
+          }
+
           > aside {
-            ${tw`sticky top-0`}
+            ${tw`hidden lg:flex`}
           }
         `,
       ],

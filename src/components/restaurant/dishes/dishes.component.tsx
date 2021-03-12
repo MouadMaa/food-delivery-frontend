@@ -1,7 +1,8 @@
 import { FC, Fragment } from 'react'
 
 import { Dish as IDish } from '@/store/restaurant/restaurant.types'
-import Dish from '../dish/dish.component'
+import FoodCard from '../food-card/food-card.component'
+import { StyledDish } from './dishes.styled'
 
 interface DishesProps {
   dishes: IDish[]
@@ -12,11 +13,15 @@ const Dishes: FC<DishesProps> = (props) => {
 
   return (
     <Fragment>
-      {dishes.map((dish) => (
-        <Dish key={dish.order} dish={dish} />
-      ))}
-      {dishes.map((dish) => (
-        <Dish key={dish.order} dish={dish} />
+      {dishes.map(({ order, category, foods }) => (
+        <StyledDish id={`#category-menu-${order}`}>
+          <h3>{category}</h3>
+          <div>
+            {foods.map((food) => (
+              <FoodCard key={food.id} food={food} />
+            ))}
+          </div>
+        </StyledDish>
       ))}
     </Fragment>
   )

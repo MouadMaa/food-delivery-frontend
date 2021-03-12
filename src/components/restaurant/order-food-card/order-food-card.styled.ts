@@ -1,6 +1,6 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledOrderCard = styled.article(() => [
+export const StyledOrderFoodCard = styled.article(() => [
   tw`flex items-center w-full h-14 space-x-4`,
   css`
     figure {

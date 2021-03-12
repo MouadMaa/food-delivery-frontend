@@ -1,6 +1,6 @@
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledDeliveryAddress = styled.section(() => [
+export const StyledOrderDeliveryAddress = styled.section(() => [
   tw`flex items-center justify-between text-xs sm:text-sm text-gray-600`,
   css`
     > div {

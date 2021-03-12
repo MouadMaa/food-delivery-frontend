@@ -7,8 +7,8 @@ import { StyledRestaurant, asideStyle } from '@/components/restaurant/styled'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
-import DeliveryAddress from '@/components/restaurant/delivery-address/delivery-address.component'
-import Orders from '@/components/restaurant/orders/orders.component'
+import OrderDeliveryAddress from '@/components/restaurant/order-delivery-address/order-delivery-address.component'
+import OrdersFood from '@/components/restaurant/orders-food/orders-food.component'
 import OrderButton from '@/components/restaurant/order-button/order-button.component'
 import MobileOrdersButton from '@/components/restaurant/mobile-orders-button/mobile-orders-button.component'
 import FoodModal from '@/components/restaurant/food-modal/food-modal.component'
@@ -35,8 +35,8 @@ const Restaurant: FC<RestaurantProps> = (props) => {
       <aside style={asideStyle()}>
         <div>
           <OrderTitle onClick={handleClickShowOrders} />
-          <DeliveryAddress duration={restaurant.duration} />
-          <Orders />
+          <OrderDeliveryAddress duration={restaurant.duration} />
+          <OrdersFood />
         </div>
         <OrderButton />
       </aside>

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react'
 import tw, { css, styled } from 'twin.macro'
 
-export const StyledOrders = styled.section(() => [
+export const StyledOrdersFood = styled.section(() => [
   tw`h-full`,
   css`
     > div:first-child {
@@ -25,7 +25,7 @@ export const StyledOrders = styled.section(() => [
   `,
 ])
 
-export const ordersStyle = (): CSSProperties =>
+export const ordersFoodStyle = (): CSSProperties =>
   typeof window !== 'undefined'
     ? { maxHeight: `calc(${document.querySelector('aside')?.offsetHeight}px - 260px)` }
     : {}

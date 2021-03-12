@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { StyledOrderCard } from './order-card.styles'
+import { StyledOrderFoodCard } from './order-food-card.styled'
 
-const OrderCard: FC = () => {
+const OrderFoodCard: FC = () => {
   return (
-    <StyledOrderCard>
+    <StyledOrderFoodCard>
       <figure>
         <Image
           src='https://firebasestorage.googleapis.com/v0/b/delivery-food-da280.appspot.com/o/foods%2Fmcdonalds%2F2-2.png?alt=media&token=651a8cf1-1a12-4902-8563-47d200122f3d'
@@ -25,8 +25,8 @@ const OrderCard: FC = () => {
           <button>+</button>
         </div>
       </div>
-    </StyledOrderCard>
+    </StyledOrderFoodCard>
   )
 }
 
-export default OrderCard
+export default OrderFoodCard

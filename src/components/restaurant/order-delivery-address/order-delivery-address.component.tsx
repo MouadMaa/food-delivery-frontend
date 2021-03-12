@@ -1,18 +1,18 @@
 import { FC } from 'react'
 
 import { IconButton } from '@/components/ui'
-import { StyledDeliveryAddress } from './delivery-address.styles'
-import { AddressSvg } from './delivery-address.svg'
+import { StyledOrderDeliveryAddress } from './order-delivery-address.styled'
+import { AddressSvg } from './order-delivery-address.svg'
 
 interface DeliveryAddressProps {
   duration: [number, number]
 }
 
-const DeliveryAddress: FC<DeliveryAddressProps> = (props) => {
+const OrderDeliveryAddress: FC<DeliveryAddressProps> = (props) => {
   const { duration } = props
 
   return (
-    <StyledDeliveryAddress>
+    <StyledOrderDeliveryAddress>
       <div>
         <IconButton>
           <AddressSvg />
@@ -23,8 +23,8 @@ const DeliveryAddress: FC<DeliveryAddressProps> = (props) => {
         </div>
       </div>
       <span>9.00 DHS</span>
-    </StyledDeliveryAddress>
+    </StyledOrderDeliveryAddress>
   )
 }
 
-export default DeliveryAddress
+export default OrderDeliveryAddress

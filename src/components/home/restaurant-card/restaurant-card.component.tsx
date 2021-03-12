@@ -21,7 +21,7 @@ const RestaurantCard: FC<RestaurantCardProps> = (props) => {
   } = props
 
   const router = useRouter()
-  const handleClick = () => router.push(`/restaurant/larache/${slug}`)
+  const handleClick = () => router.push(`/restaurant/${slug}`)
 
   return (
     <StyledCardRestaurant className='group' onClick={handleClick}>

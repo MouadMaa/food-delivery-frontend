@@ -4,9 +4,11 @@ import { Restaurant } from './restaurant.types'
 import { Food } from '../food/food.types'
 import { Category } from '../category/category.types'
 import { populateRestaurantsWithCategories } from './restaurant.utils'
+import { fetchCategories } from '../category/category.firebase'
 
 // const RESTAURANTS_LIMIT = 12
 // let hasMoreRestaurants = true
+const categories: Category[] = []
 
 export const fetchRestaurants = async (categories?: Category[]): Promise<Restaurant[]> => {
   const restaurantsResponse = await db
@@ -41,12 +43,11 @@ export const fetchRestaurants = async (categories?: Category[]): Promise<Restaur
 //   return populateRestaurantsWithCategories(restaurants, categories)
 // }
 
-export const fetchRestaurant = async (
-  slug: string,
-  categories: Category[],
-): Promise<Restaurant> => {
+export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
   const res = await db.collection('restaurants').where('slug', '==', slug).get()
   const restaurants = getCollectionData<Restaurant>(res)
+
+  if (!categories.length) categories.push(...(await fetchCategories()))
 
   const restaurant = populateRestaurantsWithCategories(restaurants, categories)[0]
 

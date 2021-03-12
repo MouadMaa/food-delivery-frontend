@@ -37,7 +37,7 @@ const SearchDropdown: FC<SearchDropdownProps> = (props) => {
   }
 
   const handleRestaurantClick = (restaurant: Restaurant) => {
-    const path = `/restaurant/larache/${restaurant.slug}`
+    const path = `/restaurant/${restaurant.slug}`
     router.pathname !== path && router.push(path)
     setIsSideMenuOpen(false)
     setSearchTerm('')

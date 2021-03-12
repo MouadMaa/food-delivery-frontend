@@ -1,10 +1,11 @@
-import { CSSProperties, FC, useEffect, useState } from 'react'
+import { CSSProperties, FC, useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import tw, { css, styled } from 'twin.macro'
 
 import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { fetchCategories } from '@/store/category/category.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
+import { useSowDishesOrdersState } from '@/store/restaurant/restaurant.state'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { IconButton } from '@/components/ui'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
@@ -23,7 +24,7 @@ interface RestaurantProps {
 const Restaurant: FC<RestaurantProps> = (props) => {
   const { restaurant } = props
 
-  const [show, setShow] = useState('both')
+  const [show, setShow] = useSowDishesOrdersState()
 
   const { width } = useWindowSize()
 

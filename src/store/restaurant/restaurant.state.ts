@@ -21,3 +21,10 @@ export const sortRestaurantsByState = atom<SortRestaurantsBy>({
 })
 
 export const useSortRestaurantsByState = () => useRecoilState(sortRestaurantsByState)
+
+export const showDishesOrdersState = atom({
+  key: 'showDishesOrdersState',
+  default: 'both',
+})
+
+export const useSowDishesOrdersState = () => useRecoilState(showDishesOrdersState)

@@ -3,13 +3,13 @@ import tw, { css, styled } from 'twin.macro'
 import { Food } from '@/store/food/food.types'
 
 export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
-  tw`max-w-2xl w-full`,
+  tw`max-w-2xl max-h-screen w-full`,
   css`
     figure {
       ${tw`relative h-48`};
 
       button {
-        ${tw`absolute top-2 right-2 flex items-center justify-center w-10 h-10 bg-gray-100 rounded-2xl transition duration-300 focus:outline-none focus-visible:ring focus-visible:ring-primary-light active:bg-gray-200`};
+        ${tw`absolute top-2 right-2 flex items-center justify-center w-10 h-10 bg-gray-50 rounded-2xl transition duration-300 focus:outline-none focus-visible:ring focus-visible:ring-primary-light active:bg-gray-200`};
 
         svg {
           ${tw`w-3.5 h-3.5 text-gray-500 fill-current`}
@@ -17,7 +17,7 @@ export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
       }
     }
 
-    article {
+    form {
       ${tw`relative bg-white h-full -mt-6 p-6 rounded-3xl dark:bg-gray-900`};
 
       > div:first-of-type {
@@ -86,8 +86,9 @@ export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
   ],
   food.choices && [
     css`
-      article > div:nth-of-type(2) {
+      form > div:nth-of-type(2) {
         ${tw`my-4 py-4 px-2 space-y-6 border-t-2 border-b-2 border-gray-200 border-dashed overflow-y-auto dark:border-gray-600`};
+        max-height: 50vh;
       }
     `,
   ],

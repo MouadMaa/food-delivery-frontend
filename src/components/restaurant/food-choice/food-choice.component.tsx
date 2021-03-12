@@ -6,11 +6,13 @@ import { StyledFoodChoice } from './food-choice.styled'
 
 interface FoodChoiceProps {
   choice: Choice
+  order: number
 }
 
 const FoodChoice: FC<FoodChoiceProps> = (props) => {
   const {
     choice: { title, type, options },
+    order,
   } = props
 
   return (
@@ -23,18 +25,19 @@ const FoodChoice: FC<FoodChoiceProps> = (props) => {
               {type === 'multiple' ? (
                 <input
                   tw='form-checkbox h-5 w-5 text-primary-default bg-gray-200 cursor-pointer dark:bg-gray-400'
-                  id={`${title}-${option.name}`}
+                  id={`${order}-${index}`}
+                  name={`${order}-${index}`}
                   type='checkbox'
                 />
               ) : (
                 <input
                   tw='form-radio h-5 w-5 text-primary-default bg-gray-200 cursor-pointer dark:bg-gray-400 dark:text-primary-default'
-                  id={`${title}-${option.name}`}
-                  name={title}
+                  id={`${order}-${index}`}
+                  name={`${order}`}
                   type='radio'
                 />
               )}
-              <label htmlFor={`${title}-${option.name}`}>{option.name}</label>
+              <label htmlFor={`${order}-${index}`}>{option.name}</label>
             </div>
             {option.price && <span>{`${option.price} DHS`}</span>}
           </div>

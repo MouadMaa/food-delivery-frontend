@@ -23,6 +23,16 @@ const Dishes: FC<DishesProps> = (props) => {
           </div>
         </StyledDish>
       ))}
+      {dishes.map(({ order, category, foods }) => (
+        <StyledDish id={`#category-menu-${order}`}>
+          <h3>{category}</h3>
+          <div>
+            {foods.map((food) => (
+              <FoodCard key={food.id} food={food} />
+            ))}
+          </div>
+        </StyledDish>
+      ))}
     </Fragment>
   )
 }

@@ -69,10 +69,6 @@ export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
 
         button {
           ${tw`flex items-center justify-center w-full space-x-2 px-6 py-2 tracking-wider text-white bg-primary-default shadow rounded-l-full transition duration-300 border-0 focus:outline-none focus-visible:ring focus-visible:ring-primary-light active:bg-primary-dark`};
-
-          svg {
-            ${tw`w-6 h-6 fill-current transition-transform duration-300 transform`}
-          }
         }
       }
     }

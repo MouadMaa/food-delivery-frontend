@@ -40,7 +40,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         </div>
         <OrderButton />
       </aside>
-      {!showOrders && <MobileOrdersButton onClick={handleClickShowOrders} />}
+      <MobileOrdersButton show={!showOrders} onClick={handleClickShowOrders} />
       <FoodModal imageCover={restaurant.imageCover} />
     </StyledRestaurant>
   )

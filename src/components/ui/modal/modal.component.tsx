@@ -1,5 +1,4 @@
-import { useOnClickOutside } from '@/hooks/useOnClickOutside'
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 
 import Backdrop from '../backdrop/backdrop.component'
 import { StyledModal } from './modal.styled'
@@ -12,14 +11,10 @@ interface ModalProps {
 const Modal: FC<ModalProps> = (props) => {
   const { children, isOpen, onHide } = props
 
-  const ref = useRef(null)
-
-  useOnClickOutside(ref, onHide)
-
   return (
     <StyledModal isOpen={isOpen}>
-      <section ref={ref}>{children}</section>
-      {isOpen && <Backdrop />}
+      <section>{children}</section>
+      {isOpen && <Backdrop onClick={onHide} />}
     </StyledModal>
   )
 }

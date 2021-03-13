@@ -11,7 +11,7 @@ export const StyledRestaurant = styled.section(({ showOrders }: { showOrders: bo
     > aside {
       ${tw`sticky top-0 z-20 justify-between flex-col h-full p-2 sm:p-4 shadow-lg rounded-3xl`}
 
-      max-height: 80vh;
+      max-height: 90vh;
     }
   `,
   showOrders

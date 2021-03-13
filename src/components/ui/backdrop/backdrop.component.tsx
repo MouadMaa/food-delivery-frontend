@@ -1,4 +1,4 @@
-import { FC, useLayoutEffect } from 'react'
+import { FC, useEffect } from 'react'
 
 import { StyledBackdrop } from './backdrop.styles'
 
@@ -10,7 +10,7 @@ interface BackdropProps {
 const Backdrop: FC<BackdropProps> = (props) => {
   const { show, onClick } = props
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let originalStyle = ''
     if (show) {
       originalStyle = window.getComputedStyle(document.body).overflow

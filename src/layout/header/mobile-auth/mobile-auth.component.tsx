@@ -6,23 +6,28 @@ import { UserSvg } from './mobile-auth.svg'
 import { useRouter } from 'next/router'
 
 const MobileAuth: FC = () => {
-	const router = useRouter()
+  const router = useRouter()
 
-	const [ show, setShowDropdown ] = useState(false)
+  const [show, setShowDropdown] = useState(false)
 
-	const signIn = () => router.push('/auth')
+  const signIn = () => router.push('/auth')
 
-	const itemsDropdown = [ 'Sign In', 'Create Account' ]
+  const itemsDropdown = ['Sign In', 'Create Account']
 
-	return (
-		<StyledMobileSign onClick={() => setShowDropdown(!show)}>
-			<IconButton>
-				<UserSvg />
-			</IconButton>
+  return (
+    <StyledMobileSign onClick={() => setShowDropdown(!show)}>
+      <IconButton>
+        <UserSvg />
+      </IconButton>
 
-			<Dropdown isOpen={show} onHide={() => setShowDropdown(false)} items={itemsDropdown} onSelect={signIn} />
-		</StyledMobileSign>
-	)
+      <Dropdown
+        show={show}
+        onHide={() => setShowDropdown(false)}
+        items={itemsDropdown}
+        onSelect={signIn}
+      />
+    </StyledMobileSign>
+  )
 }
 
 export default MobileAuth

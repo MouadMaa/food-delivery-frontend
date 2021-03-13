@@ -88,7 +88,7 @@ const SearchForm: FC<SearchFormProps> = (props) => {
           <FilterSvg />
         </IconButton>
         <Dropdown
-          isOpen={isDropdownFilterOpen}
+          show={isDropdownFilterOpen}
           onHide={() => setIsDropdownFilterOpen(false)}
           items={itemsDropdownFilter}
           onSelect={onSelect}

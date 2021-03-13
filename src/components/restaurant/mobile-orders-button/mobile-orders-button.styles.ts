@@ -15,7 +15,7 @@ export const StyledMobileOrdersButton = styled.button(({ show }: { show: boolean
 
     @keyframes show-order-button {
       from {
-        opacity: 1;
+        opacity: 0;
         transform: translateX(100vw);
       }
       to {

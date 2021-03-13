@@ -29,7 +29,7 @@ const SortRestaurantsBy: FC = () => {
       </div>
 
       <Dropdown
-        isOpen={isDropdownOpen}
+        show={isDropdownOpen}
         onHide={() => setIsDropdownOpen(false)}
         items={dropdownList}
         onSelect={onSelect}

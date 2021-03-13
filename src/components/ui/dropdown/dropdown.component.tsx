@@ -6,7 +6,7 @@ import { DropdownSvg } from './dropdown.svg'
 
 interface DropdownProps {
   items: string[]
-  isOpen: boolean
+  show: boolean
   onHide: () => void
   onSelect: (item: string) => void
   selectedItem?: string
@@ -14,7 +14,7 @@ interface DropdownProps {
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { items, isOpen, onHide, onSelect, selectedItem, withCheckMark = false } = props
+  const { items, show, onHide, onSelect, selectedItem, withCheckMark = false } = props
 
   const ref = useRef(null)
   useOnClickOutside(ref, onHide)
@@ -25,7 +25,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
   }
 
   return (
-    <StyledDropdown ref={ref} isOpen={isOpen}>
+    <StyledDropdown ref={ref} show={show}>
       {items.map((item) => (
         <button key={item} onClick={() => handleClick(item)}>
           <span>{item}</span>

@@ -18,14 +18,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
   }
 
-  /* Back Drop Blur */
-  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    .backdrop-blur {
-      -webkit-backdrop-filter: blur(5px);
-      backdrop-filter: blur(5px);
-    }
-  }
-
   /* NProgress */
   #nprogress > div.bar {
     background-color: #ED5359;

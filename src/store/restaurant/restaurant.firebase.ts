@@ -4,11 +4,9 @@ import { Restaurant } from './restaurant.types'
 import { Food } from '../food/food.types'
 import { Category } from '../category/category.types'
 import { populateRestaurantsWithCategories } from './restaurant.utils'
-import { fetchCategories } from '../category/category.firebase'
 
-// const RESTAURANTS_LIMIT = 12
+// const RESTAURANTS_LIMIT = 20
 // let hasMoreRestaurants = true
-const categories: Category[] = []
 
 export const fetchRestaurants = async (categories?: Category[]): Promise<Restaurant[]> => {
   const restaurantsResponse = await db
@@ -45,17 +43,19 @@ export const fetchRestaurants = async (categories?: Category[]): Promise<Restaur
 
 export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
   const res = await db.collection('restaurants').where('slug', '==', slug).get()
-  const restaurants = getCollectionData<Restaurant>(res)
+  const restaurant = getCollectionData<Restaurant>(res)[0]
 
-  if (!categories.length) categories.push(...(await fetchCategories()))
-
-  const restaurant = populateRestaurantsWithCategories(restaurants, categories)[0]
+  const categoriesIds = restaurant.categories as any[]
+  const categoriesRef = db.collection('categories')
+  const categories = await readIds<Category>(categoriesRef, categoriesIds)
 
   const dishesAsync = restaurant.dishes?.map(async (dish) => {
-    const foods = await readIds<Food>(db.collection('foods'), dish.foods as any)
+    const foodsIds = dish.foods as any[]
+    const foodsRef = db.collection('foods')
+    const foods = await readIds<Food>(foodsRef, foodsIds)
     return { ...dish, foods }
   })
   const dishes = dishesAsync ? await Promise.all(dishesAsync) : []
 
-  return { ...restaurant, dishes }
+  return { ...restaurant, categories, dishes }
 }

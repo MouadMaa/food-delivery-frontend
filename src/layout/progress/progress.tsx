@@ -51,5 +51,5 @@ window.fetch = async (...args) => {
   }
 }
 
-const TopProgress: FC = () => null
-export default TopProgress
+const TopProgressBar: FC = () => null
+export default TopProgressBar

@@ -4,17 +4,17 @@ import Backdrop from '../backdrop/backdrop.component'
 import { StyledModal } from './modal.styled'
 
 interface ModalProps {
-  isOpen: boolean
+  show: boolean
   onHide: () => void
 }
 
 const Modal: FC<ModalProps> = (props) => {
-  const { children, isOpen, onHide } = props
+  const { children, show, onHide } = props
 
   return (
-    <StyledModal isOpen={isOpen}>
+    <StyledModal show={show}>
       <section>{children}</section>
-      {isOpen && <Backdrop onClick={onHide} />}
+      <Backdrop show={show} onClick={onHide} />
     </StyledModal>
   )
 }

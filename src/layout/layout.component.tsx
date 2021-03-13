@@ -10,35 +10,38 @@ import Menu from './menu/menu.component'
 import { StyledMain } from './layout.styles'
 
 const Layout: FC = (props) => {
-	const { children } = props
+  const { children } = props
 
-	useFirebaseAuth()
-	useRecoilDebugObserver()
+  useFirebaseAuth()
+  useRecoilDebugObserver()
 
-	return (
-		<Fragment>
-			<Head>
-				<meta
-					name='viewport'
-					content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, maximum-scale=5, viewport-fit=cover'
-				/>
-				<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap' rel='stylesheet' />
-				<title>Food Delivery</title>
-			</Head>
-			<GlobalStyles />
-			<TopProgress />
-			<Header />
-			<Menu />
-			<StyledMain>{children}</StyledMain>
-		</Fragment>
-	)
+  return (
+    <Fragment>
+      <Head>
+        <meta
+          name='viewport'
+          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, maximum-scale=5, viewport-fit=cover'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'
+          rel='stylesheet'
+        />
+        <title>Food Delivery</title>
+      </Head>
+      <GlobalStyles />
+      <TopProgressBar />
+      <Header />
+      <Menu />
+      <StyledMain>{children}</StyledMain>
+    </Fragment>
+  )
 }
 
 export default Layout
 
-const TopProgress = dynamic(
-	() => {
-		return import('./top-progress/top-progress')
-	},
-	{ ssr: false },
+const TopProgressBar = dynamic(
+  () => {
+    return import('./progress/progress')
+  },
+  { ssr: false },
 )

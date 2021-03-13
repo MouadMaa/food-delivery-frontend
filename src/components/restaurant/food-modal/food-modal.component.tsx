@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
-import 'twin.macro'
 
 import { useSelectedFoodState } from '@/store/food/food.state'
 import { Modal } from '@/components/ui'
@@ -15,14 +14,14 @@ interface FoodModalProps {
 const FoodModal: FC<FoodModalProps> = (props) => {
   const { imageCover } = props
 
-  const [selectedFood, setSelectedFood] = useSelectedFoodState()
+  let [selectedFood, setSelectedFood] = useSelectedFoodState()
 
   const handleSubmit = (event: React.SyntheticEvent) => event.preventDefault()
 
   const onHideModal = () => setSelectedFood(null)
 
   return (
-    <Modal isOpen={!!selectedFood} onHide={onHideModal}>
+    <Modal show={!!selectedFood} onHide={onHideModal}>
       {selectedFood && (
         <StyledFoodModal food={selectedFood}>
           <figure>

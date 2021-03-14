@@ -11,6 +11,10 @@ export const StyledRestaurant = styled.section(({ showOrders }: { showOrders: bo
       ${tw`sticky z-20 h-screen p-2 sm:p-4 shadow-lg`}
 
       top: 71px;
+
+      @media (max-width: 1024px) {
+        top: 58px;
+      }
     }
   `,
   showOrders

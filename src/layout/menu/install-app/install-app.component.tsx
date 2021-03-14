@@ -1,9 +1,12 @@
+import { FC, useEffect, useState } from 'react'
+
 import { IconButton } from '@/components/ui'
-import { FC, useEffect } from 'react'
 
 let deferredPrompt: any = null
 
 const InstallApp: FC = () => {
+  const [isInstalled, setIsInstalled] = useState(false)
+
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent the mini-infobar from appearing on mobile
@@ -12,6 +15,10 @@ const InstallApp: FC = () => {
       deferredPrompt = e
       // Update UI notify the user they can install the PWA
       // showInstallPromotion()
+    })
+
+    window.addEventListener('appinstalled', () => {
+      setIsInstalled(true)
     })
   }, [])
 
@@ -24,11 +31,18 @@ const InstallApp: FC = () => {
     // const { outcome } = await deferredPrompt.userChoice
     // Optionally, send analytics event with outcome of user choice
     // console.log(`User response to the install prompt: ${outcome}`)
+    // if (outcome === 'accepted') {
+    //   console.log('User accepted the A2HS prompt')
+    // } else {
+    //   console.log('User dismissed the A2HS prompt')
+    // }
     // We've used the prompt, and can't use it again, throw it away
     deferredPrompt = null
   }
 
-  return <IconButton onClick={handleClick}>Added to your home screen</IconButton>
+  return !isInstalled ? (
+    <IconButton onClick={handleClick}>Added to your home screen</IconButton>
+  ) : null
 }
 
 export default InstallApp

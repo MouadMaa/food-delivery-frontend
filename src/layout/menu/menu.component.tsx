@@ -4,9 +4,8 @@ import { useSideMenuState } from '@/store/global/global.state'
 import { Backdrop } from '@/components/ui'
 import SearchForm from '@/components/shared/search/search-form/search-form.component'
 import Links from './links/links.component'
-import DarkMode from './dark-mode/dark-mode.component'
 import InstallApp from './install-app/install-app.component'
-import SignOut from './sign-out/sign-out.component'
+import SignButton from './sign-button/sign-button.component'
 import { StyledMenu } from './menu.styles'
 
 const Menu: FC = () => {
@@ -21,10 +20,9 @@ const Menu: FC = () => {
         </div>
         <div>
           <div>
-            <DarkMode />
             <InstallApp />
           </div>
-          <SignOut />
+          <SignButton />
         </div>
       </StyledMenu>
       <Backdrop show={isSideMenuOpen} onClick={() => setIsSideMenuOpen(false)} />

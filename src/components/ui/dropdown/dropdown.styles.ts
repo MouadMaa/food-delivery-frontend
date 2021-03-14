@@ -6,7 +6,7 @@ export const StyledDropdown = styled.div(({ show }: { show: boolean }) => [
   `,
   show ? [tw`block z-50`] : [tw`hidden`],
   css`
-    animation: show-dropdown 0.5s ease-out;
+    animation: show-dropdown 0.2s ease-out;
 
     @keyframes show-dropdown {
       from {

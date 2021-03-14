@@ -11,7 +11,7 @@ export const StyledOrderButton = styled.section(() => [
       }
 
       span:last-child {
-        ${tw`text-gray-500 dark:text-gray-400`}
+        ${tw`text-gray-500 dark:text-gray-300`}
       }
     }
 

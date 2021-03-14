@@ -4,7 +4,7 @@ export const StyledModal = styled.section(({ show }: { show: boolean }) => [
   tw`fixed inset-0 flex items-center justify-center transition-all duration-300`,
   css`
     section {
-      ${tw`bg-white z-50 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 dark:bg-gray-900`};
+      ${tw`z-50 bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 dark:bg-gray-900`};
     }
   `,
   show

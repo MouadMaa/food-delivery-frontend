@@ -24,14 +24,14 @@ const FoodChoice: FC<FoodChoiceProps> = (props) => {
             <div>
               {type === 'multiple' ? (
                 <input
-                  tw='form-checkbox h-5 w-5 text-primary-default bg-gray-200 cursor-pointer dark:bg-gray-400'
+                  tw='form-checkbox h-5 w-5 text-primary-default bg-gray-200 cursor-pointer'
                   id={`${order}-${index}`}
                   name={`${order}-${index}`}
                   type='checkbox'
                 />
               ) : (
                 <input
-                  tw='form-radio h-5 w-5 text-primary-default bg-gray-200 cursor-pointer dark:bg-gray-400 dark:text-primary-default'
+                  tw='form-radio h-5 w-5 text-primary-default bg-gray-200 cursor-pointer'
                   id={`${order}-${index}`}
                   name={`${order}`}
                   type='radio'

@@ -40,7 +40,7 @@ const FoodModal: FC<FoodModalProps> = (props) => {
             <div>
               <div>
                 <p>{`${selectedFood.price.toFixed(2)} DHS`}</p>
-                <h4>{selectedFood.name}</h4>
+                <h3>{selectedFood.name}</h3>
               </div>
               <div>
                 <button>-</button>

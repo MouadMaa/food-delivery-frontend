@@ -59,5 +59,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params!.slug as string
   const restaurant = await fetchRestaurant(slug)
-  return { revalidate: 60, props: { restaurant } }
+  return { revalidate: 600, props: { restaurant } }
 }

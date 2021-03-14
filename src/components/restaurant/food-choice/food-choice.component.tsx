@@ -39,7 +39,7 @@ const FoodChoice: FC<FoodChoiceProps> = (props) => {
               )}
               <label htmlFor={`${order}-${index}`}>{option.name}</label>
             </div>
-            {option.price && <span>{`${option.price} DHS`}</span>}
+            {option.price && <span>{`${option.price.toFixed(2)} DHS`}</span>}
           </div>
         ))}
       </div>

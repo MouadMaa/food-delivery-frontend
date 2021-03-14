@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { FC } from 'react'
 
 import { useUserLoadingValue, useUserValue } from '@/store/user/user.state'
 import { useSideMenuState } from '@/store/global/global.state'
@@ -12,23 +11,13 @@ import Avatar from './avatar/avatar.component'
 import { StyledHeader } from './header.styles'
 
 const Header: FC = () => {
-  const router = useRouter()
-
   const user = useUserValue()
   const userLoading = useUserLoadingValue()
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useSideMenuState()
-  const [stickyHeader, setStickyHeader] = useState(true)
-
-  useEffect(() => {
-    setStickyHeader(!router.pathname.includes('/restaurant'))
-  }, [router])
 
   return (
-    <StyledHeader
-      stickyHeader={stickyHeader}
-      onClick={() => isSideMenuOpen && setIsSideMenuOpen(false)}
-    >
+    <StyledHeader onClick={() => isSideMenuOpen && setIsSideMenuOpen(false)}>
       <div>
         <Burger onClick={() => !isSideMenuOpen && setIsSideMenuOpen(true)} />
         <Logo />

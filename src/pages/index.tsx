@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const restaurants = await fetchRestaurants(categories)
 
   return {
-    revalidate: 60,
+    revalidate: 600,
     props: {
       categories,
       restaurants,

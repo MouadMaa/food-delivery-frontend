@@ -32,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar
   {
     width: 7px;
-    height: 7px;
+    height: 4px;
     background-color: #F5F5F5;
   }
   ::-webkit-scrollbar-thumb

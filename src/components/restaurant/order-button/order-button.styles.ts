@@ -1,13 +1,13 @@
 import tw, { css, styled } from 'twin.macro'
 
 export const StyledOrderButton = styled.section(() => [
-  tw`text-sm flex flex-col sm:flex-row items-center justify-between space-x-0 sm:space-x-6 space-y-4 md:space-y-0 mb-4 transform translate-x-0 md:translate-x-4`,
+  tw`text-sm flex flex-col sm:flex-row items-center justify-between space-x-0 sm:space-x-6 space-y-4 md:space-y-0 transform translate-x-0 md:translate-x-4`,
   css`
     div {
       ${tw`flex flex-row-reverse sm:flex-col justify-between text-xs sm:text-sm whitespace-nowrap w-full sm:w-auto ml-0 md:-ml-4`};
 
       span:first-child {
-        ${tw`text-primary-default font-semibold tracking-wider`}
+        ${tw`text-primary-default tracking-wider`}
       }
 
       span:last-child {

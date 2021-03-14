@@ -10,7 +10,7 @@ export const StyledOrderDeliveryAddress = styled.section(() => [
         ${tw`w-14 sm:w-16 h-10 sm:h-12 rounded-2xl transform scale-100 transition duration-300 active:scale-90`}
 
         svg {
-          ${tw`w-5 sm:w-6 h-5 sm:h-6 text-primary-dark stroke-current`}
+          ${tw`w-5 sm:w-6 h-5 sm:h-6 text-primary-default stroke-current`}
         }
       }
 

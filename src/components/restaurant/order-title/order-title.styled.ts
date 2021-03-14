@@ -1,10 +1,10 @@
 import tw, { css, styled } from 'twin.macro'
 
 export const StyledOrderTitle = styled.div(() => [
-  tw`flex items-center justify-between ml-2 mb-4`,
+  tw`flex items-center justify-between mb-6`,
   css`
     span {
-      ${tw`text-md md:text-lg tracking-wide text-gray-600 dark:text-gray-300`}
+      ${tw`text-md md:text-lg tracking-wide pl-2 text-gray-600 dark:text-gray-300`}
     }
 
     button {

@@ -1,14 +1,12 @@
 import { FC } from 'react'
 
 import OrderFoodCard from '../order-food-card/order-food-card.component'
-import { StyledOrdersFood, ordersFoodStyle } from './orders-food.styled'
+import { StyledOrdersFood } from './orders-food.styled'
 
 const OrdersFood: FC = () => {
   return (
     <StyledOrdersFood>
-      <div style={ordersFoodStyle()}>
-        <OrderFoodCard />
-        <OrderFoodCard />
+      <div>
         <OrderFoodCard />
         <OrderFoodCard />
         <OrderFoodCard />

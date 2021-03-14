@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
-import { StyledRestaurant, asideStyle } from '@/components/restaurant/styled'
+import { StyledRestaurant } from '@/components/restaurant/styled'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
@@ -32,12 +32,10 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         <CategoriesMenu dishes={restaurant.dishes} />
         <Dishes dishes={restaurant.dishes} />
       </section>
-      <aside style={asideStyle()}>
-        <div>
-          <OrderTitle onClick={handleClickShowOrders} />
-          <OrderDeliveryAddress duration={restaurant.duration} />
-          <OrdersFood />
-        </div>
+      <aside>
+        <OrderTitle onClick={handleClickShowOrders} />
+        <OrderDeliveryAddress duration={restaurant.duration} />
+        <OrdersFood />
         <OrderButton />
       </aside>
       <MobileOrdersButton show={!showOrders} onClick={handleClickShowOrders} />
@@ -61,5 +59,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params!.slug as string
   const restaurant = await fetchRestaurant(slug)
-  return { revalidate: 600, props: { restaurant } }
+  return { revalidate: 60, props: { restaurant } }
 }

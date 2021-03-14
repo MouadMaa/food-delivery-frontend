@@ -14,7 +14,7 @@ const Menu: FC = () => {
 
   return (
     <Fragment>
-      <StyledMenu isOpen={isSideMenuOpen}>
+      <StyledMenu show={isSideMenuOpen}>
         <div>
           <SearchForm />
           <Links />

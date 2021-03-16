@@ -5,7 +5,7 @@ export const StyledHeader = styled.header(() => [
   tw`flex items-center justify-between px-2 md:px-6 py-3 md:py-4 border-b-2 border-gray-200`,
   tw`dark:(text-gray-50 bg-gray-900 border-gray-600)`,
   css`
-    > div:first-of-type {
+    > div:first-child {
       ${tw`flex items-center justify-between w-full`};
       ${tw`md:(w-auto space-x-3)`};
 
@@ -14,12 +14,8 @@ export const StyledHeader = styled.header(() => [
       }
     }
 
-    > div:last-of-type {
-      ${tw`flex items-center space-x-3`}
-
-      > button:last-child {
-        ${tw`hidden md:flex`};
-      }
+    > button:last-child {
+      ${tw`hidden md:flex`};
     }
   `,
 ])

@@ -7,7 +7,6 @@ import Burger from './burger/burger.component'
 import Logo from './logo/logo.component'
 import MobileAuth from './mobile-auth/mobile-auth.component'
 import DesktopAuth from './desktop-auth/desktop-auth.component'
-import DarkMode from './dark-mode/dark-mode.component'
 import Avatar from './avatar/avatar.component'
 import { StyledHeader } from './header.styles'
 
@@ -25,10 +24,7 @@ const Header: FC = () => {
         {userLoading ? <div /> : user ? <Avatar /> : <MobileAuth />}
       </div>
       <SearchForm isHeader />
-      <div>
-        <DarkMode />
-        {userLoading ? <div /> : user ? <Avatar /> : <DesktopAuth />}
-      </div>
+      {userLoading ? <div /> : user ? <Avatar /> : <DesktopAuth />}
     </StyledHeader>
   )
 }

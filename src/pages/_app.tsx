@@ -7,18 +7,18 @@ import Layout from '@/layout/layout.component'
 import TwinGlobalStyles from '@/styles/TwinGlobalStyles'
 
 const MyApp: FC<AppProps> = (props) => {
-	const { Component, pageProps } = props
+  const { Component, pageProps } = props
 
-	return (
-		<RecoilRoot>
-			<ThemeProvider attribute='class'>
-				<TwinGlobalStyles />
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
-			</ThemeProvider>
-		</RecoilRoot>
-	)
+  return (
+    <RecoilRoot>
+      <ThemeProvider attribute='class'>
+        <TwinGlobalStyles />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </RecoilRoot>
+  )
 }
 
 export default MyApp

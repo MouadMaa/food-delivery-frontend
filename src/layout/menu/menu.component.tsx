@@ -21,8 +21,8 @@ const Menu: FC = () => {
         </div>
         <div>
           <div>
-            <InstallApp />
             <DarkMode />
+            <InstallApp />
           </div>
           <SignButton />
         </div>

@@ -12,7 +12,7 @@ const CategoriesMenu: FC<DishesCategoriesProps> = (props) => {
 
   const handleClick = (event: MouseEvent, dishId: string) => {
     event.preventDefault()
-    document.getElementById(dishId)?.scrollIntoView()
+    document.getElementById(dishId)?.scrollIntoView({ block: 'center' })
   }
 
   return (

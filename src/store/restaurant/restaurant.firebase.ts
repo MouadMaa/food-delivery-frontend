@@ -1,9 +1,12 @@
 import { db } from '@/firebase/firebase'
-import { getCollectionData, readIds } from '@/firebase/firebase.utils'
+import { getCollectionData, getOneData, readIds } from '@/firebase/firebase.utils'
 import { Dish, Restaurant } from './restaurant.types'
 import { Choice, Food, Option } from '../food/food.types'
 import { Category } from '../category/category.types'
-import { populateRestaurantsWithCategories } from './restaurant.utils'
+import {
+  populateRestaurantsWithCategories,
+  sortRestaurantSubCollectionsByOrder,
+} from './restaurant.utils'
 
 // const RESTAURANTS_LIMIT = 20
 // let hasMoreRestaurants = true
@@ -45,7 +48,7 @@ export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
   // Read restaurant
   const restaurantRef = db.collection('restaurants')
   const restaurantsCollection = await restaurantRef.where('slug', '==', slug).get()
-  let restaurant = getCollectionData<Restaurant>(restaurantsCollection)[0]
+  let restaurant = getOneData<Restaurant>(restaurantsCollection)
 
   // Reads an array of categories (IDs)
   const categoriesIds = restaurant.categories as any[]
@@ -78,5 +81,6 @@ export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
     }
   }
 
+  restaurant = sortRestaurantSubCollectionsByOrder(restaurant)
   return restaurant
 }

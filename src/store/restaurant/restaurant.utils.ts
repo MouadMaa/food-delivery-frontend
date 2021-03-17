@@ -46,3 +46,22 @@ export const sortRestaurants = (
       return restaurants
   }
 }
+
+export const sortRestaurantSubCollectionsByOrder = (restaurant: Restaurant): Restaurant => {
+  let { dishes } = restaurant
+
+  // Sort dishes
+  dishes = dishes.sort((dish1, dish2) => dish1.order - dish2.order)
+
+  // Sort Foods
+  for (const dish of dishes) {
+    dish.foods = dish.foods.sort((food1, food2) => food1.order - food2.order)
+
+    // Sort Choices
+    for (const food of dish.foods) {
+      food.choices = food.choices.sort((choice1, choice2) => choice1.order - choice2.order)
+    }
+  }
+
+  return { ...restaurant, dishes }
+}

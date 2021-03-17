@@ -13,9 +13,9 @@ const Dishes: FC<DishesProps> = (props) => {
 
   return (
     <Fragment>
-      {dishes.map(({ order, category, foods }) => (
-        <StyledDish key={order} id={`#category-menu-${order}`}>
-          <h3>{category}</h3>
+      {dishes.map(({ order, name, foods }) => (
+        <StyledDish key={order} id={`#menu-${order}`}>
+          <h3>{name}</h3>
           <div>
             {foods.map((food) => (
               <FoodCard key={food.id} food={food} />
@@ -23,9 +23,9 @@ const Dishes: FC<DishesProps> = (props) => {
           </div>
         </StyledDish>
       ))}
-      {dishes.map(({ order, category, foods }) => (
-        <StyledDish key={order} id={`#category-menu-${order}`}>
-          <h3>{category}</h3>
+      {dishes.map(({ order, name, foods }) => (
+        <StyledDish key={order} id={`#menu-${order}`}>
+          <h3>{name}</h3>
           <div>
             {foods.map((food) => (
               <FoodCard key={food.id} food={food} />

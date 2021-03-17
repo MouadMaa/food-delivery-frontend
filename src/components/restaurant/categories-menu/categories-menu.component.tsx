@@ -12,7 +12,8 @@ const CategoriesMenu: FC<DishesCategoriesProps> = (props) => {
 
   const handleClick = (event: MouseEvent, dishId: string) => {
     event.preventDefault()
-    document.getElementById(dishId)?.scrollIntoView({ block: 'center' })
+    const element = document.getElementById(dishId)
+    if (element) element.scrollIntoView({ block: 'center' })
   }
 
   return (
@@ -21,10 +22,10 @@ const CategoriesMenu: FC<DishesCategoriesProps> = (props) => {
         {dishes.map((dish) => (
           <a
             key={dish.order}
-            href={`#category-menu-${dish.order}`}
-            onClick={(event) => handleClick(event, `#category-menu-${dish.order}`)}
+            href={`#menu-${dish.order}`}
+            onClick={(event) => handleClick(event, `#menu-${dish.order}`)}
           >
-            {dish.category}
+            {dish.name}
           </a>
         ))}
       </nav>

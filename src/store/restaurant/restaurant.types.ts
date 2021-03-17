@@ -13,7 +13,8 @@ export interface Restaurant {
 }
 
 export interface Dish {
-  category: string
+  id: string
+  name: string
   order: number
   foods: Food[]
 }

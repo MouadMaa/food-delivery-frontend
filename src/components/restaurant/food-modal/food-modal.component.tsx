@@ -51,7 +51,7 @@ const FoodModal: FC<FoodModalProps> = (props) => {
 
             <p>{selectedFood.desc}</p>
 
-            {selectedFood.choices && (
+            {!!selectedFood.choices.length && (
               <div>
                 {selectedFood.choices.map((choice, index) => (
                   <FoodChoice key={index} order={index} choice={choice} />

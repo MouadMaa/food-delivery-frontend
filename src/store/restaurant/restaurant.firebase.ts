@@ -1,7 +1,7 @@
 import { db } from '@/firebase/firebase'
 import { getCollectionData, readIds } from '@/firebase/firebase.utils'
-import { Restaurant } from './restaurant.types'
-import { Food } from '../food/food.types'
+import { Dish, Restaurant } from './restaurant.types'
+import { Choice, Food, Option } from '../food/food.types'
 import { Category } from '../category/category.types'
 import { populateRestaurantsWithCategories } from './restaurant.utils'
 
@@ -42,20 +42,41 @@ export const fetchRestaurants = async (categories?: Category[]): Promise<Restaur
 // }
 
 export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
-  const res = await db.collection('restaurants').where('slug', '==', slug).get()
-  const restaurant = getCollectionData<Restaurant>(res)[0]
+  // Read restaurant
+  const restaurantRef = db.collection('restaurants')
+  const restaurantsCollection = await restaurantRef.where('slug', '==', slug).get()
+  let restaurant = getCollectionData<Restaurant>(restaurantsCollection)[0]
 
+  // Reads an array of categories (IDs)
   const categoriesIds = restaurant.categories as any[]
   const categoriesRef = db.collection('categories')
-  const categories = await readIds<Category>(categoriesRef, categoriesIds)
+  restaurant.categories = await readIds<Category>(categoriesRef, categoriesIds)
 
-  const dishesAsync = restaurant.dishes?.map(async (dish) => {
-    const foodsIds = dish.foods as any[]
-    const foodsRef = db.collection('foods')
-    const foods = await readIds<Food>(foodsRef, foodsIds)
-    return { ...dish, foods }
-  })
-  const dishes = dishesAsync ? await Promise.all(dishesAsync) : []
+  // Read sub collection dishes
+  const dishesRef = restaurantRef.doc(restaurant.id).collection('dishes')
+  const dishesCollection = await dishesRef.get()
+  restaurant.dishes = getCollectionData<Dish>(dishesCollection)
 
-  return { ...restaurant, categories, dishes }
+  // Read sub collection foods
+  for await (const dish of restaurant.dishes) {
+    const foodsRef = dishesRef.doc(dish.id).collection('foods')
+    const foodsCollection = await foodsRef.get()
+    dish.foods = getCollectionData<Food>(foodsCollection)
+
+    // Read sub collection choices
+    for await (const food of dish.foods) {
+      const choicesRef = foodsRef.doc(food.id).collection('choices')
+      const choicesCollection = await choicesRef.get()
+      food.choices = getCollectionData<Choice>(choicesCollection)
+
+      // Read sub collection options
+      for await (const choice of food.choices) {
+        const optionsRef = choicesRef.doc(choice.id).collection('options')
+        const optionsCollection = await optionsRef.get()
+        choice.options = getCollectionData<Option>(optionsCollection)
+      }
+    }
+  }
+
+  return restaurant
 }

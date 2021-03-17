@@ -2,7 +2,7 @@ import tw, { css, styled } from 'twin.macro'
 
 import { Food } from '@/store/food/food.types'
 
-export const StyledFoodModal = styled.div(({ food }: { food: Food | null }) => [
+export const StyledFoodModal = styled.div(({ food }: { food: Food }) => [
   tw`max-w-2xl max-h-screen w-full`,
   css`
     figure {
@@ -71,14 +71,14 @@ export const StyledFoodModal = styled.div(({ food }: { food: Food | null }) => [
       }
     }
   `,
-  !food?.image && [
+  !food.image && [
     css`
       figure {
         ${tw`h-20`}
       }
     `,
   ],
-  food?.choices && [
+  food.choices.length && [
     css`
       form > div:nth-of-type(2) {
         ${tw`my-2 lg:my-4 py-2 lg:py-4 px-2 space-y-6 border-t-2 border-b-2 border-gray-200 border-dashed overflow-y-auto dark:border-gray-600`};

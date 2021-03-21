@@ -5,7 +5,7 @@ import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
 import { StyledRestaurant } from '@/components/restaurant/styled'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
-import CategoriesMenu from '@/components/restaurant/categories-menu/categories-menu.component'
+import DishMenu from '@/components/restaurant/dish-menu/dish-menu.component'
 import Dishes from '@/components/restaurant/dishes/dishes.component'
 import OrderDeliveryAddress from '@/components/restaurant/order-delivery-address/order-delivery-address.component'
 import OrdersFood from '@/components/restaurant/orders-food/orders-food.component'
@@ -29,7 +29,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
     <StyledRestaurant showOrders={showOrders}>
       <section>
         <RestaurantDetails restaurant={restaurant} />
-        <CategoriesMenu dishes={restaurant.dishes} />
+        <DishMenu dishes={restaurant.dishes} />
         <Dishes dishes={restaurant.dishes} />
       </section>
       <aside>

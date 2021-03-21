@@ -1,13 +1,13 @@
 import { FC, MouseEvent } from 'react'
 
 import { Dish } from '@/store/restaurant/restaurant.types'
-import { StyledCategoriesMenu } from './categories-menu.styles'
+import { StyledDishMenu } from './dish-menu.styles'
 
-interface DishesCategoriesProps {
+interface DishMenuProps {
   dishes: Dish[]
 }
 
-const CategoriesMenu: FC<DishesCategoriesProps> = (props) => {
+const DishMenu: FC<DishMenuProps> = (props) => {
   const { dishes } = props
 
   const handleClick = (event: MouseEvent, dishId: string) => {
@@ -17,20 +17,20 @@ const CategoriesMenu: FC<DishesCategoriesProps> = (props) => {
   }
 
   return (
-    <StyledCategoriesMenu>
+    <StyledDishMenu>
       <nav>
         {dishes.map((dish) => (
           <a
             key={dish.order}
-            href={`#menu-${dish.order}`}
-            onClick={(event) => handleClick(event, `#menu-${dish.order}`)}
+            href={`#dish-menu-${dish.order}`}
+            onClick={(event) => handleClick(event, `#dish-menu-${dish.order}`)}
           >
             {dish.name}
           </a>
         ))}
       </nav>
-    </StyledCategoriesMenu>
+    </StyledDishMenu>
   )
 }
 
-export default CategoriesMenu
+export default DishMenu

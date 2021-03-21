@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 import { useSelectedFoodState } from '@/store/food/food.state'
 import { Modal } from '@/components/ui'
+import FoodChoice from '../food-choice/food-choice.component'
 import { CloseSvg } from './food-modal.svg'
 import { StyledFoodModal } from './food-modal.styled'
-import FoodChoice from '../food-choice/food-choice.component'
 
 interface FoodModalProps {
   imageCover: string
@@ -54,7 +54,7 @@ const FoodModal: FC<FoodModalProps> = (props) => {
             {!!selectedFood.choices.length && (
               <div>
                 {selectedFood.choices.map((choice, index) => (
-                  <FoodChoice key={index} order={index} choice={choice} />
+                  <FoodChoice key={index} choice={choice} />
                 ))}
               </div>
             )}

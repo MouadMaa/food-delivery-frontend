@@ -4,6 +4,7 @@
     "firebasestorage",
     "firebaseui",
     "firestore",
+    "formik",
     "nprogress"
   ],
   "tailwindCSS.experimental.classRegex": [

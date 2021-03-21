@@ -1,21 +1,19 @@
 import { FC, Fragment } from 'react'
-import { useRouter } from 'next/router'
 
 import { auth } from '@/firebase/firebase'
 import { useUserValue } from '@/store/user/user.state'
-import { useSetSideMenuState } from '@/store/global/global.state'
+import { useSetShowAuthModalState, useSetSideMenuState } from '@/store/global/global.state'
 import { StyledSignButton } from './sign-button.styles'
 import { LogInSvg, LogOutSvg } from './sign-button.svg'
 
 const SignButton: FC = () => {
-  const router = useRouter()
-
   const user = useUserValue()
+  const setShowAuthModal = useSetShowAuthModalState()
   const setIsSideMenuOpen = useSetSideMenuState()
 
   const handleClick = async () => {
     if (user) await auth.signOut()
-    else router.push('/auth')
+    else setShowAuthModal(true)
     setIsSideMenuOpen(false)
   }
 

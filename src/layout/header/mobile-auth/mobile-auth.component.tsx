@@ -1,27 +1,27 @@
 import { FC, useState } from 'react'
 
+import { useSetShowAuthModalState } from '@/store/global/global.state'
 import { IconButton, Dropdown } from '@/components/ui'
 import { StyledMobileSign } from './mobile-auth.styles'
 import { UserSvg } from './mobile-auth.svg'
-import { useRouter } from 'next/router'
 
 const MobileAuth: FC = () => {
-  const router = useRouter()
+  const setShowAuthModal = useSetShowAuthModalState()
 
-  const [show, setShowDropdown] = useState(false)
+  const [showDropdown, setShowDropdown] = useState(false)
 
-  const signIn = () => router.push('/auth')
+  const signIn = () => setShowAuthModal(true)
 
   const itemsDropdown = ['Sign In', 'Create Account']
 
   return (
-    <StyledMobileSign onClick={() => setShowDropdown(!show)}>
+    <StyledMobileSign onClick={() => setShowDropdown(!showDropdown)}>
       <IconButton>
         <UserSvg />
       </IconButton>
 
       <Dropdown
-        show={show}
+        show={showDropdown}
         onHide={() => setShowDropdown(false)}
         items={itemsDropdown}
         onSelect={signIn}

@@ -3,16 +3,18 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
 import GlobalStyles from '@/styles/GlobalStyles'
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
 import { useRecoilDebugObserver } from '@/hooks/useRecoilDebugObserver'
+import { useUserValue } from '@/store/user/user.state'
 import Header from './header/header.component'
 import Menu from './menu/menu.component'
+import Auth from './auth/auth'
 import { StyledMain } from './layout.styles'
 
 const Layout: FC = (props) => {
   const { children } = props
 
-  useFirebaseAuth()
+  const user = useUserValue()
+
   useRecoilDebugObserver()
 
   return (
@@ -33,6 +35,7 @@ const Layout: FC = (props) => {
       <Header />
       <Menu />
       <StyledMain>{children}</StyledMain>
+      {!user && <Auth />}
     </Fragment>
   )
 }

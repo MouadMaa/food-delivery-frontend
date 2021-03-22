@@ -3,24 +3,25 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 import { auth, firebaseUIConfig } from '@/firebase/firebase'
 import { useShowAuthModalState } from '@/store/global/global.state'
-import { useSetUserLoadingState, useSetUserState } from '@/store/user/user.state'
+import { useSetUserLoadingState, useUserState } from '@/store/user/user.state'
 import { Modal } from '@/components/ui'
 
 const Auth: FC = () => {
-  const setUser = useSetUserState()
+  const [user, setUser] = useUserState()
   const setUserLoading = useSetUserLoadingState()
   const [showAuthModal, setShowAuthModal] = useShowAuthModalState()
 
   useEffect(() => {
     return auth.onAuthStateChanged(async (user) => {
-      setUser(
-        user
-          ? {
-              id: user.uid,
-              phone: user.phoneNumber as string,
-            }
-          : null,
-      )
+      if (user) {
+        setUser({
+          id: user.uid,
+          phone: user.phoneNumber as string,
+        })
+        onHide()
+      } else {
+        setUser(null)
+      }
       setUserLoading(false)
     })
   }, [])
@@ -29,7 +30,7 @@ const Auth: FC = () => {
 
   return (
     <Modal show={showAuthModal} onHide={onHide}>
-      <StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
+      {!user && <StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />}
     </Modal>
   )
 }

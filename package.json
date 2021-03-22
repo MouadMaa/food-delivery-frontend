@@ -30,6 +30,7 @@
 		"babel-plugin-styled-components": "^1.12.0",
 		"postcss": "^8.2.4",
 		"react-is": "^17.0.1",
+		"sharp": "^0.27.2",
 		"tailwindcss": "^2.0.2",
 		"twin.macro": "^2.1.0",
 		"typescript": "^4.1.3"

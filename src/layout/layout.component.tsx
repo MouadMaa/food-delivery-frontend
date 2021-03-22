@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 
 import GlobalStyles from '@/styles/GlobalStyles'
 import { useRecoilDebugObserver } from '@/hooks/useRecoilDebugObserver'
-import { useUserValue } from '@/store/user/user.state'
 import Header from './header/header.component'
 import Menu from './menu/menu.component'
 import Auth from './auth/auth'
@@ -13,29 +12,17 @@ import { StyledMain } from './layout.styles'
 const Layout: FC = (props) => {
   const { children } = props
 
-  const user = useUserValue()
-
   useRecoilDebugObserver()
 
   return (
     <Fragment>
-      <Head>
-        <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, maximum-scale=5, viewport-fit=cover'
-        />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'
-          rel='stylesheet'
-        />
-        <title>Food Delivery</title>
-      </Head>
+      <HtmlHead />
       <GlobalStyles />
       <TopProgressBar />
       <Header />
       <Menu />
       <StyledMain>{children}</StyledMain>
-      {!user && <Auth />}
+      <Auth />
     </Fragment>
   )
 }
@@ -47,4 +34,18 @@ const TopProgressBar = dynamic(
     return import('./progress/progress')
   },
   { ssr: false },
+)
+
+const HtmlHead = () => (
+  <Head>
+    <meta
+      name='viewport'
+      content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, maximum-scale=5, viewport-fit=cover'
+    />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'
+      rel='stylesheet'
+    />
+    <title>Food Delivery</title>
+  </Head>
 )

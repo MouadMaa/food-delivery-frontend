@@ -1,4 +1,4 @@
-import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { UserState } from './user.types'
 
@@ -9,6 +9,7 @@ export const userState = atom<UserState | null>({
 
 export const useUserValue = () => useRecoilValue(userState)
 export const useSetUserState = () => useSetRecoilState(userState)
+export const useUserState = () => useRecoilState(userState)
 
 export const userLoadingState = atom({
   key: 'userLoadingState',

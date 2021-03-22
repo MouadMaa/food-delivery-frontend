@@ -7,7 +7,7 @@ import { useSetUserLoadingState, useUserState } from '@/store/user/user.state'
 import { Modal } from '@/components/ui'
 
 const Auth: FC = () => {
-  const [user, setUser] = useUserState()
+  const [, setUser] = useUserState()
   const setUserLoading = useSetUserLoadingState()
   const [showAuthModal, setShowAuthModal] = useShowAuthModalState()
 
@@ -30,7 +30,7 @@ const Auth: FC = () => {
 
   return (
     <Modal show={showAuthModal} onHide={onHide}>
-      {!user && <StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />}
+      <StyledFirebaseAuth uiConfig={firebaseUIConfig} firebaseAuth={auth} />
     </Modal>
   )
 }

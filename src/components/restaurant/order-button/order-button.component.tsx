@@ -1,13 +1,18 @@
 import { FC } from 'react'
 import 'twin.macro'
 
+import { useOrdersValue } from '@/store/order/order.states'
 import { StyledOrderButton } from './order-button.styles'
 
 const OrderButton: FC = () => {
+  const orders = useOrdersValue()
+
+  const totalPrice = orders.reduce((acc, order) => order.count * order.food.price + acc, 0) + 9
+
   return (
     <StyledOrderButton>
       <div>
-        <span>297.00 DHS</span>
+        <span>{`${totalPrice.toFixed(2)} DHS`}</span>
         <span>Total Price</span>
       </div>
       <button className='group'>

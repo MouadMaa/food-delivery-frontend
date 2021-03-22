@@ -1,28 +1,53 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
+import { LIMIT_ORDERS, Order } from '@/store/order/order.types'
+import { useSetOrdersSelector } from '@/store/order/order.selectors'
 import { StyledOrderFoodCard } from './order-food-card.styled'
 
-const OrderFoodCard: FC = () => {
+interface OrderFoodCardProps {
+  order: Order
+}
+
+const OrderFoodCard: FC<OrderFoodCardProps> = (props) => {
+  const { order } = props
+  console.log('🚀 ~ file: order-food-card.component.tsx ~ line 14 ~ order', order)
+
+  const setOrders = useSetOrdersSelector()
+
+  const handleClickCount = (type: 'inc' | 'dec') => {
+    const newOrder: Order = { ...order }
+
+    if (type === 'inc' && count < LIMIT_ORDERS) newOrder.count = 1
+    else if (type === 'dec' && count > 1) newOrder.count = -1
+    else if (type === 'dec' && count === 1) newOrder.count = 0
+
+    setOrders([newOrder])
+  }
+
+  const { name, image, price } = order.food
+  const { count } = order
+
   return (
     <StyledOrderFoodCard>
-      <figure>
-        <Image
-          src='https://firebasestorage.googleapis.com/v0/b/delivery-food-da280.appspot.com/o/foods%2Fmcdonalds%2F2-2.png?alt=media&token=651a8cf1-1a12-4902-8563-47d200122f3d'
-          alt='mcdonalds burger'
-          layout='fill'
-          objectFit='cover'
-        />
-      </figure>
+      {image && (
+        <figure>
+          <Image src={image} alt={name} layout='fill' objectFit='cover' />
+        </figure>
+      )}
       <div>
         <div>
-          <h4>Big Chicken Sauce Moroccan</h4>
-          <span>72.00 DHS</span>
+          <h4>{name}</h4>
+          <span>{`${(price * count).toFixed(2)} DHS`}</span>
         </div>
         <div>
-          <button>-</button>
-          <span>1</span>
-          <button>+</button>
+          <button type='button' onClick={() => handleClickCount('dec')}>
+            -
+          </button>
+          <span>{count}</span>
+          <button type='button' onClick={() => handleClickCount('inc')}>
+            +
+          </button>
         </div>
       </div>
     </StyledOrderFoodCard>

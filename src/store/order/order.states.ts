@@ -1,4 +1,4 @@
-import { atom, useRecoilValue } from 'recoil'
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Order } from './order.types'
 
@@ -8,3 +8,5 @@ export const ordersState = atom<Order[]>({
 })
 
 export const useOrdersValue = () => useRecoilValue(ordersState)
+export const useSetOrdersState = () => useSetRecoilState(ordersState)
+export const useOrdersState = () => useRecoilState(ordersState)

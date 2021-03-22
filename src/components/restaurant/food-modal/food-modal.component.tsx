@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react'
 import Image from 'next/image'
 
 import { useSelectedFoodState } from '@/store/food/food.state'
-import { useSetOrdersSelector } from '@/store/order/order.selectors'
-import { LIMIT_ORDERS, Order } from '@/store/order/order.types'
+import { LIMIT_ORDERS } from '@/store/order/order.types'
+import { useOrdersState } from '@/store/order/order.states'
 import { Modal } from '@/components/ui'
 import FoodChoice from '../food-choice/food-choice.component'
 import { CloseSvg } from './food-modal.svg'
@@ -16,7 +16,7 @@ interface FoodModalProps {
 const FoodModal: FC<FoodModalProps> = (props) => {
   const { imageCover } = props
 
-  const setOrders = useSetOrdersSelector()
+  const [orders, setOrders] = useOrdersState()
   let [selectedFood, setSelectedFood] = useSelectedFoodState()
 
   const [orderCount, setOrderCount] = useState(1)
@@ -24,13 +24,24 @@ const FoodModal: FC<FoodModalProps> = (props) => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault()
 
-    if (selectedFood) {
-      const order: Order = {
-        food: selectedFood,
-        count: orderCount,
+    let isOrderExists = false
+
+    const newOrders = orders.map((order) => {
+      if (order.food.id === selectedFood?.id) {
+        isOrderExists = true
+        return { ...order, count: order.count + orderCount }
       }
-      setOrders([order])
+      return order
+    })
+
+    if (!isOrderExists) {
+      newOrders.push({
+        food: selectedFood!,
+        count: orderCount,
+      })
     }
+
+    setOrders(newOrders)
 
     onHideModal()
   }

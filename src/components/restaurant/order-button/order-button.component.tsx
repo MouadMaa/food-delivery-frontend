@@ -7,7 +7,7 @@ import { StyledOrderButton } from './order-button.styles'
 const OrderButton: FC = () => {
   const orders = useOrdersValue()
 
-  const totalPrice = orders.reduce((acc, order) => order.count * order.food.price + acc, 0) + 9
+  const totalPrice = orders.reduce((acc, order) => order.count * order.food.price + acc, 0) + 9 //  9 is price of delivery address
 
   return (
     <StyledOrderButton>

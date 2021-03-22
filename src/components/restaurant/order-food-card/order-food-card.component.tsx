@@ -1,29 +1,16 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { LIMIT_ORDERS, Order } from '@/store/order/order.types'
-import { useSetOrdersSelector } from '@/store/order/order.selectors'
+import { Order } from '@/store/order/order.types'
 import { StyledOrderFoodCard } from './order-food-card.styled'
 
 interface OrderFoodCardProps {
   order: Order
+  handleClickCount: (type: 'inc' | 'dec', order: Order) => void
 }
 
 const OrderFoodCard: FC<OrderFoodCardProps> = (props) => {
-  const { order } = props
-  console.log('🚀 ~ file: order-food-card.component.tsx ~ line 14 ~ order', order)
-
-  const setOrders = useSetOrdersSelector()
-
-  const handleClickCount = (type: 'inc' | 'dec') => {
-    const newOrder: Order = { ...order }
-
-    if (type === 'inc' && count < LIMIT_ORDERS) newOrder.count = 1
-    else if (type === 'dec' && count > 1) newOrder.count = -1
-    else if (type === 'dec' && count === 1) newOrder.count = 0
-
-    setOrders([newOrder])
-  }
+  const { order, handleClickCount } = props
 
   const { name, image, price } = order.food
   const { count } = order
@@ -41,11 +28,11 @@ const OrderFoodCard: FC<OrderFoodCardProps> = (props) => {
           <span>{`${(price * count).toFixed(2)} DHS`}</span>
         </div>
         <div>
-          <button type='button' onClick={() => handleClickCount('dec')}>
+          <button type='button' onClick={() => handleClickCount('dec', order)}>
             -
           </button>
           <span>{count}</span>
-          <button type='button' onClick={() => handleClickCount('inc')}>
+          <button type='button' onClick={() => handleClickCount('inc', order)}>
             +
           </button>
         </div>

@@ -1,8 +1,9 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { fetchRestaurant, fetchRestaurants } from '@/store/restaurant/restaurant.firebase'
 import { Restaurant as IRestaurant } from '@/store/restaurant/restaurant.types'
+import { useSetOrdersState } from '@/store/order/order.states'
 import { StyledRestaurant } from '@/components/restaurant/styled'
 import RestaurantDetails from '@/components/restaurant/restaurant-details/restaurant-details.components'
 import DishMenu from '@/components/restaurant/dish-menu/dish-menu.component'
@@ -23,6 +24,19 @@ const Restaurant: FC<RestaurantProps> = (props) => {
 
   const [showOrders, setShowOrders] = useState(false)
 
+  /**
+   * Only For Testing
+   */
+  const setOrders = useSetOrdersState()
+  useEffect(() => {
+    setOrders([
+      { food: { ...restaurant.dishes[0].foods[0], dishId: restaurant.dishes[0].id }, count: 1 },
+      { food: { ...restaurant.dishes[0].foods[1], dishId: restaurant.dishes[0].id }, count: 2 },
+      { food: { ...restaurant.dishes[1].foods[0], dishId: restaurant.dishes[1].id }, count: 3 },
+    ])
+  }, [])
+  /*****************/
+
   const handleClickShowOrders = () => setShowOrders(!showOrders)
 
   return (
@@ -36,7 +50,7 @@ const Restaurant: FC<RestaurantProps> = (props) => {
         <OrderTitle onClick={handleClickShowOrders} />
         <OrderDeliveryAddress duration={restaurant.duration} />
         <OrdersFood />
-        <OrderButton />
+        <OrderButton restaurantId={restaurant.id} />
       </aside>
       <MobileOrdersButton show={!showOrders} onClick={handleClickShowOrders} />
       <FoodModal imageCover={restaurant.imageCover} />

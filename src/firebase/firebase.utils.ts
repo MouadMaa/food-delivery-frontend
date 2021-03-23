@@ -8,7 +8,7 @@ export const getCollectionData = <T>(collection: any): T[] => {
   return collection.docs.map(getDocData)
 }
 
-export const getOneData = <T>(collection: any): T => {
+export const getFirstCollectionData = <T>(collection: any): T => {
   return getCollectionData<T>(collection)[0]
 }
 

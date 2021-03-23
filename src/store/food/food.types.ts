@@ -6,6 +6,7 @@ export interface Food {
   image?: string
   order: number
   choices: Choice[]
+  dishId?: string
 }
 
 export interface Choice {

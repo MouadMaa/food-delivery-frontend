@@ -1,5 +1,5 @@
 import { db } from '@/firebase/firebase'
-import { getCollectionData, getOneData, readIds } from '@/firebase/firebase.utils'
+import { getCollectionData, getFirstCollectionData, readIds } from '@/firebase/firebase.utils'
 import { Dish, Restaurant } from './restaurant.types'
 import { Choice, Food, Option } from '../food/food.types'
 import { Category } from '../category/category.types'
@@ -48,7 +48,7 @@ export const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
   // Read restaurant
   const restaurantRef = db.collection('restaurants')
   const restaurantsCollection = await restaurantRef.where('slug', '==', slug).get()
-  let restaurant = getOneData<Restaurant>(restaurantsCollection)
+  let restaurant = getFirstCollectionData<Restaurant>(restaurantsCollection)
 
   // Reads an array of categories (IDs)
   const categoriesIds = restaurant.categories as any[]

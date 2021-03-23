@@ -3,7 +3,7 @@ import axios from 'axios'
 import 'twin.macro'
 
 import { useOrdersValue } from '@/store/order/order.states'
-import { OrderResponse } from '@/store/order/order.types'
+import { OrderServerData, OrderResponse, OrderRequest } from '@/store/order/order.types'
 import { StyledOrderButton } from './order-button.styles'
 
 interface OrderButtonProps {
@@ -16,16 +16,22 @@ const OrderButton: FC<OrderButtonProps> = (props) => {
   const orders = useOrdersValue()
 
   const handleStartOrder = async () => {
-    const order = orders.map((order) => ({
+    const order: OrderServerData[] = orders.map((order) => ({
       foodId: order.food.id,
-      dishId: order.food.dishId,
+      dishId: order.food.dishId!,
       count: order.count,
     }))
-    const { data } = await axios.post<OrderResponse>('/api/order', { order, restaurantId })
+
+    const orderRequest: OrderRequest = {
+      order,
+      restaurantId,
+    }
+
+    const { data } = await axios.post<OrderResponse>('/api/order', orderRequest)
     console.log(data)
   }
 
-  const totalPrice = orders.reduce((acc, order) => order.count * order.food.price + acc, 0) + 9 //  9 is price of delivery address
+  const totalPrice = orders.reduce((acc, order) => order.count * order.food.price + acc, 0) + 9 //  9 is price of delivery man (address)
 
   return (
     <StyledOrderButton>

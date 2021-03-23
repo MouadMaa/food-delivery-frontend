@@ -5,7 +5,7 @@ import { db, serverTimestamp } from '@/firebase/firebase'
 import { admin } from '@/firebase/firebase.admin'
 import { getDocData } from '@/firebase/firebase.utils'
 import { TOKEN_NAME } from '@/store/user/user.types'
-import { OrderRequest, OrderResponse, OrderedFood } from '@/store/order/order.types'
+import { OrderResponse, OrderedFood, OrderRequest } from '@/store/order/order.types'
 import { Food } from '@/store/food/food.types'
 
 const orderHandler = (req: NextApiRequest, res: NextApiResponse<any>) => {
@@ -25,19 +25,22 @@ export default orderHandler
 
 const createOrder = async (req: NextApiRequest, res: NextApiResponse<OrderResponse>) => {
   try {
+    const data = req.body as OrderRequest
+
     // test req data is exists
-    if (!req.body.order || !req.body.restaurantId) {
-      res
-        .status(400)
-        .json({ status: 'failure', message: 'order and restaurantId data is required !' })
+    if (!data.order || !data.restaurantId) {
+      res.status(400).json({
+        status: 'failure',
+        message: 'order and restaurantId data is required !',
+      })
     }
 
     // read ordered foods from restaurant collection
     const foods: OrderedFood[] = []
-    for await (const o of req.body.order as OrderRequest[]) {
+    for await (const o of data.order) {
       const foodDoc = await db
         .collection('restaurants')
-        .doc(req.body.restaurantId)
+        .doc(data.restaurantId)
         .collection('dishes')
         .doc(o.dishId)
         .collection('foods')
@@ -68,7 +71,7 @@ const createOrder = async (req: NextApiRequest, res: NextApiResponse<OrderRespon
       createdAt: serverTimestamp(),
       userId: decodedToken.uid,
       userPhone: decodedToken.firebase.identities.phone[0],
-      restaurantId: req.body.restaurantId,
+      restaurantId: data.restaurantId,
       totalPrice,
       foods,
     }

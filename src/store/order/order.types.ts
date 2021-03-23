@@ -5,10 +5,15 @@ export interface Order {
   count: number
 }
 
-export interface OrderRequest {
+export interface OrderServerData {
   foodId: string
   dishId: string
   count: number
+}
+
+export interface OrderRequest {
+  order: OrderServerData[]
+  restaurantId: string
 }
 
 export interface OrderResponse {
